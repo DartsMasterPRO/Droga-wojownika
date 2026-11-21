@@ -22,7 +22,7 @@
    PICTURE: żywy awatar (wideo) na górze każdej zakładki, po dotknięciu otwiera kartę postaci
    COLOUR and TYPE: noc dojo #07090d, złoto pucharów #f2c14e, błękit jej pasa; Barlow Condensed italic + Barlow
    LAYOUT: aplikacja mobilna, dolna nawigacja, jedna kolumna do 640px, pełnoekranowe celebracje */
-:root{color-scheme:dark;--bg:#07090d;--card:#11141b;--card2:#171b24;--ink:#f1f2f4;--mute:#9aa2af;--line:#252a36;--gold:#f2c14e;--gold2:#ffe08a;--blue:#3b7be8;--red:#e2452b;--green:#2fb36a;--silver:#c4c9cf;--bronze:#c98a4b}
+:root{color-scheme:dark;--acc:#f2c14e;--acc2:#ffe08a;--bg:#07090d;--card:#11141b;--card2:#171b24;--ink:#f1f2f4;--mute:#9aa2af;--line:#252a36;--gold:#f2c14e;--gold2:#ffe08a;--blue:#3b7be8;--red:#e2452b;--green:#2fb36a;--silver:#c4c9cf;--bronze:#c98a4b}
 *{box-sizing:border-box;min-width:0}
 html{-webkit-tap-highlight-color:transparent}
 body{margin:0;color:var(--ink);font:16px/1.5 Barlow,system-ui,sans-serif;overflow-x:clip;padding-bottom:calc(68px + env(safe-area-inset-bottom));
@@ -33,7 +33,7 @@ h2{font-size:30px;margin-bottom:10px}h3{font-size:22px;margin-bottom:10px}
 p{margin:0 0 8px}a{color:inherit}
 .wrap{max-width:640px;margin:0 auto}
 main{padding:16px}
-.kick{color:var(--gold);font-weight:600;font-size:14px;margin:0 0 2px}
+.kick{color:var(--acc);font-weight:600;font-size:14px;margin:0 0 2px}
 .mute{color:var(--mute);font-size:14px}
 /* hero z wideo */
 .hero{position:relative;max-width:640px;margin:0 auto;cursor:pointer}
@@ -49,8 +49,8 @@ main{padding:16px}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px}
-.stat .num{font-size:34px;color:var(--gold)}.stat span{display:block;font-size:13px;color:var(--mute);line-height:1.25}
-.bar{height:10px;border-radius:6px;background:#232835;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .5s}
+.stat .num{font-size:34px;color:var(--acc)}.stat span{display:block;font-size:13px;color:var(--mute);line-height:1.25}
+.bar{height:10px;border-radius:6px;background:#232835;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .5s}
 .beltfig{height:84px;margin:6px -6px 0}.beltfig svg{width:100%;height:100%;display:block}
 button{font:inherit;font-weight:500;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--ink);padding:0 14px;cursor:pointer}
 button:active{transform:scale(.97)}
@@ -62,7 +62,7 @@ textarea{min-height:90px;resize:vertical}
 label{display:block;font-size:14px;color:var(--mute);margin:0 0 4px}
 .field{margin-bottom:10px}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.chip{min-height:38px;border-radius:99px;font-size:15px;padding:0 14px}.chip.on{background:var(--gold);color:#1a1405;border-color:var(--gold);font-weight:700}
+.chip{min-height:38px;border-radius:99px;font-size:15px;padding:0 14px}.chip.on{background:var(--acc);color:#10131a;border-color:var(--acc);font-weight:700}
 .seg{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px}.seg button{flex:none}
 .item{border-top:1px solid var(--line);padding:12px 0}.item:first-child{border-top:0;padding-top:0}
 .kname{font-weight:600;font-size:18px}
@@ -152,6 +152,13 @@ details.card>summary{color:var(--ink);font-size:17px;min-height:30px}
 .tog input{width:46px;height:26px;min-height:0;appearance:none;-webkit-appearance:none;background:#2a2f3a;border-radius:99px;position:relative;cursor:pointer;flex:none;border:0;padding:0;transition:background .2s}
 .tog input::after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .2s}
 .tog input:checked{background:var(--gold)}.tog input:checked::after{left:23px}
+@keyframes tabIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}main.tin{animation:tabIn .38s cubic-bezier(.2,.8,.3,1)}
+.cerbelt{height:80px;margin:10px -10px 0}.cerbelt svg{width:100%;height:100%}
+.feel{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.faces{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.faces button{display:grid;place-items:center;gap:2px;padding:6px 2px;min-height:64px;font-size:11px;line-height:1.1;color:var(--mute)}.faces button.on{border-color:var(--acc);background:rgba(242,193,78,.12);color:var(--ink)}
+.tl{border-left:2px solid var(--line);margin-left:6px;padding-left:14px}.tl div{position:relative;margin-bottom:10px}.tl div::before{content:'';position:absolute;left:-21px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--acc)}.tl b{display:block}.tl span{color:var(--mute);font-size:14px}
+details.prep>summary{display:flex;align-items:center;gap:10px}
+.cnt{font:600 15px Barlow,sans-serif}
 /* karty */
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .kc{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;padding:0;text-align:left;display:block;width:100%;position:relative}
@@ -187,7 +194,7 @@ details.card>summary{color:var(--ink);font-size:17px;min-height:30px}
 /* nawigacja */
 nav.tabs{position:fixed;left:0;right:0;bottom:0;background:rgba(13,16,22,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding-bottom:env(safe-area-inset-bottom);z-index:10}
 nav.tabs a{display:grid;place-items:center;gap:1px;min-height:58px;color:var(--mute);text-decoration:none;font-size:11px;font-weight:600}
-nav.tabs a svg{width:22px;height:22px}nav.tabs a.on{color:var(--gold)}
+nav.tabs a svg{width:22px;height:22px}nav.tabs a.on{color:var(--acc)}
 /* splash, intro, celebracje */
 .splash,.intro,.ov{position:fixed;inset:0;z-index:40;background:#05070b}
 .splash img{width:100%;height:100%;object-fit:cover;display:block}
@@ -223,8 +230,8 @@ button:not(:disabled):active,a.card:active,.dr:active,.kc.on:active{transform:sc
 .btn-p:hover::after,.btn-b:hover::after,.btn-p:active::after,.btn-b:active::after{opacity:1;animation:sheen .8s ease-out}
 @keyframes sheen{0%,55%{left:-70%}100%{left:135%}}
 .chip.on{box-shadow:0 0 16px rgba(242,193,78,.4)}
-nav.tabs a{transition:color .2s}nav.tabs a.on svg{filter:drop-shadow(0 0 6px rgba(242,193,78,.75))}nav.tabs a{position:relative;overflow:hidden}
-nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;height:3px;border-radius:0 0 3px 3px;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+nav.tabs a{transition:color .2s}nav.tabs a.on svg{filter:drop-shadow(0 0 6px currentColor)}nav.tabs a{position:relative;overflow:hidden}
+nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;height:3px;border-radius:0 0 3px 3px;background:var(--acc);box-shadow:0 0 12px var(--acc)}
 .rip{position:absolute;border-radius:50%;transform:scale(0);background:radial-gradient(circle,rgba(255,236,170,.55),rgba(242,193,78,.25) 60%,transparent 70%);animation:rip .6s ease-out forwards;pointer-events:none;z-index:0}
 .btn-p .rip{background:radial-gradient(circle,rgba(255,255,255,.38),rgba(255,255,255,.12) 60%,transparent 70%)}
 @keyframes rip{to{transform:scale(2.8);opacity:0}}
@@ -243,7 +250,7 @@ nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;heig
 <input type="file" id="impFile" accept="application/json,.json" hidden>
 
 <div id="intro" class="intro">
- <video id="iv" muted playsinline autoplay preload="auto" poster="media/v-uklon.jpg"><source src="media/v-uklon.mp4" type="video/mp4"></video>
+ <video id="iv" muted playsinline autoplay preload="auto" poster="media/wideo/v-uklon.jpg"><source src="media/wideo/v-uklon.mp4" type="video/mp4"></video>
  <h2 id="it">Osu</h2><p id="dedi"></p><button class="skip" id="skip">Pomiń</button>
 </div>
 <div id="ov" class="ov" hidden>
@@ -303,7 +310,7 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}try{kv
 
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const src=x=>'media/'+(x.includes('.')?x:x+'.webp');
+const src=x=>'media/'+(x.startsWith('ex-')?'ex/':x.startsWith('plan-')?'plan/':x.startsWith('v-')?'wideo/':'')+(x.includes('.')?x:x+'.webp');
 const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const today=()=>iso(new Date());
 const pl=d=>{if(!d)return'';const[y,m,dd]=d.split('-');return `${+dd}.${m}.${y}`};
@@ -366,11 +373,12 @@ function celebrate(o){OQ.push(o);if(!ovOpen)nextOv()}
 function nextOv(){const o=OQ.shift();const ov=$('#ov');
  if(!o){ovOpen=false;ov.hidden=true;$('#ovm').innerHTML='';cancelAnimationFrame(cfId);return}
  ovOpen=true;
- $('#ovm').innerHTML=o.vid?`<video src="media/v-${o.vid}.mp4" poster="media/v-${o.vid}.jpg" autoplay muted loop playsinline></video>`:`<img src="${src(o.img)}" alt="">`;
+ $('#ovm').innerHTML=o.vid?`<video src="media/wideo/v-${o.vid}.mp4" poster="media/wideo/v-${o.vid}.jpg" autoplay muted loop playsinline></video>`:`<img src="${src(o.img)}" alt="">`;
  $('#ovk').textContent=o.k||'';$('#ovt').textContent=o.t||'';$('#ovs').textContent=o.s||'';
  ov.hidden=false;const inn=$('#ovin');inn.style.animation='none';void inn.offsetWidth;inn.style.animation='';
- const v=$('#ovm video');if(v)v.play().catch(()=>{});
- if(o.conf!==false)confetti();if(o.fan)fanfare();else if(o.conf!==false)beep(880,.1,2)}
+ const v=$('#ovm video');if(v){v.addEventListener('error',()=>{$('#ovm').innerHTML=`<img src="${src(o.img||'puchar')}" alt="">`+(o.belt!=null?`<div class="cerbelt">${beltSvg(S.belts[o.belt].c,S.belts[o.belt].s)}</div>`:'')});v.play().catch(()=>{})}
+ if(o.belt!=null)$('#ovm').insertAdjacentHTML('beforeend',`<div class="cerbelt">${beltSvg(S.belts[o.belt].c,S.belts[o.belt].s)}</div>`);
+ if(o.conf!==false)confetti();if(o.gong)gong();else if(o.fan)fanfare();else if(o.conf!==false)beep(880,.1,2)}
 function confetti(){if(reduced())return;const c=$('#cf'),x=c.getContext('2d'),r=devicePixelRatio||1,W=c.width=innerWidth*r,H=c.height=innerHeight*r;
  const C=['#f2c14e','#ffe08a','#3b7be8','#e2452b','#ffffff'];
  const P=Array.from({length:150},()=>({x:Math.random()*W,y:-Math.random()*H*.6,vx:(Math.random()-.5)*3*r,vy:(2+Math.random()*4)*r,s:(5+Math.random()*7)*r,a:Math.random()*6,va:(Math.random()-.5)*.25,c:pick(C)}));
@@ -381,13 +389,15 @@ function confetti(){if(reduced())return;const c=$('#cf'),x=c.getContext('2d'),r=
 /* ---------- filmiki na górze zakładek ---------- */
 function mood(){const last=S.log.map(l=>l.d).filter(d=>d<=today()).sort().pop(),gap=last?-daysTo(last):null,st=streak();
  if(bday())return{img:'taniec',t:`Sto lat, ${S.name}!`,s:`Dziś kończysz ${age()} ${lat(age())}. Wszystkiego najlepszego, osu!`};
+ const sp=special();if(sp)return sp;
  const g=S.comps.filter(c=>c.p==1&&daysTo(c.d)<=0&&daysTo(c.d)>-7);if(g.length)return{vid:'medal',t:'Mistrzyni!',s:`Złoto: ${g[0].n||'zawody'}. Ciesz się tym!`};
  if(last===today())return{vid:'karate',t:'Dziś już trenowałaś',s:st>1?`Seria: ${st} ${dni(st)} z rzędu. Ogień!`:'Tak trzymaj. Osu!'};
  if(gap!==null&&gap>=3)return{vid:'smutek',t:'Tęsknię za treningiem…',s:`Ostatni trening ${gap} dni temu. Zrób dziś choć 15 minut?`};
- if(!last)return{vid:'boks',t:'Gotowa na pierwszy trening?',s:'Zapisz go niżej i odblokuj pierwszą kartę.'};
- return{vid:'boks',t:'Czas na trening!',s:st?`Seria: ${st} ${dni(st)}. Nie przerywaj jej!`:'Zacznij nową serię dni.'}}
+ if(!last)return{vid:'boks',t:`${greet()}! Gotowa na pierwszy trening?`,s:'Zacznij od planu na dziś i odblokuj pierwszą kartę.'};
+ const h=new Date().getHours();
+ return{vid:'boks',t:h<10?'Dzień dobry! Poranna iskra na rozruch?':h>=19?'Dobry wieczór! Jeszcze zdążysz z krótkim treningiem':`${greet()}! Czas na trening`,s:st?`Seria: ${st} ${dni(st)}. Nie przerywaj jej!`:'Zacznij nową serię dni.'}}
 const heroEls={};
-function heroHTML(m,title,small){return `<div class="hmedia">${m.vid?`<video src="media/v-${m.vid}.mp4" poster="media/v-${m.vid}.jpg" autoplay muted loop playsinline></video>`:`<img src="${src(m.img)}" alt="">`}</div>
+function heroHTML(m,title,small){return `<div class="hmedia">${m.vid?`<video src="media/wideo/v-${m.vid}.mp4" poster="media/wideo/v-${m.vid}.jpg" autoplay muted loop playsinline></video>`:`<img src="${src(m.img)}" alt="">`}</div>
  <span class="pill">Moja karta ›</span>
  <div class="htext"><p class="kick">Droga wojownika</p><h1>${title}</h1>${m.t?`<p class="ht">${esc(m.t)}</p>`:''}${m.s?`<p class="hs">${esc(m.s)}</p>`:''}</div>`}
 function placeHero(t,m,title){let e=heroEls[t];if(!e){e=document.createElement('div');e.className='hero'+(t==='start'?'':' small');e.dataset.a='prof';e.setAttribute('role','button');e.setAttribute('aria-label','Otwórz kartę postaci');heroEls[t]=e;e._k=''}
@@ -423,10 +433,11 @@ function vStart(){
  const mon=today().slice(0,7),ML=S.log.filter(l=>l.d.startsWith(mon)),monN=new Set(ML.map(l=>l.d)).size,monM=ML.reduce((a,l)=>a+(+l.m||0),0),nd=S.next.d?daysTo(S.next.d):null;
  const nc=CARDS.find(c=>!S.got.includes(c.id)),la=S.an[S.an.length-1],tp=todayPlan(),ch=dayChallenge(),cd=chDone(),st=streak(),trained=S.log.some(l=>l.d===today());
  return `<div id="heroSlot"></div><main class="wrap">
+ ${weekSum()}
  ${tp&&tp.p?`<div class="card today"><div class="row between"><p class="kick" style="margin:0">Na dziś</p>${trained?'<span class="tag">trening zaliczony</span>':''}</div>
   <a class="tdy" href="#trening" data-a="tsub" data-v="dzis"><img src="${planImg(tp.p)}" alt=""><div><b>${esc(tp.p.name)}</b><p class="mute">${planMin(tp.p)} min · ${esc(tp.why)}</p></div></a>
   <button class="btn-p full bigbtn" data-a="plan" data-v="${tp.p.id}">Zaczynamy!</button>
-  <a class="chrow" href="#trening" data-a="tsub" data-v="dzis"><span style="color:var(--ink);font-weight:500;white-space:normal">Wyzwanie dnia: ${cd?'zaliczone ✓':ch.map(e=>esc(e.name)).join(' + ')}</span><span>${cd?'':'+20 XP ›'}</span></a></div>`:''}
+  <a class="chrow" href="#trening" data-a="tsub" data-v="dzis"><span style="color:var(--ink);font-weight:500;white-space:normal">Wyzwanie dnia: ${cd?'zaliczone ✓':ch.map(e=>esc(e.name)).join(' + ')}</span><span>${cd?'':'+20 XP ›'}</span></a>${trained?feelRow():''}</div>`:''}
  <div class="card"><div class="row between"><h3 style="margin:0">${FLAME} ${st} ${dni(st)} z rzędu</h3><span class="mute">rekord: ${bestStreak()}</span></div><div style="margin-top:12px">${calHTML()}</div></div>
  ${lvlCard()}
  <div class="card"><div class="row between"><b>${esc(b.k)} · ${esc(b.n)}</b><span class="mute">${nb?`do ${esc(nb.k)}: ${done}/${req.length}`:'Najwyższy pas'}</span></div><div class="beltfig">${beltSvg(b.c,b.s)}</div><div class="bar"><i style="width:${bp}%"></i></div></div>
@@ -540,12 +551,13 @@ function vKumite(){
 function vZawody(){
  const c=S.comps.slice().sort((a,b)=>b.d.localeCompare(a.d)),m=medals();
  return `<div id="heroSlot"></div><main class="wrap">
+ ${compPrep()}
  <div class="grid3" style="margin-bottom:14px">${[['Złoto','m1'],['Srebro','m2'],['Brąz','m3']].map(([t,cl],i)=>`<div class="stat row"><div class="medal ${cl}">${i+1}</div><div><div class="num">${m[i]}</div><span>${t}</span></div></div>`).join('')}</div>
  <div class="card"><h3>Najbliższe zawody</h3><div class="grid2"><div class="field"><label for="nd">Data</label><input id="nd" type="date" value="${esc(S.next.d)}" data-c="nextd"></div>
   <div class="field"><label for="nn">Nazwa</label><input id="nn" value="${esc(S.next.n)}" data-c="nextn" placeholder="np. Puchar Burmistrza"></div></div>
   ${S.next.d&&daysTo(S.next.d)>=0?`<p style="margin:0"><b>Za ${daysTo(S.next.d)} ${dni(daysTo(S.next.d))}</b></p>`:''}</div>
  ${resForm('z','Dodaj wynik zawodów')}
- <div class="card"><h3>Historia startów</h3>${c.length?c.map(x=>`<div class="item row"><div class="medal ${x.p>=1&&x.p<=3?'m'+x.p:''}">${x.p||'–'}</div><div style="flex:1"><b>${esc(x.n||'Zawody')}</b><div class="mute">${pl(x.d)} · ${esc(x.c)}${x.o?' · '+esc(x.o):''}</div></div><button class="x" data-a="delcomp" data-i="${S.comps.indexOf(x)}" aria-label="Usuń">×</button></div>`).join(''):'<p class="mute">Tu pojawią się Twoje starty i medale.</p>'}</div>
+ <div class="card"><h3>Historia startów</h3>${c.length?c.map(x=>`<div class="item row"><div class="medal ${x.p>=1&&x.p<=3?'m'+x.p:''}">${x.p||'–'}</div><div style="flex:1"><b>${esc(x.n||'Zawody')}</b><div class="mute">${pl(x.d)} · ${esc(x.c)}${x.o?' · '+esc(x.o):''}</div>${x.good?`<div style="font-size:14px;margin-top:4px"><b style="color:var(--green)">Dobrze:</b> ${esc(x.good)}</div>`:''}${x.fix?`<div style="font-size:14px"><b style="color:var(--acc)">Poprawić:</b> ${esc(x.fix)}</div>`:''}</div><button class="x" data-a="delcomp" data-i="${S.comps.indexOf(x)}" aria-label="Usuń">×</button></div>`).join(''):'<p class="mute">Tu pojawią się Twoje starty i medale.</p>'}</div>
  </main>`}
 
 const LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
@@ -589,6 +601,7 @@ function vUst(){
   <details style="margin-top:10px"><summary>Mój pas ma inny kolor</summary><div class="row" style="margin-top:8px"><label for="bc" style="margin:0;flex:1;color:var(--ink)">Kolor pasa „${esc(S.belts[S.cur].n)}”</label><input id="bc" type="color" data-c="beltcol" value="${S.belts[S.cur].c}" style="width:64px;padding:4px"></div>
   <div class="row" style="margin-top:8px"><label for="bs" style="margin:0;flex:1;color:var(--ink)">Kolor belki</label><input id="bs" type="color" data-c="beltstr" value="${S.belts[S.cur].s||S.belts[S.cur].c}" style="width:64px;padding:4px"><button data-a="nostripe">Bez belki</button></div></details></div>
  <div class="card"><h3>Trener i przypomnienia</h3>
+  <label class="tog"><span><b>Kolor aplikacji jak mój pas</b><br><span class="mute">Podświetlenia w kolorze Twojego pasa</span></span><input type="checkbox" data-c="acc" ${S.accOff?'':'checked'}></label>
   <label class="tog"><span><b>Głos trenera</b><br><span class="mute">Podpowiada w treningu, timerze i reakcji</span></span><input type="checkbox" data-c="voice" ${S.voice?'checked':''}></label>
   <label class="tog"><span><b>Codzienne przypomnienie</b><br><span class="mute">Po południu, jeśli nie było treningu</span></span><input type="checkbox" data-c="remind" ${S.remind?'checked':''}></label>
   <button class="full" data-a="testnotif" style="margin-top:8px">Wyślij próbne przypomnienie</button></div>
@@ -617,7 +630,7 @@ const exImg=e=>EXOWN.has(e.id)?'ex-'+e.id:EXREUSE[e.id]||CAT[e.cat]?.[1]||'poza'
 const XPL=[0,100,250,450,700,1000,1400,1900,2500,3200,4000,5000];
 const TITLES=['Nowicjuszka','Uczennica','Młoda wojowniczka','Wojowniczka','Tygrysica','Pantera','Smoczyca','Strażniczka dojo','Mistrzyni','Wielka mistrzyni','Legenda dojo','Duch kyokushin'];
 function lvl(){const x=S.xp||0;let l=0;while(l+1<XPL.length&&x>=XPL[l+1])l++;return{l:l+1,t:TITLES[l],x,cur:XPL[l],nx:XPL[l+1]??null}}
-function addXP(n){const a=lvl().l;S.xp=(S.xp||0)+Math.round(n);const b=lvl();if(b.l>a)celebrate({vid:'rekord',k:'Nowy poziom!',t:'Poziom '+b.l,s:`${b.t}. Rośniesz w siłę!`,fan:true})}
+function addXP(n){const a=lvl().l;S.xp=(S.xp||0)+Math.round(n);coin();const b=lvl();if(b.l>a)celebrate({vid:'rekord',k:'Nowy poziom!',t:'Poziom '+b.l,s:`${b.t}. Rośniesz w siłę!`,fan:true})}
 function lvlCard(){const L=lvl(),p=L.nx?Math.round((L.x-L.cur)/(L.nx-L.cur)*100):100;
  return `<div class="card lvlc"><div class="lvlb">${L.l}</div><div style="flex:1"><p class="kick" style="margin:0">Poziom ${L.l}</p><b style="font:700 22px 'Barlow Condensed',sans-serif">${L.t}</b><div class="bar"><i style="width:${p}%"></i></div><p class="mute" style="margin:4px 0 0">${L.x} XP${L.nx?` · do poziomu ${L.l+1}: ${L.nx-L.x} XP`:''}</p></div></div>`}
 
@@ -633,6 +646,7 @@ function planBy(words){if(!TD)return null;const w=words.map(x=>x.toLowerCase());
 function todayPlan(){if(!TD||!TD.plans.length)return null;const P_=id=>TD.plans.find(p=>p.id===id);const wd=(new Date().getDay()+6)%7,club=S.club||[],isClub=club.includes(wd),afterClub=club.includes((wd+6)%7);
  const doneWeek=new Set(S.log.filter(l=>daysTo(l.d)>-6).map(l=>l.pid).filter(Boolean)),doneToday=S.log.some(l=>l.d===today()&&l.pid);
  const pickFirst=ids=>ids.map(P_).find(p=>p&&!doneWeek.has(p.id))||P_(ids[0]);
+ if(tired())return{why:'Ostatnio jesteś bardzo zmęczona – dziś odpoczynek albo tylko lekkie rozciąganie. Odpoczynek też jest treningiem!',p:P_('gumowe_nogi'),rest:1};
  if(next7comp())return{why:'Zawody tuż-tuż – lekko, żeby mieć świeże nogi i spokojną głowę.',p:P_('przed_turniejem')};
  if(doneToday)return{why:'Dzisiejszy trening już zaliczony! Jeśli masz ochotę – tylko coś lekkiego.',p:P_('gumowe_nogi')};
  if(isClub)return{why:'Dziś trening w dojo. W domu wieczorem tylko lekkie rozciąganie.',p:P_('gumowe_nogi')};
@@ -653,13 +667,13 @@ function buildSteps(plan){const st=[];
 function startPlan(plan){if(!plan)return;try{actx()}catch(e){}P={plan,st:buildSteps(plan),i:0,t0:Date.now(),paused:false};if(!P.st.length)return;
  try{navigator.wakeLock?.request('screen').then(w=>P&&(P.wake=w)).catch(()=>{})}catch(e){}
  $('#play').hidden=false;stepStart()}
-function stepStart(){const s=P.st[P.i];clearInterval(P.id);P.lb=null;P.said={};if(!s)return finishPlan();
+function stepStart(){countStop();const s=P.st[P.i];clearInterval(P.id);P.lb=null;P.said={};if(!s)return finishPlan();
  if(s.k==='rest'){const nx=P.st.slice(P.i+1).find(x=>x.k==='work');say(nx?`Przerwa. Następne: ${nx.e.name}.`:'Przerwa.')}else say(s.e.mode==='time'?`${s.e.name}. ${s.d.sec||30} sekund.`:`${s.e.name}. ${s.d.reps||10} powtórzeń.`);
  const now=Date.now();if(s.k==='rest'){P.ready=now;P.end=now+s.sec*1000}else if(s.e.mode==='time'){P.ready=now+3000;P.end=P.ready+(s.d.sec||30)*1000}else{P.ready=P.end=0}
  renderPlay();if(P.end)P.id=setInterval(tickPlay,200)}
 function setT(n,lab){const t=$('#pt'),l=$('#plab');if(t)t.textContent=n;if(l)l.textContent=lab}
 function tickPlay(){if(!P||P.paused)return;const s=P.st[P.i],now=Date.now();
- if(now<P.ready){const n=Math.ceil((P.ready-now)/1000);if(n!==P.lb){P.lb=n;beep(700,.08)}setT(n,'Przygotuj się…');return}
+ if(now<P.ready){const n=Math.ceil((P.ready-now)/1000);if(n!==P.lb){P.lb=n;taiko(1)}setT(n,'Przygotuj się…');return}
  const left=Math.ceil((P.end-now)/1000),tot=s.k==='rest'?s.sec:(s.d.sec||30);if(s.k==='work'&&!P.said.go){P.said.go=1;say('Start!')}
  if(s.k==='work'&&tot>=30&&left===Math.round(tot/2)&&!P.said.h){P.said.h=1;say('Połowa!')}if(s.k==='work'&&tot>=20&&left===10&&!P.said.t){P.said.t=1;say('Jeszcze dziesięć sekund')}
  if(left<=3&&left>0&&left!==P.lb){P.lb=left;beep(880,.07)}
@@ -667,7 +681,7 @@ function tickPlay(){if(!P||P.paused)return;const s=P.st[P.i],now=Date.now();
  setT(left,s.k==='rest'?'Przerwa – oddychaj spokojnie':'sekund – dasz radę!')}
 function nextStep(){P.i++;stepStart()}
 function pausePlay(){if(!P)return;if(P.paused){const d=Date.now()-P.pAt;P.ready+=d;P.end+=d;P.paused=false}else{P.paused=true;P.pAt=Date.now()}renderPlay()}
-function closePlay(log){clearInterval(P?.id);try{P?.wake?.release()}catch(e){}$('#play').hidden=true;$('#play').innerHTML='';
+function closePlay(log){countStop();clearInterval(P?.id);try{P?.wake?.release()}catch(e){}$('#play').hidden=true;$('#play').innerHTML='';
  if(log&&P){const m=Math.max(1,Math.round((Date.now()-P.t0)/60000));S.log.push({d:today(),t:/kumite|karate|kopn/i.test(P.plan.name+P.plan.goal)?'Kihon':'Kondycja',m,n:P.plan.name,pid:P.plan.id});S.plansDone=(S.plansDone||0)+1;addXP(20+m);save();
   say(`Brawo, ${S.name}! Trening ukończony.`);celebrate({vid:pick(['brzuszki','worek','boks']),k:'Trening ukończony!',t:P.plan.name,s:`${m} min · +${20+m} XP · ${pick(CHEER)}`,fan:true});checkCards()}
  P=null;render()}
@@ -681,10 +695,10 @@ function renderPlay(){const s=P.st[P.i],n=P.st.length,doneW=P.st.slice(0,P.i).fi
  else{const e=s.e,time=e.mode==='time';body=`<img class="pimg" src="${src(exImg(e))}" alt=""><p class="kick">${esc(s.bl||'')}${s.rounds>1?` · runda ${s.r}/${s.rounds}`:''}${s.sets>1?` · seria ${s.s}/${s.sets}`:''}</p><h2 style="margin:0 0 4px">${esc(e.name)}</h2>
   <div class="pbig" id="pt">${time?(s.d.sec||30):(s.d.reps||10)}</div><p id="plab" class="mute">${time?'Przygotuj się…':'powtórzeń'}</p>
   <div class="pcues">${e.cues.map(c=>`<p>${esc(c)}</p>`).join('')}</div>${e.safety?`<p class="mute" style="font-size:13px">${esc(e.safety)}</p>`:''}
-  ${time?`<div class="grid2"><button data-a="ppause">${P.paused?'Wznów':'Pauza'}</button><button data-a="pskip">Pomiń</button></div>`:`<button class="btn-p full bigbtn" data-a="pskip">Zrobione!</button>`}
+  ${time?`<div class="grid2"><button data-a="ppause">${P.paused?'Wznów':'Pauza'}</button><button data-a="pskip">Pomiń</button></div>`:`<button class="btn-p full bigbtn" data-a="pskip">Zrobione!</button><button class="btn-b full cnt" data-a="pcount" style="margin-top:8px">${P.cnt?'Zatrzymaj liczenie':'Licz ze mną po japońsku'}</button>`}
   ${nx?`<p class="mute" style="margin-top:10px">Następne: ${esc(nx.e.name)} · ${doseOne(nx)}</p>`:''}`}
  $('#play').innerHTML=`<div class="pbar"><div style="flex:1;margin-right:12px"><b>${esc(P.plan.name)}</b><div class="bar" style="margin-top:4px"><i style="width:${Math.round(doneW/allW*100)}%"></i></div></div><button data-a="pquit">Zakończ</button></div><div class="wrap pbody">${body}</div>`}
-const planImg=p=>`media/plan-${p.id}.webp`;
+const planImg=p=>`media/plan/plan-${p.id}.webp`;
 const planMin=p=>{const st=buildSteps(p);let sec=0;st.forEach(x=>{sec+=x.k==='rest'?x.sec:(x.e.mode==='time'?(x.d.sec||30)+3:(x.d.reps||10)*3.5)+6});return Math.max(3,Math.round(sec/60))};
 const doseOne=s=>s.e.mode==='time'?`${s.d.sec||30} s`:`${s.d.reps||10} powt.`;
 
@@ -765,13 +779,14 @@ function resForm(pre,title){return `<div class="card"><h3>${title}</h3><label>Wy
  <div class="field"><label for="${pre}n">Nazwa zawodów</label><input id="${pre}n" placeholder="np. Puchar Burmistrza Góry Kalwarii"></div>
  <div class="grid2"><div class="field"><label for="${pre}d">Data</label><input id="${pre}d" type="date" value="${today()}"></div><div class="field"><label for="${pre}c">Konkurencja</label><select id="${pre}c"><option>Kata</option><option>Kumite</option><option>Kata drużynowe</option></select></div></div>
  <div class="field"><label for="${pre}o">Notatka</label><input id="${pre}o" placeholder="np. 3 wygrane walki"></div>
+ <details><summary>Co poszło dobrze, a co poprawić?</summary><div class="field" style="margin-top:8px"><label for="${pre}g">Co poszło dobrze?</label><input id="${pre}g" placeholder="np. mocne low kicki"></div><div class="field"><label for="${pre}f">Co poprawić?</label><input id="${pre}f" placeholder="np. garda w 2. rundzie"></div></details>
  <button class="btn-p full" data-a="addres" data-v="${pre}">Zapisz wynik</button></div>`}
 
 /* ---------- WYZWANIE RODZINNE ---------- */
 const weekKey=()=>{const d=new Date(),day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return iso(d)};
 function vRodzina(){const F=S.fam,wk=weekKey();
  if(!F||F.wk!==wk){const opts=TD?TD.exercises.filter(e=>e.mode==='reps'&&['sila','core','wydolnosc','karate'].includes(e.cat)):[];
-  return `<div class="card say"><img src="media/plan-olimpiada.webp" alt=""><div class="bubble"><p><b>Wyzwanie rodzinne</b></p><p>Wybierzcie ćwiczenie i wspólny cel na ten tydzień. Każdy dopisuje swoje powtórzenia – razem dobijacie do celu!</p></div></div>
+  return `<div class="card say"><img src="media/plan/plan-olimpiada.webp" alt=""><div class="bubble"><p><b>Wyzwanie rodzinne</b></p><p>Wybierzcie ćwiczenie i wspólny cel na ten tydzień. Każdy dopisuje swoje powtórzenia – razem dobijacie do celu!</p></div></div>
   ${F&&F.wk!==wk?`<div class="warn">Poprzednie wyzwanie: ${esc(F.exn)} – ${F.people.reduce((a,p)=>a+p.v,0)} z ${F.goal}${F.done?' – zaliczone!':''}</div>`:''}
   <div class="card"><h3>Nowe wyzwanie tygodnia</h3>
    <div class="field"><label for="fx">Ćwiczenie</label><select id="fx">${opts.map(e=>`<option value="${e.id}" ${e.id==='przysiad'?'selected':''}>${esc(e.name)}</option>`).join('')}</select></div>
@@ -836,6 +851,68 @@ async function setRemind(on){S.remind=on?1:0;save();
 async function testNotif(){try{if(Notification.permission!=='granted'&&await Notification.requestPermission()!=='granted')return 'Brak zgody na powiadomienia.';const r=await navigator.serviceWorker.ready;await r.showNotification('Droga wojownika',{body:`Osu, ${S.name}! Tak będzie wyglądać przypomnienie.`,icon:'icon-192.png',badge:'icon-192.png',tag:'dw-test'});return 'Wysłane – sprawdź powiadomienia.'}catch(e){return 'Powiadomienia działają dopiero po wrzuceniu aplikacji na serwer (https).'}}
 if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 
+/* ---------- DŹWIĘKI DOJO ---------- */
+function gong(){try{const a=actx(),t=a.currentTime;[[110,1],[220,.55],[331,.3],[440,.2],[587,.12]].forEach(([f,v])=>{const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(f*.985,t+3);o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.35*v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+3.2);o.start(t);o.stop(t+3.3)})}catch(e){}}
+function taiko(n=1){try{const a=actx();for(let k=0;k<n;k++){const t=a.currentTime+k*.18,o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.setValueAtTime(150,t);o.frequency.exponentialRampToValueAtTime(48,t+.25);o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.8,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+.35);o.start(t);o.stop(t+.4);
+ const nb=a.createBuffer(1,Math.floor(a.sampleRate*.08),a.sampleRate),d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);const ns=a.createBufferSource(),ng=a.createGain();ns.buffer=nb;ns.connect(ng);ng.connect(a.destination);ng.gain.value=.22;ns.start(t)}}catch(e){}try{navigator.vibrate&&navigator.vibrate(40)}catch(e){}}
+let coinT=0;function coin(){if(Date.now()-coinT<400)return;coinT=Date.now();try{const a=actx(),t=a.currentTime;[[988,0],[1319,.08]].forEach(([f,d])=>{const o=a.createOscillator(),g=a.createGain();o.type='square';o.frequency.value=f;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.1,t+d+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d+(d?.3:.08));o.start(t+d);o.stop(t+d+.32)})}catch(e){}}
+
+/* ---------- KOLOR WEDŁUG PASA ---------- */
+const ACC={'#f2f2ee':['#f2c14e','#ffe08a'],'#ee7a1b':['#ff9a3c','#ffc58a'],'#2563c9':['#5b97f5','#b3cfff'],'#f2c623':['#f2c14e','#ffe08a'],'#2f9a4a':['#3cc46a','#a5ecbd'],'#7a4a24':['#d4954f','#f0c493'],'#6a3f1e':['#d4954f','#f0c493'],'#5a3418':['#d4954f','#f0c493'],'#1a1a1a':['#f2c14e','#ffe08a']};
+function applyAcc(){const c=(S.belts[S.cur]||{}).c;let a=S.accOff?null:(ACC[c]||(c?[c,c]:null));if(!a)a=['#f2c14e','#ffe08a'];const r=document.documentElement.style;r.setProperty('--acc',a[0]);r.setProperty('--acc2',a[1])}
+
+/* ---------- PRZEJŚCIA I LICZBY ---------- */
+let lastTab='';
+function tabFx(){if(reduced())return;const m=$('#app main');if(m){m.classList.remove('tin');void m.offsetWidth;m.classList.add('tin')}
+ document.querySelectorAll('#app .stat .num').forEach(el=>{const mm=/^(\d+)(.*)$/.exec(el.textContent.trim());if(!mm)return;const n=+mm[1],rest=mm[2];if(n<2)return;const t0=performance.now(),d=650;
+  const st=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=Math.round(n*e)+rest;if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)})}
+
+/* ---------- LICZENIE PO JAPOŃSKU ---------- */
+const JPR=['','ichi','ni','san','shi','go','roku','shichi','hachi','ku','ju'],JPK=['','いち','に','さん','し','ご','ろく','しち','はち','きゅう','じゅう'],JPP=['','iczi','ni','san','szi','go','roku','sziczi','haczi','kju','dżju'];
+const jpParts=n=>n<=10?[n]:[Math.floor(n/10)>1?Math.floor(n/10):0,10,n%10].filter(Boolean);
+const jpWord=(n,A,sep=' ')=>jpParts(n).map(x=>A[x]).join(sep);
+let jaVoice=null;try{const f=()=>{try{jaVoice=speechSynthesis.getVoices().find(v=>/^ja/i.test(v.lang))||null}catch(e){}};f();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',f)}catch(e){}
+function sayJp(n){if(!S.voice||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(jaVoice?jpWord(n,JPK,''):jpWord(n,JPP));u.lang=jaVoice?'ja-JP':'pl-PL';u.voice=jaVoice||plVoice;u.rate=1.15;speechSynthesis.speak(u)}catch(e){}}
+function countStop(){if(P&&P.cnt){clearInterval(P.cnt.id);P.cnt=null}}
+function countGo(){if(!P)return;const s=P.st[P.i];if(!s||s.k!=='work')return;if(P.cnt){countStop();renderPlay();return}
+ const max=s.d.reps||10,tempo=s.e.cat==='karate'?1700:s.e.cat==='wydolnosc'?1500:2400;P.cnt={n:0,max};renderPlay();
+ const tick=()=>{if(!P||!P.cnt)return;P.cnt.n++;const n=P.cnt.n;setT(n,jpWord(n,JPR).toUpperCase());sayJp(n);
+  if(n>=P.cnt.max){countStop();setTimeout(()=>{say('Yame! Brawo!');taiko(2);setTimeout(()=>P&&P.st[P.i]===s&&nextStep(),900)},700)}};
+ setTimeout(()=>{if(P&&P.cnt){tick();if(P&&P.cnt)P.cnt.id=setInterval(tick,tempo)}},800);say('Liczymy! Hajime!')}
+
+/* ---------- TRYB ZAWODÓW ---------- */
+const BAG=['Karategi – czyste i złożone','Pas','Ochraniacze wymagane w regulaminie','Ochraniacz na zęby (jeśli wymagany)','Butelka wody','Przekąska: banan lub kanapka','Legitymacja lub zgoda rodzica','Klapki','Ręcznik','Gumki do włosów'];
+const DAYPLAN=[['Dzień przed','Lekki trening, spakowana torba, wcześnie do łóżka.'],['Rano','Śniadanie 2–3 godziny przed startem. Pij wodę małymi łykami.'],['Na hali','Sprawdź listę startową i swoją matę. Nie siedź godzinami bez ruchu.'],['30 minut przed','Rozgrzewka: trucht, krążenia, kopnięcia w powietrze.'],['Tuż przed','Mokuso – minuta spokojnego oddechu. Osu!'],['Po starcie','Zapisz wynik i to, co poszło dobrze – bez względu na miejsce.']];
+function compPrep(){const nd=S.next.d?daysTo(S.next.d):null;if(!S.bag||S.bag.for!==S.next.d)S.bag={for:S.next.d,ch:{}};const ch=S.bag.ch,done=BAG.filter((_,i)=>ch[i]).length;
+ return `<details class="card prep" ${nd!==null&&nd>=0&&nd<=7?'open':''}><summary><b>Przygotowanie do zawodów</b>${nd!==null&&nd>=0?`<span class="tag" style="margin-left:auto">${nd===0?'dziś!':'za '+nd+' '+dni(nd)}</span>`:''}</summary>
+ <p class="kick" style="margin-top:12px">Torba · ${done}/${BAG.length} spakowane</p><div class="bar" style="margin:4px 0 10px"><i style="width:${Math.round(done/BAG.length*100)}%"></i></div>
+ ${BAG.map((t,i)=>`<label class="check"><input type="checkbox" data-c="bag" data-i="${i}" ${ch[i]?'checked':''}><span>${t}</span></label>`).join('')}
+ <p class="kick" style="margin-top:14px">Plan dnia zawodów</p><div class="tl">${DAYPLAN.map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join('')}</div>
+ <a href="#kumite"><button class="btn-b full" style="margin-top:12px">Mokuso przed walką</button></a></details>`}
+
+/* ---------- SAMOPOCZUCIE ---------- */
+const FEEL=[null,['Padam z nóg','#e2452b'],['Zmęczona','#ee7a1b'],['W porządku','#9aa2af'],['Dobrze','#3b7be8'],['Super!','#2fb36a']];
+function faceSvg(l){const m={1:'M8 17 Q12 13 16 17',2:'M8 16.5 Q12 14.5 16 16.5',3:'M8 15.5 L16 15.5',4:'M8 14.5 Q12 17 16 14.5',5:'M7.5 14 Q12 19 16.5 14'}[l];return `<svg viewBox="0 0 24 24" width="34" height="34"><circle cx="12" cy="12" r="10.5" fill="${FEEL[l][1]}"/><circle cx="8.5" cy="9.5" r="1.3" fill="#111"/><circle cx="15.5" cy="9.5" r="1.3" fill="#111"/><path d="${m}" stroke="#111" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`}
+function feelRow(){S.feel=S.feel||{};const f=S.feel[today()];
+ return `<div class="feel"><p style="margin:0 0 6px"><b>${f?'Dzisiaj czujesz się: '+FEEL[f][0]:'Jak się czujesz po treningu?'}</b></p><div class="faces">${[1,2,3,4,5].map(l=>`<button class="${f===l?'on':''}" data-a="feel" data-v="${l}" aria-label="${FEEL[l][0]}">${faceSvg(l)}<span>${FEEL[l][0]}</span></button>`).join('')}</div></div>`}
+function tired(){const F=S.feel||{},ds=Object.keys(F).filter(d=>daysTo(d)>-4&&daysTo(d)<=0).sort().slice(-3);return ds.length>=2&&ds.every(d=>F[d]<=2)}
+
+/* ---------- POWITANIA ---------- */
+function greet(){const h=new Date().getHours();return h<5?'Dobranoc':h<10?'Dzień dobry':h<18?'Cześć':'Dobry wieczór'}
+function special(){const md=today().slice(5),nd=S.next.d?daysTo(S.next.d):null;
+ if(nd===0)return{vid:'tab-zawody',t:'Dziś zawody!',s:'Oddychaj spokojnie, rozgrzej się i walcz z sercem. Osu!'};
+ if(nd===1)return{vid:'tab-zawody',t:'Jutro zawody!',s:'Spakuj torbę i wyśpij się. Lista jest w zakładce Zawody.'};
+ const H={'12-06':['Wesołych Mikołajek!','Prezent od Mikołaja: +1 do siły. Osu!'],'12-24':['Wesołych Świąt!','Dziś odpoczynek i pierniki. Osu!'],'12-25':['Wesołych Świąt!','Spacer po obiedzie też się liczy!'],'12-26':['Wesołych Świąt!','Lekkie rozciąganie po świątecznym obiedzie?'],'01-01':['Szczęśliwego Nowego Roku!','Nowy rok – nowy pas? Osu!'],'06-01':['Wszystkiego dobrego w Dniu Dziecka!','Dziś trening tylko dla zabawy!']};
+ if(H[md])return{img:'taniec',t:H[md][0],s:H[md][1]};return null}
+
+/* ---------- PODSUMOWANIE TYGODNIA ---------- */
+function weekSum(){const wd=(new Date().getDay()+6)%7;if(wd!==6&&wd!==0)return '';const d=new Date();d.setDate(d.getDate()-wd-(wd===0?7:0));const A=iso(d),e=new Date(d);e.setDate(d.getDate()+7);const B=iso(e);
+ S.wk=S.wk||{};if(S.wk[A]!=null)return '';const L=S.log.filter(l=>l.d>=A&&l.d<B),days=new Set(L.map(l=>l.d)).size,mins=L.reduce((a,l)=>a+(+l.m||0),0),plans=L.filter(l=>l.pid).length,an=S.an.filter(a=>a.d>=A&&a.d<B),ch=Object.keys(S.ch||{}).filter(k=>k>=A&&k<B).length;
+ const lv=days>=4?3:days===3?2:days===2?1:0,M=[['W drodze','sou','Każdy tydzień to nowa szansa. Następny będzie lepszy!'],['Brązowa odznaka','podium','Dwa dni treningu – dobry początek!'],['Srebrna odznaka','podium','Trzy dni treningu – solidna robota!'],['Złota odznaka','medal','Cztery dni lub więcej – prawdziwa wojowniczka!']][lv];
+ return `<div class="card today"><p class="kick" style="margin:0 0 8px">Podsumowanie tygodnia</p><div class="row" style="align-items:center;flex-wrap:nowrap"><img src="media/${M[1]}.webp" alt="" style="width:84px;height:84px;border-radius:14px;object-fit:cover"><div><b style="font:700 24px 'Barlow Condensed'">${M[0]}</b><p class="mute" style="margin:2px 0 0">${M[2]}</p></div></div>
+ <div class="grid3" style="margin:12px 0"><div class="stat"><div class="num">${days}</div><span>dni treningu</span></div><div class="stat"><div class="num">${mins}</div><span>minut</span></div><div class="stat"><div class="num">${plans+an.length+ch}</div><span>planów, analiz i wyzwań</span></div></div>
+ <button class="btn-p full bigbtn" data-a="wkclaim" data-v="${A}" data-i="${lv}">${lv?'Odbierz odznakę':'Odbierz punkty za starania'}</button></div>`}
+
 /* ---------- karta postaci ---------- */
 function renderProf(){const b=S.belts[S.cur],m=medals(),mins=S.log.reduce((a,l)=>a+(+l.m||0),0);
  const M=S.comps.filter(c=>c.p>=1&&c.p<=3).sort((a,b)=>b.d.localeCompare(a.d));
@@ -858,7 +935,7 @@ function renderProf(){const b=S.belts[S.cur],m=medals(),mins=S.log.reduce((a,l)=
  </div>
  <div class="card"><h3>Moje medale</h3>${M.length?`<div class="mwall">${M.map(c=>`<div class="mw"><div class="medal m${c.p}">${c.p}</div><b>${esc(c.n||'Zawody')}</b>${pl(c.d)}${c.c?'<br>'+esc(c.c):''}</div>`).join('')}</div>`:'<p class="mute">Jeszcze nie ma medali. Dodaj pierwszy poniżej!</p>'}</div>
  ${resForm('p','Dodaj medal')}
- <div class="card"><h3>Osiągnięcia</h3><p class="mute">${got.length} z ${CARDS.length} kart${S.quizBest?` · quiz: ${S.quizBest}/10`:''}${S.passed?` · zdane egzaminy: ${S.passed}`:''}</p>
+ <div class="card"><h3>Osiągnięcia</h3><p class="mute">${got.length} z ${CARDS.length} kart${S.quizBest?` · quiz: ${S.quizBest}/10`:''}${S.passed?` · zdane egzaminy: ${S.passed}`:''}${Object.values(S.wk||{}).filter(x=>x>0).length?` · odznaki tygodnia: ${Object.values(S.wk||{}).filter(x=>x===3).length} złote, ${Object.values(S.wk||{}).filter(x=>x===2).length} srebrne, ${Object.values(S.wk||{}).filter(x=>x===1).length} brązowe`:''}</p>
   ${got.length?`<div class="thumbs">${got.map(c=>`<img src="${src(c.img)}" alt="${esc(c.n)}" title="${esc(c.n)}">`).join('')}</div>`:'<p class="mute" style="margin:0">Zdobywaj karty treningami, zawodami i analizami.</p>'}</div>
  <div class="card"><h3>O mnie</h3>${f('klub','Klub','np. Fighters Dojo')}${f('sensei','Mój sensei','imię sensei')}${f('tech','Ulubiona technika','np. mawashi geri')}${f('kata','Ulubiona kata','np. Pinan Sono Ni')}${f('cel','Mój cel','np. medal na Mistrzostwach Polski')}</div>
  </div>`}
@@ -872,7 +949,8 @@ function render(){
  else{const hs={trening:[{dzis:'Twój trening na dziś',plany:'Gotowe plany treningowe',cw:'Biblioteka ćwiczeń',testy:'Test sprawności',rodzina:'Wspólne wyzwanie tygodnia',analiza:'Nagraj się, a ja ocenię technikę'}[TS.sub],'Trening'],kata:[`${S.kata.filter(k=>k.f).length} startowych · ${reps()} powtórzeń`,'Kata'],kumite:['Timer, refleks i zasady walki','Kumite'],zawody:[`${S.comps.length} startów · ${medals().reduce((a,b)=>a+b,0)} medali`,'Zawody'],wiecej:sub==='karty'?[`${S.got.length} z ${CARDS.length} kart zdobytych`,'Karty']:['Pasy, dziennik, słowniczek','Więcej']}[tab];
   placeHero(tab,{vid:tab==='wiecej'&&sub==='karty'?'tab-karty':HV[tab],s:hs[0]},hs[1])}
  $('#nav').innerHTML=TABS.map(([k,t])=>`<a href="#${k}" class="${k===tab?'on':''}" ${k===tab?'aria-current="page"':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>${t}</a>`).join('');
- tShow();fillImgs();if(profOpen)renderProf();msg='';
+ tShow();fillImgs();if(profOpen)renderProf();msg='';applyAcc();
+ if(tab!==lastTab){lastTab=tab;tabFx()}
 }
 
 /* ---------- timer ---------- */
@@ -881,11 +959,11 @@ function tShow(){const el=$('#tm');if(!el)return;const s=Math.max(0,Math.ceil(T.
  $('#tgo').textContent=T.run?'Pauza':T.ph==='idle'||T.ph==='done'?'Start':'Wznów';$('#tcard').className='card timer ph-'+T.ph}
 function tTick(){T.left=T.end-Date.now();
  if(T.ph==='walka'&&S.kt.a&&!T.warned&&T.left<=10000&&S.kt.w>10){T.warned=true;beep(1250,.12,2)}
- if(T.left<=0){if(T.ph==='walka'){beep(440,.8);say(T.round>=S.kt.r?'Yame! Koniec walki. Osu!':'Yame! Przerwa.');if(T.round>=S.kt.r){T.ph='done';T.run=false;clearInterval(T.id);T.left=0;celebrate({img:'sou',k:'Koniec walki',t:'Osu!',s:`${S.kt.r} ${S.kt.r===1?'runda':'rundy'} za Tobą. Ukłon i oddech.`,conf:false})}else{T.ph='przerwa';T.left=S.kt.p*1000;T.end=Date.now()+T.left}}
-  else if(T.ph==='przerwa'){T.round++;T.ph='walka';T.warned=false;T.left=S.kt.w*1000;T.end=Date.now()+T.left;beep(660,.4);say(`Runda ${T.round}. Hajime!`)}}
+ if(T.left<=0){if(T.ph==='walka'){gong();say(T.round>=S.kt.r?'Yame! Koniec walki. Osu!':'Yame! Przerwa.');if(T.round>=S.kt.r){T.ph='done';T.run=false;clearInterval(T.id);T.left=0;celebrate({img:'sou',k:'Koniec walki',t:'Osu!',s:`${S.kt.r} ${S.kt.r===1?'runda':'rundy'} za Tobą. Ukłon i oddech.`,conf:false})}else{T.ph='przerwa';T.left=S.kt.p*1000;T.end=Date.now()+T.left}}
+  else if(T.ph==='przerwa'){T.round++;T.ph='walka';T.warned=false;T.left=S.kt.w*1000;T.end=Date.now()+T.left;taiko(2);say(`Runda ${T.round}. Hajime!`)}}
  tShow()}
 function tGo(){if(T.run){T.run=false;T.left=T.end-Date.now();clearInterval(T.id);tShow();return}
- if(T.ph==='idle'||T.ph==='done'){T.ph='walka';T.round=1;T.left=S.kt.w*1000;T.warned=false;beep(660,.4);say('Hajime!')}
+ if(T.ph==='idle'||T.ph==='done'){T.ph='walka';T.round=1;T.left=S.kt.w*1000;T.warned=false;taiko(2);say('Hajime!')}
  T.run=true;T.end=Date.now()+T.left;clearInterval(T.id);T.id=setInterval(tTick,100);tShow()}
 function tReset(){clearInterval(T.id);T.run=false;T.ph='idle';T.left=S.kt.w*1000;tShow()}
 
@@ -975,11 +1053,14 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b
  case'tsave':{const t=TD.tests.find(x=>x.id===v),raw=val('tv-'+v).replace(',','.'),num=parseFloat(raw);if(!t||!isFinite(num))return;S.tests=S.tests||[];const prev=S.tests.filter(x=>x.id===v).sort((a,b)=>a.d.localeCompare(b.d)).pop();S.tests.push({id:v,d:today(),v:num});addXP(15);
   const better=prev&&(t.better==='lower'?num<prev.v:num>prev.v);celebrate(better?{vid:'rekord',k:t.name,t:'Nowy rekord!',s:`${String(num).replace('.',',')} ${t.unit} (poprzednio ${String(prev.v).replace('.',',')})`,fan:true}:{img:'tablica',k:t.name,t:String(num).replace('.',',')+' '+t.unit,s:prev?'Zapisane. Następnym razem pobijesz!':'Pierwszy wynik zapisany. +15 XP'});break}
  case'rcol':rcol=+v;document.querySelectorAll('[data-a=rcol]').forEach(x=>x.classList.toggle('on',+x.dataset.v===rcol));document.querySelectorAll('.rcl').forEach(x=>x.textContent=RCOL.find(r=>r[0]===rcol)[3]);return;
- case'addres':{const pre=v,p=rcol,n=val(pre+'n');S.comps.push({d:val(pre+'d')||today(),c:val(pre+'c'),n,p,o:val(pre+'o')});if(S.next.d&&S.next.d<=today())S.next={d:'',n:''};addXP(p>=1&&p<=3?30:15);
+ case'addres':{const pre=v,p=rcol,n=val(pre+'n');S.comps.push({d:val(pre+'d')||today(),c:val(pre+'c'),n,p,o:val(pre+'o'),good:val(pre+'g'),fix:val(pre+'f')});if(S.next.d&&S.next.d<=today())S.next={d:'',n:''};addXP(p>=1&&p<=3?30:15);
   celebrate(p===1?{img:'medal',k:n||'Zawody',t:'Złoto!',s:'Mistrzyni. Osu!'}:p>1?{img:'podium',k:n||'Zawody',t:p+'. miejsce!',s:'Medal jest Twój. Brawo!'}:{img:'sou',k:n||'Zawody',t:'Każdy start uczy',s:'Wyciągnij wnioski i wracaj silniejsza. Osu!',conf:false});say(p===1?'Złoto! Mistrzyni!':p>1?'Medal! Brawo!':'Każdy start uczy. Osu!');break}
  case'katahelp':S.kataHelp=1;break;
  case'setbelt':S.cur=i;for(const k in heroEls)heroEls[k]._k='';celebrate({img:'macha',k:'Mój pas',t:S.belts[i].n,s:S.belts[i].k+' – zapisane. Osu!',conf:false});break;
  case'nostripe':S.belts[S.cur].s=null;break;
+ case'pcount':countGo();return;
+ case'feel':S.feel=S.feel||{};S.feel[today()]=+v;say(['','Odpocznij dobrze. Zasłużyłaś!','Odpocznij dzisiaj. Jutro będzie lepiej.','W porządku. Osu!','Super! Tak trzymaj.','Ogień! Jesteś w formie!'][+v]);break;
+ case'wkclaim':{S.wk=S.wk||{};const lv=i;S.wk[v]=lv;addXP([5,10,20,30][lv]);const M=[['sou','Starania się liczą!'],['podium','Brązowa odznaka tygodnia!'],['podium','Srebrna odznaka tygodnia!'],['medal','Złota odznaka tygodnia!']][lv];celebrate({img:M[0],k:'Podsumowanie tygodnia',t:M[1],s:`+${[5,10,20,30][lv]} XP. Nowy tydzień, nowa szansa. Osu!`,fan:lv===3});say(M[1]);break}
  case'report':openReport();return;
  case'repx':$('#rep').hidden=true;$('#rep').innerHTML='';return;
  case'repshare':if(REPBLOB)shareBlob(REPBLOB,`raport-${today().slice(0,7)}.png`,'Raport – Droga wojownika');return;
@@ -1006,7 +1087,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b
  case'card':{const c=CARDS[i];celebrate({vid:c.vid,img:c.img,k:'Twoja karta',t:c.n,s:c.need,conf:false});return}
  case'addreq':{const t=val('nr');if(!t)return;S.belts[S.cur+1].req.push({t,d:false});break}
  case'delreq':if(!arm(b))return;S.belts[S.cur+1].req.splice(i,1);break;
- case'pass':{if(!arm(b))return;S.cur++;S.passed=(S.passed||0)+1;addXP(100);const nb=S.belts[S.cur];celebrate({img:'puchar',k:'Egzamin zdany',t:`${nb.k}!`,s:`Nowy pas: ${nb.n}. Droga trwa. Osu!`,fan:true});keep=false;location.hash='start';break}
+ case'pass':{if(!arm(b))return;S.cur++;S.passed=(S.passed||0)+1;const nb=S.belts[S.cur];celebrate({vid:'pas',img:'puchar',belt:S.cur,gong:1,k:'Egzamin zdany!',t:nb.n,s:`${nb.k} – nowy pas. Droga trwa. Osu!`});say(`Gratulacje! Nowy pas: ${nb.n}. Osu!`);addXP(100);keep=false;location.hash='start';break}
  case'qstart':qStart();keep=false;break;
  case'qans':Q.ans=i;if(i===Q.list[Q.i].ok){Q.score++;beep(990,.1)}else beep(300,.2);break;
  case'qnext':Q.i++;Q.ans=null;if(Q.i>=10){if(Q.score>S.quizBest)S.quizBest=Q.score;addXP(Q.score*2);celebrate(Q.score===10?{img:'taniec',k:'Quiz',t:'10/10!',s:'Sensei byłby dumny.',fan:true}:Q.score>=7?{img:'macha',k:'Quiz',t:Q.score+'/10',s:'Bardzo dobrze! Jeszcze krok do perfekcji.'}:{img:'smutek',k:'Quiz',t:Q.score+'/10',s:'Spróbuj jeszcze raz, dasz radę!',conf:false})}break;
@@ -1032,6 +1113,8 @@ document.addEventListener('change',e=>{const t=e.target,c=t.dataset.c;if(!c)retu
  else if(c==='dedi'){S.dedi=t.value.trim();$('#dedi').textContent=S.dedi}
  else if(c==='me'){S.me[t.dataset.k]=t.value.trim();save();renderProf();return}
  else if(c==='trkata')TR.kata=t.value;
+ else if(c==='bag'){if(!S.bag)S.bag={for:S.next.d,ch:{}};S.bag.ch[i]=t.checked;save();render();return}
+ else if(c==='acc'){S.accOff=t.checked?0:1;save();render();return}
  else if(c==='beltcol'){S.belts[S.cur].c=t.value;save();render();return}
  else if(c==='beltstr'){S.belts[S.cur].s=t.value;save();render();return}
  else if(c==='voice'){S.voice=t.checked?1:0;save();if(S.voice)say('Osu! Jestem Twoim trenerem.');return}
