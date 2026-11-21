@@ -12,19 +12,17 @@ permissions:
   pages: write
   id-token: write
 
+# Kolejne publikacje czekają na swoją kolej zamiast się przerywać.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Pobierz pliki
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
 
       - name: Nowa wersja do pamięci telefonu
         run: sed -i "s/const V='dw-[^']*'/const V='dw-${GITHUB_SHA::8}'/" sw.js
@@ -33,10 +31,17 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Spakuj aplikację
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Opublikuj
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
