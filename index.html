@@ -202,6 +202,7 @@ details.prep>summary{display:flex;align-items:center;gap:10px}
 .prof[hidden]{display:none}
 .pbar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:rgba(7,9,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .pcard{border-radius:22px;overflow:hidden;border:2px solid rgba(242,193,78,.6);box-shadow:0 0 40px rgba(242,193,78,.18);background:linear-gradient(180deg,#151924,#0b0e14);margin-bottom:14px}
+.pvid{position:relative;aspect-ratio:1;background:#05070b}.pvid>video{width:100%;height:100%;object-fit:cover;display:block}.pmini{position:absolute;right:10px;top:10px;width:30%;border-radius:12px;overflow:hidden;border:2px solid rgba(242,193,78,.7);box-shadow:0 4px 14px rgba(0,0,0,.6)}.pmini .stage{border-radius:0}
 .pcard>img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
 .pinfo{padding:14px 16px 16px;margin-top:-70px;position:relative;background:linear-gradient(transparent,#0e1118 60px)}
 .lvl{display:inline-flex;align-items:center;gap:8px;background:rgba(5,7,11,.75);border:1px solid var(--line);border-radius:99px;padding:4px 12px 4px 6px;font-size:14px;font-weight:600}
@@ -419,7 +420,7 @@ function mood(){const last=S.log.map(l=>l.d).filter(d=>d<=today()).sort().pop(),
  if(bday())return{img:'taniec',t:`Sto lat, ${S.name}!`,s:`Dziś kończysz ${age()} ${lat(age())}. Wszystkiego najlepszego, osu!`};
  const sp=special();if(sp)return sp;
  const g=S.comps.filter(c=>c.p==1&&daysTo(c.d)<=0&&daysTo(c.d)>-7);if(g.length)return{vid:'medal',t:'Mistrzyni!',s:`Złoto: ${g[0].n||'zawody'}. Ciesz się tym!`};
- if(last===today())return{vid:'karate',t:'Dziś już trenowałaś',s:st>1?`Seria: ${st} ${dni(st)} z rzędu. Ogień!`:'Tak trzymaj. Osu!'};
+ if(last===today())return{vid:'boks',t:'Dziś już trenowałaś',s:st>1?`Seria: ${st} ${dni(st)} z rzędu. Ogień!`:'Tak trzymaj. Osu!'};
  if(gap!==null&&gap>=3)return{vid:'smutek',t:'Tęsknię za treningiem…',s:`Ostatni trening ${gap} dni temu. Zrób dziś choć 15 minut?`};
  if(!last)return{vid:'boks',t:`${greet()}! Gotowa na pierwszy trening?`,s:'Zacznij od planu na dziś i odblokuj pierwszą kartę.'};
  const h=new Date().getHours();
@@ -1010,9 +1011,9 @@ function renderProf(){const b=S.belts[S.cur],m=medals(),mins=S.log.reduce((a,l)=
  const M=S.comps.filter(c=>c.p>=1&&c.p<=3).sort((a,b)=>b.d.localeCompare(a.d));
  const got=CARDS.filter(c=>S.got.includes(c.id));
  const me=S.me,f=(k,l,ph)=>`<div class="field"><label for="me-${k}">${l}</label><input id="me-${k}" data-c="me" data-k="${k}" value="${esc(me[k])}" placeholder="${ph}"></div>`;
- $('#prof').innerHTML=`<div class="pbar"><b style="font:700 20px 'Barlow Condensed',sans-serif">Karta postaci</b><button data-a="profx">Zamknij</button></div>
+ const _pv=$('#prof .pvid video'),_pt=_pv?_pv.currentTime:0;$('#prof').innerHTML=`<div class="pbar"><b style="font:700 20px 'Barlow Condensed',sans-serif">Karta postaci</b><button data-a="profx">Zamknij</button></div>
  <div class="wrap" style="padding:16px">
- <div class="pcard">${stage()}<div class="pinfo"><h1>${esc(S.name)}</h1>${S.title?'<span class="ttl2">Smocza wojowniczka</span>':''}
+ <div class="pcard"><div class="pvid"><video src="media/wideo/v-o-mnie.mp4" poster="media/wideo/v-o-mnie.jpg" autoplay muted loop playsinline preload="auto"></video>${(S.look||S.bg||S.pet)?`<div class="pmini" aria-label="Twój strój">${stage()}</div>`:''}</div><div class="pinfo"><h1>${esc(S.name)}</h1>${S.title?'<span class="ttl2">Smocza wojowniczka</span>':''}
   <p style="margin:4px 0 10px;color:#c9ced6">${age()} ${lat(age())} · urodziny ${pl(S.born).slice(0,-5)} · karate kyokushin</p>
   <span class="lvl">${swatch(b)}${esc(b.k)} · ${esc(b.n)}</span> <span class="lvl">Poziom ${lvl().l} · ${lvl().t}</span>
   <p class="mute" style="margin:10px 0 0">${esc(me.klub||'')}${me.sensei?' · sensei '+esc(me.sensei):''}</p></div></div>
@@ -1030,7 +1031,7 @@ function renderProf(){const b=S.belts[S.cur],m=medals(),mins=S.log.reduce((a,l)=
  <div class="card"><h3>Osiągnięcia</h3><p class="mute">${got.length} z ${CARDS.length} kart${S.quizBest?` · quiz: ${S.quizBest}/10`:''}${S.passed?` · zdane egzaminy: ${S.passed}`:''}${Object.values(S.wk||{}).filter(x=>x>0).length?` · odznaki tygodnia: ${Object.values(S.wk||{}).filter(x=>x===3).length} złote, ${Object.values(S.wk||{}).filter(x=>x===2).length} srebrne, ${Object.values(S.wk||{}).filter(x=>x===1).length} brązowe`:''}</p>
   ${got.length?`<div class="thumbs">${got.map(c=>`<img src="${src(c.img)}" alt="${esc(c.n)}" title="${esc(c.n)}">`).join('')}</div>`:'<p class="mute" style="margin:0">Zdobywaj karty treningami, zawodami i analizami.</p>'}</div>
  <div class="card"><h3>O mnie</h3>${f('klub','Klub','np. Fighters Dojo')}${f('sensei','Mój sensei','imię sensei')}${f('tech','Ulubiona technika','np. mawashi geri')}${f('kata','Ulubiona kata','np. Pinan Sono Ni')}${f('cel','Mój cel','np. medal na Mistrzostwach Polski')}</div>
- </div>`}
+ </div>`;{const v=$('#prof .pvid video');if(v&&_pt){v.currentTime=_pt;v.play().catch(()=>{})}}}
 function openProf(){profOpen=true;renderProf();const p=$('#prof');p.hidden=false;p.scrollTop=0}
 function closeProf(){profOpen=false;$('#prof').hidden=true}
 

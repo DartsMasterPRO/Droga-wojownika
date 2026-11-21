@@ -67,10 +67,26 @@ function kickEvents(F,minPeak){const out=[];
   const sig=F.map(f=>{if(!f.w)return null;const b=body(f.w);return(f.w[g.sup.an].y-Math.min(f.w[g.an].y,f.w[g.ft].y))/b.leg});
   segments(sig,minPeak*.6,minPeak*.35,minPeak,2).forEach(e=>out.push({...e,side:s}))}
  return out.sort((a,b)=>a.peak-b.peak)}
+// Cios = ręka wyprostowana I uniesiona w przód (mniej więcej prostopadle do tułowia),
+// a wcześniej cofnięta. Ręce opuszczone wzdłuż ciała (stanie, ukłon) się nie liczą.
+function armSig(w,a){const arm=d3(w[a.sh],w[a.el])+d3(w[a.el],w[a.wr])||.5;
+ if((w[a.wr].visibility??1)<.4||(w[a.el].visibility??1)<.4)return null;
+ const r=d3(w[a.sh],w[a.wr])/arm,sh=mid(w[11],w[12]),hp=mid(w[23],w[24]);
+ const u=[sh.x-hp.x,sh.y-hp.y,sh.z-hp.z],ul=Math.hypot(...u)||1,v=[w[a.wr].x-w[a.sh].x,w[a.wr].y-w[a.sh].y,w[a.wr].z-w[a.sh].z];
+ const along=(v[0]*u[0]+v[1]*u[1]+v[2]*u[2])/ul/arm,horiz=Math.hypot(v[0],v[2])/arm;
+ const up=along>-.5&&along<.65&&horiz>.55;
+ return up?r:Math.min(r,.45)}
 function punchEvents(F,minReach){const out=[];
  for(const s of['L','R']){const a=ARM[s];
-  const sig=F.map(f=>{if(!f.w)return null;const w=f.w,arm=d3(w[a.sh],w[a.el])+d3(w[a.el],w[a.wr])||.5;return d3(w[a.sh],w[a.wr])/arm});
-  segments(sig,minReach-.06,minReach-.16,minReach,1).forEach(e=>out.push({...e,side:s}))}
+  const sig=F.map(f=>f.w?armSig(f.w,a):null);
+  segments(sig,minReach-.06,minReach-.16,minReach,1).forEach(e=>{
+   // musi być wyraźny ruch: chwilę przed ciosem ręka była cofnięta
+   const t0=F[e.start].t;let low=Infinity;
+   for(let k=e.start-1;k>=0&&t0-F[k].t<=1;k--)if(sig[k]!=null)low=Math.min(low,sig[k]);
+   const prev=out.filter(o=>o.side===s).pop();
+   if(low>minReach-.3)return;
+   if(prev&&F[e.peak].t-F[prev.peak].t<.4){if(sig[e.peak]>sig[prev.peak]){prev.peak=e.peak;prev.end=e.end}return}
+   out.push({...e,side:s})})}
  return out.sort((a,b)=>a.peak-b.peak)}
 
 /* ---------- oceny ---------- */
@@ -126,7 +142,9 @@ function analyzeKicks(F,fps,key){const K=KICK[key];const evs=kickEvents(F,K.min)
   facts:[`${reps.length} ${reps.length===1?'kopnięcie':reps.length<5?'kopnięcia':'kopnięć'} (lewa: ${nL}, prawa: ${nR})`,`Najlepsze: ${SIDE[best.side]} noga, ${key==='low'?'na wysokości uda':best.level}`,`Czas kopnięcia: ${fmt(avg(reps.map(r=>r.time)),2)} s`],
   extra:{level:best.level,time:avg(reps.map(r=>r.time))}}}
 
-function analyzePunch(F,fps){const evs=punchEvents(F,.9);
+function analyzePunch(F,fps){const kk=kickEvents(F,.3).map(e=>F[e.peak].t);
+ // ruch rąk w czasie kopnięcia to nie cios
+ const evs=punchEvents(F,.9).filter(e=>!kk.some(t=>Math.abs(t-F[e.peak].t)<.35));
  if(!evs.length)return{error:'Nie widzę ciosów. Stań bokiem do telefonu i uderzaj do przodu, w bok kadru.'};
  const reps=evs.map(e=>{const a=ARM[e.side],w=F[e.peak].w,b=body(w);
   const ext=ang(w[a.sh],w[a.el],w[a.wr]),hp=(w[a.wr].y-b.sh.y)/Math.max(.05,b.hp.y-b.sh.y);
@@ -149,6 +167,7 @@ function analyzeZenkutsu(F){const C=core(F);if(C.length<3)return{error:'Za mało
  const M=C.map(f=>{const w=f.w,b=body(w),aL=ang(w[23],w[25],w[27]),aR=ang(w[24],w[26],w[28]);return{len:Math.hypot(w[27].x-w[28].x,w[27].z-w[28].z)/b.leg,front:Math.min(aL,aR),back:Math.max(aL,aR),lean:b.lean,hx:f.lm?(f.lm[23].x+f.lm[24].x)/2:null,fl:aL<aR?'L':'R'}});
  const len=med(M.map(m=>m.len)),front=med(M.map(m=>m.front)),back=med(M.map(m=>m.back)),lean=med(M.map(m=>m.lean));
  const hx=M.map(m=>m.hx).filter(x=>x!=null),mu=avg(hx),sd=Math.sqrt(avg(hx.map(x=>(x-mu)**2)));
+ if(!(len>=.45))return{error:'Nie widzę pozycji zenkutsu dachi. Zrób długi krok do przodu, ugnij przednie kolano i postój tak kilka sekund.'};
  const sF=front<=128?(front>=88?1:lin(front,60,88)):1-lin(front,128,162);
  const checks=[
   {k:'len',s:lin(len,.7,1.08),wt:.3,label:'Długość pozycji',good:'Długa, mocna pozycja – super!',fix:'Zrób dłuższy krok – zenkutsu dachi ma być długa i niska.'},
@@ -163,6 +182,7 @@ function analyzeKiba(F){const C=core(F);if(C.length<3)return{error:'Za mało kla
   return{wid:ad/b.shW,knee:(ang(w[23],w[25],w[27])+ang(w[24],w[26],w[28]))/2,out:kd/Math.max(.05,ad),lean:b.lean,hx:f.lm?(f.lm[23].x+f.lm[24].x)/2:null}});
  const wid=med(M.map(m=>m.wid)),knee=med(M.map(m=>m.knee)),out=med(M.map(m=>m.out)),lean=med(M.map(m=>m.lean));
  const hx=M.map(m=>m.hx).filter(x=>x!=null),mu=avg(hx),sd=Math.sqrt(avg(hx.map(x=>(x-mu)**2)));
+ if(!(wid>=1.05))return{error:'Nie widzę pozycji kiba dachi. Rozstaw stopy szeroko (dwie szerokości barków), ugnij kolana i postój tak kilka sekund.'};
  const sK=knee>142?1-lin(knee,142,172):knee<95?lin(knee,70,95):1;
  const checks=[
   {k:'wid',s:lin(wid,1.3,1.9),wt:.28,label:'Szerokość',good:'Szeroko rozstawione stopy – idealnie.',fix:'Stopy szerzej – mniej więcej dwie szerokości barków.'},
@@ -177,6 +197,7 @@ function analyzeShadow(F,fps){const V=F.filter(f=>f.w&&f.lm);if(V.length<5)retur
  let path=0;for(let i=1;i<V.length;i++){const a=V[i-1].lm,b=V[i].lm,bh=Math.abs(((a[27].y+a[28].y)/2)-((a[11].y+a[12].y)/2))||.4;path+=Math.abs(((b[23].x+b[24].x)-(a[23].x+a[24].x))/2)/bh}
  const dur=(V[V.length-1].t-V[0].t)||1,mob=path/dur;
  const acts=kickEvents(F,.3).length+punchEvents(F,.86).length,rate=acts/dur*10;
+ if(acts<2&&mob<.06)return{error:'Nie widzę walki z cieniem. Ruszaj się na nogach i wyprowadzaj ciosy i kopnięcia – trener policzy każdą technikę.'};
  const checks=[
   {k:'guard',s:lin(guard,.35,.8),wt:.45,label:'Garda',good:`Ręce wysoko przez ${pctTxt(guard)}% czasu – brawo!`,fix:`Ręce były wysoko tylko przez ${pctTxt(guard)}% czasu. Pięści przy brodzie przez całą walkę!`},
   {k:'mob',s:lin(mob,.04,.22),wt:.3,label:'Praca nóg',good:'Super praca nóg – ciągle w ruchu!',fix:'Więcej ruchu na nogach – krok w bok, do przodu, do tyłu.'},
@@ -189,6 +210,7 @@ function analyzeKata(F,fps){const V=F.filter(f=>f.w&&f.lm);if(V.length<8)return{
  const thr=med(mv)*.45;let kime=0,run=0,moved=false;mv.forEach(m=>{if(m<thr){run++;if(run===Math.max(2,Math.round(.3*fps))&&moved){kime++;moved=false}}else{run=0;if(m>thr*2)moved=true}});
  const dur=V[V.length-1].t-V[0].t,tail=mv.slice(-Math.max(3,Math.round(fps))),zan=avg(tail)<thr*1.2;
  const lean=med(V.map(f=>body(f.w).lean));
+ if(kickEvents(F,.3).length+punchEvents(F,.86).length<2)return{error:'Nie widzę kata – na filmie jest za mało technik. Nagraj całe kata od ukłonu do ukłonu, cała w kadrze.'};
  const checks=[
   {k:'depth',s:lin(depth,.03,.13),wt:.35,label:'Niskie pozycje',good:'Nisko i stabilnie w pozycjach!',fix:'Schodź niżej w pozycjach – niskie pozycje to mocne kata.'},
   {k:'kime',s:lin(kime/Math.max(1,dur/3),.3,1),wt:.3,label:'Rytm i kime',good:'Świetny rytm i zatrzymania po technikach!',fix:'Zatrzymaj się na mgnienie oka po każdej technice (kime) – kata ma rytm.'},
