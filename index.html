@@ -300,12 +300,12 @@ const defMe=()=>({klub:'Fighters Dojo Góra Kalwaria',sensei:'',tech:'',kata:'',
 const fresh=()=>({v:2,style:'kyo',name:'Blanka',born:'2015-11-08',cur:3,passed:0,rx:0,dedi:'',pbs:0,me:defMe(),
  belts:BELTS.map(([k,n,c,s,r])=>({k,n,c,s,req:r.map(t=>({t,d:false}))})),
  kata:KATA.map(([n,l])=>({n,l,r:0,f:false,note:''})),
- log:[],comps:[],an:[],tests:[],ch:{},club:[],xp:0,plansDone:0,voice:1,remind:0,fam:null,quizBest:0,next:{d:'',n:''},kt:{w:90,p:60,r:3,a:1},rs:'średnio',rd:60});
+ log:[],comps:[],an:[],tests:[],ch:{},club:[],xp:0,plansDone:0,voice:1,music:1,mvol:1,remind:0,fam:null,quizBest:0,next:{d:'',n:''},kt:{w:90,p:60,r:3,a:1},rs:'średnio',rd:60});
 let S=null;
 try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 if(!S||!S.v)S=fresh();
 if(S.style!=='kyo'){const f=fresh();Object.assign(S,{v:2,style:'kyo',born:'2015-11-08',cur:3,belts:f.belts,kata:f.kata,kt:f.kt,me:S.me||defMe(),an:S.an||[]})}
-S.an=S.an||[];S.me=S.me||defMe();S.tests=S.tests||[];S.ch=S.ch||{};S.club=S.club||[];S.xp=S.xp||0;if(S.voice==null)S.voice=1;
+S.an=S.an||[];S.me=S.me||defMe();S.tests=S.tests||[];S.ch=S.ch||{};S.club=S.club||[];S.xp=S.xp||0;if(S.voice==null)S.voice=1;if(S.music==null)S.music=1;if(S.mvol==null)S.mvol=1;
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}try{kvSync()}catch(e){}};
 
 const $=s=>document.querySelector(s);
@@ -602,6 +602,8 @@ function vUst(){
   <div class="row" style="margin-top:8px"><label for="bs" style="margin:0;flex:1;color:var(--ink)">Kolor belki</label><input id="bs" type="color" data-c="beltstr" value="${S.belts[S.cur].s||S.belts[S.cur].c}" style="width:64px;padding:4px"><button data-a="nostripe">Bez belki</button></div></details></div>
  <div class="card"><h3>Trener i przypomnienia</h3>
   <label class="tog"><span><b>Kolor aplikacji jak mój pas</b><br><span class="mute">Podświetlenia w kolorze Twojego pasa</span></span><input type="checkbox" data-c="acc" ${S.accOff?'':'checked'}></label>
+  <label class="tog"><span><b>Muzyka w tle</b><br><span class="mute">Inna w menu, na treningu i przy mokuso</span></span><input type="checkbox" data-c="music" ${S.music?'checked':''}></label>
+  ${S.music?`<div class="row" style="padding:4px 0 10px"><label for="mv" style="margin:0;color:var(--ink)">Głośność</label><input id="mv" type="range" min="0.2" max="1.6" step="0.1" value="${S.mvol}" data-c="mvol" style="flex:1;min-height:0;padding:0;accent-color:var(--acc)"></div>`:''}
   <label class="tog"><span><b>Głos trenera</b><br><span class="mute">Podpowiada w treningu, timerze i reakcji</span></span><input type="checkbox" data-c="voice" ${S.voice?'checked':''}></label>
   <label class="tog"><span><b>Codzienne przypomnienie</b><br><span class="mute">Po południu, jeśli nie było treningu</span></span><input type="checkbox" data-c="remind" ${S.remind?'checked':''}></label>
   <button class="full" data-a="testnotif" style="margin-top:8px">Wyślij próbne przypomnienie</button></div>
@@ -761,7 +763,7 @@ function vTrening(){const V={dzis:['Dziś',vDzis],plany:['Plany',vPlany],cw:['Ć
 let plVoice=null;
 function pickVoice(){try{const vs=speechSynthesis.getVoices();plVoice=vs.find(v=>/pl/i.test(v.lang)&&/female|zosia|ewa|paulina|google/i.test(v.name))||vs.find(v=>/^pl/i.test(v.lang))||null}catch(e){}}
 try{if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}}catch(e){}
-function say(t,keep){if(!S.voice||!('speechSynthesis' in window))return;try{if(!keep)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pl-PL';if(plVoice)u.voice=plVoice;u.rate=1.05;u.pitch=1.1;speechSynthesis.speak(u)}catch(e){}}
+function say(t,keep){if(!S.voice||!('speechSynthesis' in window))return;try{if(!keep)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='pl-PL';if(plVoice)u.voice=plVoice;u.rate=1.05;u.pitch=1.1;u.onstart=()=>duck(1);u.onend=u.onerror=()=>duck(0);speechSynthesis.speak(u)}catch(e){}}
 
 /* ---------- KALENDARZ ---------- */
 const FLAME='<svg viewBox="0 0 24 24" width="22" height="22" style="vertical-align:-3px" fill="#f2c14e"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3-1-3 0-6 1-9.5z"/></svg>';
@@ -872,7 +874,7 @@ const JPR=['','ichi','ni','san','shi','go','roku','shichi','hachi','ku','ju'],JP
 const jpParts=n=>n<=10?[n]:[Math.floor(n/10)>1?Math.floor(n/10):0,10,n%10].filter(Boolean);
 const jpWord=(n,A,sep=' ')=>jpParts(n).map(x=>A[x]).join(sep);
 let jaVoice=null;try{const f=()=>{try{jaVoice=speechSynthesis.getVoices().find(v=>/^ja/i.test(v.lang))||null}catch(e){}};f();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',f)}catch(e){}
-function sayJp(n){if(!S.voice||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(jaVoice?jpWord(n,JPK,''):jpWord(n,JPP));u.lang=jaVoice?'ja-JP':'pl-PL';u.voice=jaVoice||plVoice;u.rate=1.15;speechSynthesis.speak(u)}catch(e){}}
+function sayJp(n){if(!S.voice||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(jaVoice?jpWord(n,JPK,''):jpWord(n,JPP));u.lang=jaVoice?'ja-JP':'pl-PL';u.voice=jaVoice||plVoice;u.rate=1.15;u.onstart=()=>duck(1);u.onend=u.onerror=()=>duck(0);speechSynthesis.speak(u)}catch(e){}}
 function countStop(){if(P&&P.cnt){clearInterval(P.cnt.id);P.cnt=null}}
 function countGo(){if(!P)return;const s=P.st[P.i];if(!s||s.k!=='work')return;if(P.cnt){countStop();renderPlay();return}
  const max=s.d.reps||10,tempo=s.e.cat==='karate'?1700:s.e.cat==='wydolnosc'?1500:2400;P.cnt={n:0,max};renderPlay();
@@ -912,6 +914,22 @@ function weekSum(){const wd=(new Date().getDay()+6)%7;if(wd!==6&&wd!==0)return '
  return `<div class="card today"><p class="kick" style="margin:0 0 8px">Podsumowanie tygodnia</p><div class="row" style="align-items:center;flex-wrap:nowrap"><img src="media/${M[1]}.webp" alt="" style="width:84px;height:84px;border-radius:14px;object-fit:cover"><div><b style="font:700 24px 'Barlow Condensed'">${M[0]}</b><p class="mute" style="margin:2px 0 0">${M[2]}</p></div></div>
  <div class="grid3" style="margin:12px 0"><div class="stat"><div class="num">${days}</div><span>dni treningu</span></div><div class="stat"><div class="num">${mins}</div><span>minut</span></div><div class="stat"><div class="num">${plans+an.length+ch}</div><span>planów, analiz i wyzwań</span></div></div>
  <button class="btn-p full bigbtn" data-a="wkclaim" data-v="${A}" data-i="${lv}">${lv?'Odbierz odznakę':'Odbierz punkty za starania'}</button></div>`}
+
+
+/* ---------- MUZYKA W TLE ---------- */
+const MUS={menu:'media/muzyka/menu.mp3',trening:'media/muzyka/trening.mp3',spokoj:'media/muzyka/spokoj.mp3'},MV={menu:.2,trening:.32,spokoj:.3};
+let mEl=null,mKey=null,mDuck=1,mGest=false;
+const mVol=k=>(MV[k]||.25)*(S.mvol??1)*mDuck;
+function fadeTo(a,v,ms){if(!a)return;clearInterval(a._f);const s0=a.volume,t0=Date.now();a._f=setInterval(()=>{const k=Math.min(1,(Date.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,s0+(v-s0)*k))}catch(e){}if(k>=1)clearInterval(a._f)},40)}
+function wantMusic(){if(!S.music||document.hidden||!$('#intro').hidden)return null;if(P){const p=P.plan;return /gumowe|przed_turniejem|rozci/i.test(p.id+' '+p.name)?'spokoj':'trening'}if(MK.run)return 'spokoj';if(T.run||R.run)return 'trening';
+ if(tab==='trening'&&TS.sub==='analiza'&&TR.view==='proc')return 'spokoj';return 'menu'}
+function sceneMusic(){const k=wantMusic();if(k===mKey){if(mEl&&mEl.paused&&k&&mGest)mEl.play().catch(()=>{});return}
+ const old=mEl;mKey=k;mEl=null;if(old){fadeTo(old,0,700);setTimeout(()=>{old.pause();old.removeAttribute('src');old.load()},750)}
+ if(!k||!mGest)return;const a=new Audio(MUS[k]);a.loop=true;a.volume=0;a.preload='auto';mEl=a;a.play().then(()=>fadeTo(a,mVol(k),1500)).catch(()=>{if(mEl===a){mEl=null;mKey=null}})}
+function duck(on){mDuck=on?.3:1;if(mEl&&mKey)fadeTo(mEl,mVol(mKey),on?200:600)}
+setInterval(sceneMusic,700);
+document.addEventListener('pointerdown',()=>{if(!mGest){mGest=true;sceneMusic()}},{passive:true});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&mEl)mEl.pause();else sceneMusic()});
 
 /* ---------- karta postaci ---------- */
 function renderProf(){const b=S.belts[S.cur],m=medals(),mins=S.log.reduce((a,l)=>a+(+l.m||0),0);
@@ -1113,6 +1131,8 @@ document.addEventListener('change',e=>{const t=e.target,c=t.dataset.c;if(!c)retu
  else if(c==='dedi'){S.dedi=t.value.trim();$('#dedi').textContent=S.dedi}
  else if(c==='me'){S.me[t.dataset.k]=t.value.trim();save();renderProf();return}
  else if(c==='trkata')TR.kata=t.value;
+ else if(c==='music'){S.music=t.checked?1:0;mGest=true;save();sceneMusic();render();return}
+ else if(c==='mvol'){S.mvol=+t.value;save();if(mEl&&mKey)fadeTo(mEl,mVol(mKey),200);return}
  else if(c==='bag'){if(!S.bag)S.bag={for:S.next.d,ch:{}};S.bag.ch[i]=t.checked;save();render();return}
  else if(c==='acc'){S.accOff=t.checked?0:1;save();render();return}
  else if(c==='beltcol'){S.belts[S.cur].c=t.value;save();render();return}
