@@ -211,6 +211,8 @@ nav.tabs a svg{width:22px;height:22px}nav.tabs a.on{color:var(--acc)}
 .intro video{width:100vw;height:100vh;height:100dvh;object-fit:cover;object-position:center 30%}@media(min-aspect-ratio:3/4){.intro video{object-fit:contain}}
 .intro h2{position:absolute;left:0;right:0;bottom:calc(14vh + env(safe-area-inset-bottom));text-align:center;font:800 italic clamp(44px,13vw,72px)/1 'Barlow Condensed',sans-serif;text-transform:uppercase;color:var(--gold2);text-shadow:0 0 30px rgba(242,193,78,.6);opacity:0;animation:rise 1.2s 2.4s forwards}
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.itap{position:absolute;left:50%;bottom:calc(30vh + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(320px,80vw);animation:pulse 2s infinite}.itap[hidden]{display:none}
+.intro.wait h2,.intro.wait #dedi{animation:none;opacity:0}
 .skip{position:absolute;right:16px;top:calc(16px + env(safe-area-inset-top));background:rgba(0,0,0,.5);border-color:rgba(255,255,255,.2)}
 .ov{background:rgba(3,4,7,.94);display:grid;place-items:center;padding:20px;z-index:60}
 .ov canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -253,8 +255,10 @@ nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;heig
 <input type="file" id="impFile" accept="application/json,.json" hidden>
 
 <div id="intro" class="intro">
- <video id="iv" muted playsinline autoplay preload="auto" poster="media/wideo/v-intro.jpg"><source src="media/wideo/v-intro.mp4" type="video/mp4"></video>
+ <video id="iv" muted playsinline preload="auto" poster="media/wideo/v-intro.jpg"><source src="media/wideo/v-intro.mp4" type="video/mp4"></video>
+ <audio id="ia" src="media/muzyka/intro.mp3" preload="auto"></audio>
  <h2 id="it">Osu</h2><p id="dedi"></p><button class="skip" id="skip">Pomiń</button>
+ <button class="btn-p bigbtn itap" id="itap" hidden>Dotknij, aby wejść do dojo</button>
 </div>
 <div id="ov" class="ov" hidden>
  <canvas id="cf"></canvas>
@@ -1032,11 +1036,19 @@ $('#impFile').addEventListener('change',e=>{const f=e.target.files[0];if(f)impor
 $('#vidGal').addEventListener('change',e=>runAnalysis(e.target.files[0]));
 
 /* ---------- intro ---------- */
-function showIntro(){const it=$('#intro'),v=$('#iv');$('#it').textContent='Osu, '+S.name;it.hidden=false;it.classList.remove('out');
- const h=$('#it');h.style.animation='none';void h.offsetWidth;h.style.animation='';
- try{v.currentTime=0}catch(e){}v.play().catch(()=>{});setTimeout(()=>fanfare(),2400)}
-function endIntro(){const it=$('#intro');if(it.hidden)return;it.classList.add('out');$('#iv').pause();setTimeout(()=>{it.hidden=true;it.classList.remove('out')},500);document.querySelectorAll('.hero video').forEach(v=>v.play().catch(()=>{}))}
-$('#iv').addEventListener('ended',endIntro);$('#intro').addEventListener('click',e=>{if(e.target.id!=='skip')endIntro()});$('#skip').addEventListener('click',endIntro);
+function introRun(){const it=$('#intro'),v=$('#iv'),au=$('#ia');it.classList.remove('wait');$('#itap').hidden=true;
+ const h=$('#it'),d=$('#dedi');[h,d].forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
+ try{v.currentTime=0}catch(e){}v.play().catch(()=>{});if(S.music){try{au.currentTime=0;au.volume=.95;au.play().catch(()=>{})}catch(e){}}}
+function showIntro(){const it=$('#intro'),v=$('#iv'),au=$('#ia');$('#it').textContent='Osu, '+S.name;it.hidden=false;it.classList.remove('out');
+ try{v.pause();v.currentTime=0}catch(e){}
+ if(!S.music){introRun();return}
+ try{au.currentTime=0;au.volume=.95}catch(e){}
+ au.play().then(()=>{mGest=true;introRun()}).catch(()=>{it.classList.add('wait');$('#itap').hidden=false})}
+function endIntro(){const it=$('#intro');if(it.hidden)return;it.classList.add('out');$('#iv').pause();const au=$('#ia');fadeTo(au,0,450);setTimeout(()=>{au.pause()},480);
+ setTimeout(()=>{it.hidden=true;it.classList.remove('out','wait');$('#itap').hidden=true},500);document.querySelectorAll('.hero video').forEach(v=>v.play().catch(()=>{}))}
+$('#iv').addEventListener('ended',endIntro);
+$('#intro').addEventListener('click',e=>{if(e.target.id==='skip')return;mGest=true;if(!$('#itap').hidden){introRun();return}endIntro()});
+$('#skip').addEventListener('click',endIntro);
 $('#dedi').textContent=S.dedi||'';
 showIntro();
 $('#ovb').addEventListener('click',nextOv);
