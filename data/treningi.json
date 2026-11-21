@@ -1,0 +1,2592 @@
+{
+ "meta": {
+  "for": "Dziewczynka 11 lat, karate Kyokushin (niebieski pas), kata + kumite",
+  "version": 1,
+  "created": "2026-11-21",
+  "disclaimer": "Materiał edukacyjny, nie zastępuje trenera ani lekarza. Przy bólu, urazie lub chorobie – przerwa i konsultacja."
+ },
+ "principles": [
+  {
+   "text": "Najpierw technika, potem więcej powtórzeń. Ładny ruch wygrywa z szybkim.",
+   "source": "NSCA 2009 (Faigenbaum i in.); Lloyd i in. 2014 (UKSCA, BJSM)"
+  },
+  {
+   "text": "Ćwiczymy masą własnego ciała. Żadnych maksymalnych ciężarów ani prób 'ile max'.",
+   "source": "NSCA 2009; Lloyd i in. 2014"
+  },
+  {
+   "text": "Siła 2–3 razy w tygodniu, nie dzień po dniu. Na start 1–2 serie po 8–15 powtórzeń, przerwa ok. 1 min.",
+   "source": "NSCA 2009"
+  },
+  {
+   "text": "Zawsze 5–10 min rozgrzewki dynamicznej. Rozciąganie statyczne zostaw na koniec.",
+   "source": "NSCA 2009"
+  },
+  {
+   "text": "Skala zmęczenia 1–10: zwykle trenuj na 5–7 ('trudno, ale dam radę rozmawiać'). Ostatnie powtórzenie ma być ładne.",
+   "source": "Lloyd i in. 2016 (NSCA LTAD) – monitorowanie obciążeń; skala RPE (wartości 5–7: konserwatywne założenie aplikacji)"
+  },
+  {
+   "text": "Ból = STOP. Nie ćwiczymy przez ból ani przed pełnym wyleczeniem urazu czy choroby.",
+   "source": "IOC 2015 (Bergeron i in.)"
+  },
+  {
+   "text": "Okres skoku wzrostu: kości rosną szybciej niż mięśnie, koordynacja może chwilowo się pogorszyć. Wtedy mniejsza objętość skoków i więcej techniki.",
+   "source": "Lloyd i in. 2016 (NSCA LTAD)"
+  },
+  {
+   "text": "U dziewcząt warto wzmacniać tył uda i pośladki oraz uczyć miękkiego lądowania – chroni kolana.",
+   "source": "Lloyd i in. 2016 (NSCA LTAD); Ramirez-Campillo i in. 2023"
+  },
+  {
+   "text": "Skoki: niskie, ciche, na miękkiej nawierzchni (mata, trawa, parkiet). Najpierw nauka lądowania, potem większa wysokość.",
+   "source": "Ramirez-Campillo i in. 2023 (Sports Med Open)"
+  },
+  {
+   "text": "Minimum 1 pełny dzień odpoczynku w tygodniu, a przed zawodami ok. 48 h bez ciężkiego treningu.",
+   "source": "Lloyd i in. 2016 (NSCA LTAD); IOC 2015"
+  },
+  {
+   "text": "Sen: ponad 7 godzin, najlepiej 9–11. Sen to też trening!",
+   "source": "Lloyd i in. 2016 (≥7 h); zakres 9–11 h dla 6–12 lat – AASM (zalecenie ogólne)"
+  },
+  {
+   "text": "Pij wodę przed, w trakcie i po treningu, jedz regularnie. Brak energii = gorsze wyniki i większe ryzyko urazów.",
+   "source": "IOC 2015 (RED-S, odżywianie młodych sportowców)"
+  },
+  {
+   "text": "Zabawa przede wszystkim. Brak radości to główny powód rezygnacji ze sportu.",
+   "source": "Lloyd i in. 2016; IOC 2015"
+  },
+  {
+   "text": "Rób różne rzeczy, nie tylko karate: siła, skoki, równowaga, bieganie, gry. To buduje lepszą sportsmenkę.",
+   "source": "IOC 2015; Lloyd i in. 2016; Balyi (LTAD) – etap Learn to Train / Train to Train"
+  },
+  {
+   "text": "Każdego dnia średnio 60 min ruchu, a 3 dni w tygodniu coś intensywnego i wzmacniającego mięśnie i kości.",
+   "source": "WHO 2020"
+  },
+  {
+   "text": "Dorosły czuwa nad treningiem, szczególnie przy nowych ćwiczeniach.",
+   "source": "NSCA 2009; Lloyd i in. 2014"
+  },
+  {
+   "text": "Porównuj się z sobą sprzed miesiąca, nie z innymi. Dzieci dojrzewają w różnym tempie.",
+   "source": "IOC 2015; Lloyd i in. 2016"
+  },
+  {
+   "text": "Gibkość: rozciągaj się tylko do lekkiego ciągnięcia, nigdy na zimno i bez dociskania przez kogoś.",
+   "source": "NSCA 2009 (stretching statyczny w części końcowej); zasada bezpieczeństwa aplikacji"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "trucht",
+   "name": "Trucht w miejscu",
+   "cat": "rozgrzewka",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 1,
+    "sec": 60
+   },
+   "rest_sec": 0,
+   "cues": [
+    "Lekko na palcach",
+    "Ręce pracują jak przy biegu"
+   ],
+   "easier": null,
+   "harder": "skip_a",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "krazenia_ramion",
+   "name": "Krążenia ramion",
+   "cat": "rozgrzewka",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 10
+   },
+   "rest_sec": 0,
+   "cues": [
+    "Duże koła w przód, potem w tył",
+    "Plecy proste"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "wymachy_przod",
+   "name": "Wymachy nóg w przód",
+   "cat": "rozgrzewka",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 10
+   },
+   "rest_sec": 0,
+   "cues": [
+    "Trzymaj się ściany",
+    "Noga luźna jak wahadło",
+    "Coraz wyżej, bez szarpania"
+   ],
+   "easier": null,
+   "harder": "wymachy_bok",
+   "safety": "Wymachy kontrolowane – nie rzucaj nogą na siłę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "wymachy_bok",
+   "name": "Wymachy nóg w bok",
+   "cat": "rozgrzewka",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 10
+   },
+   "rest_sec": 0,
+   "cues": [
+    "Biodra przodem do ściany",
+    "Noga leci w bok i wraca spokojnie"
+   ],
+   "easier": "wymachy_przod",
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "gasienica",
+   "name": "Gąsienica",
+   "cat": "rozgrzewka",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 5
+   },
+   "rest_sec": 0,
+   "cues": [
+    "Dłonie idą do przodu aż do deski",
+    "Potem stopy drobią do rąk"
+   ],
+   "easier": null,
+   "harder": "niedzwiedz",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "otwieranie_bramy",
+   "name": "Otwieranie bramy (krążenie biodra)",
+   "cat": "rozgrzewka",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 8
+   },
+   "rest_sec": 0,
+   "cues": [
+    "Kolano w górę, potem w bok – jak otwierasz bramę",
+    "Stój prosto, możesz trzymać się ściany"
+   ],
+   "easier": null,
+   "harder": "kolano_balans",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "pompki_sciana",
+   "name": "Pompki przy ścianie",
+   "cat": "sila",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 10
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Ciało proste jak deska",
+    "Klatka blisko ściany, łokcie lekko przy bokach"
+   ],
+   "easier": null,
+   "harder": "pompki_podwyzszenie",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "pompki_podwyzszenie",
+   "name": "Pompki na podwyższeniu (kanapa/ławka)",
+   "cat": "sila",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Dłonie na stabilnym meblu",
+    "Brzuch napięty, pupa nie opada"
+   ],
+   "easier": "pompki_sciana",
+   "harder": "pompki_kolana",
+   "safety": "Mebel musi stać stabilnie i się nie przesuwać.",
+   "equipment": "brak"
+  },
+  {
+   "id": "pompki_kolana",
+   "name": "Pompki na kolanach",
+   "cat": "sila",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Od kolan do głowy prosta linia",
+    "Schodź powoli, wypychaj mocno"
+   ],
+   "easier": "pompki_podwyzszenie",
+   "harder": "pompki",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "pompki",
+   "name": "Pompki",
+   "cat": "sila",
+   "level": 3,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 6
+   },
+   "rest_sec": 75,
+   "cues": [
+    "Ciało twarde jak deska",
+    "Klatka nisko, łokcie pod kątem jak strzałka"
+   ],
+   "easier": "pompki_kolana",
+   "harder": null,
+   "safety": "Jeśli pupa opada albo boli nadgarstek – wróć do łatwiejszej wersji.",
+   "equipment": "brak"
+  },
+  {
+   "id": "przysiad",
+   "name": "Przysiad",
+   "cat": "sila",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 12
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Pupa w tył jak na krzesło",
+    "Kolana idą nad palcami",
+    "Pięty na ziemi"
+   ],
+   "easier": null,
+   "harder": "przysiad_pauza",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "przysiad_pauza",
+   "name": "Przysiad z pauzą",
+   "cat": "sila",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Zatrzymaj się na dole na 2 sekundy",
+    "Wstawaj szybko i dumnie"
+   ],
+   "easier": "przysiad",
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "wykrok_tyl",
+   "name": "Wykrok w tył",
+   "cat": "sila",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Krok w tył, kolano prawie do podłogi",
+    "Tułów prosto jak król"
+   ],
+   "easier": null,
+   "harder": "wykrok_przod",
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "wykrok_przod",
+   "name": "Wykrok w przód",
+   "cat": "sila",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Duży krok, kolano nad stopą",
+    "Odpychaj się z pięty"
+   ],
+   "easier": "wykrok_tyl",
+   "harder": null,
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "mostek_biodrowy",
+   "name": "Mostek biodrowy",
+   "cat": "sila",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 12
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Leżysz, stopy blisko pupy",
+    "Pupa w górę, ściśnij pośladki",
+    "Zatrzymaj 2 s na górze"
+   ],
+   "easier": null,
+   "harder": "mostek_jednonoz",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "mostek_jednonoz",
+   "name": "Mostek biodrowy na jednej nodze",
+   "cat": "sila",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Jedna noga w górze",
+    "Biodra równo, nie przechylaj się"
+   ],
+   "easier": "mostek_biodrowy",
+   "harder": null,
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "superman",
+   "name": "Superman",
+   "cat": "sila",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 15
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Leżysz na brzuchu",
+    "Ręce i nogi lekko w górę, patrz w podłogę"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": "Unoś nisko – nie wyginaj mocno pleców.",
+   "equipment": "brak"
+  },
+  {
+   "id": "wspiecia_palce",
+   "name": "Wspięcia na palce",
+   "cat": "sila",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 15
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Wysoko na palce jak baletnica",
+    "Powoli w dół"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "niedzwiedz",
+   "name": "Chód niedźwiedzia",
+   "cat": "sila",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 20
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Kolana tuż nad podłogą",
+    "Plecy płaskie jak stolik"
+   ],
+   "easier": "gasienica",
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "dead_bug",
+   "name": "Martwy żuczek",
+   "cat": "core",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Plecy przyklejone do podłogi",
+    "Ręka i przeciwna noga w dal, powoli"
+   ],
+   "easier": null,
+   "harder": "deska",
+   "safety": "Dawka = na każdą stronę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "spiecia",
+   "name": "Spięcia brzucha",
+   "cat": "core",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 12
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Łopatki lekko w górę, nie cała",
+    "Ręce przy skroniach, nie ciągnij głowy"
+   ],
+   "easier": null,
+   "harder": "brzuszki",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "brzuszki",
+   "name": "Brzuszki (siady z leżenia)",
+   "cat": "core",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 12
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Kolana zgięte, stopy na ziemi",
+    "Wstajesz płynnie, bez szarpania szyją"
+   ],
+   "easier": "spiecia",
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "deska_kolana",
+   "name": "Deska na kolanach",
+   "cat": "core",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 20
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Łokcie pod ramionami",
+    "Prosto od kolan do głowy"
+   ],
+   "easier": null,
+   "harder": "deska",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "deska",
+   "name": "Deska (plank)",
+   "cat": "core",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Ciało jak stalowa belka",
+    "Oddychaj spokojnie, nie wstrzymuj"
+   ],
+   "easier": "deska_kolana",
+   "harder": null,
+   "safety": "Kończ, gdy biodra zaczną opadać – jakość ważniejsza niż czas.",
+   "equipment": "brak"
+  },
+  {
+   "id": "boczna_deska_kolana",
+   "name": "Boczna deska na kolanach",
+   "cat": "core",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 15
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Łokieć pod ramieniem",
+    "Biodra w górę, prosta linia"
+   ],
+   "easier": null,
+   "harder": "boczna_deska",
+   "safety": "Dawka = na każdą stronę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "boczna_deska",
+   "name": "Boczna deska",
+   "cat": "core",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 20
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Stopy jedna na drugiej",
+    "Biodra wysoko jak most"
+   ],
+   "easier": "boczna_deska_kolana",
+   "harder": null,
+   "safety": "Dawka = na każdą stronę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "skip_a",
+   "name": "Skip A (kolana w górę)",
+   "cat": "szybkosc",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 10
+   },
+   "rest_sec": 40,
+   "cues": [
+    "Kolana do wysokości bioder",
+    "Szybkie, lekkie stopy"
+   ],
+   "easier": "trucht",
+   "harder": "szybkie_stopy",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "szybkie_stopy",
+   "name": "Szybkie stopy (tupanie)",
+   "cat": "szybkosc",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 8
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Lekki przysiad, jak bramkarz",
+    "Tup tup tup – najszybciej jak umiesz"
+   ],
+   "easier": "skip_a",
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "start_reakcja",
+   "name": "Start na sygnał",
+   "cat": "szybkosc",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 6
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Ktoś klaszcze – ty startujesz",
+    "Pierwsze 3 kroki z całych sił, potem hamuj"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": "Zmieniaj pozycje startowe: stojąc, siedząc, z leżenia.",
+   "equipment": "brak"
+  },
+  {
+   "id": "drabinka_linie",
+   "name": "Drabinka koordynacyjna na liniach (bez drabinki)",
+   "cat": "zwinnosc",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 15
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Narysuj taśmą/kredą 6–8 kratek",
+    "Każda stopa do każdej kratki",
+    "Najpierw dokładnie, potem szybko"
+   ],
+   "easier": null,
+   "harder": "drabinka_boczna",
+   "safety": null,
+   "equipment": "taśma lub kreda"
+  },
+  {
+   "id": "drabinka_boczna",
+   "name": "Drabinka bokiem (in-in-out-out)",
+   "cat": "zwinnosc",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 15
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Dwie stopy w kratkę, dwie za kratkę",
+    "Patrz przed siebie, nie pod nogi"
+   ],
+   "easier": "drabinka_linie",
+   "harder": null,
+   "safety": null,
+   "equipment": "taśma lub kreda"
+  },
+  {
+   "id": "bieg_wahadlowy",
+   "name": "Bieg wahadłowy 4×5 m",
+   "cat": "zwinnosc",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 3,
+    "reps": 1
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Dotknij linii ręką i nawrót",
+    "Hamuj nisko, na ugiętych nogach"
+   ],
+   "easier": null,
+   "harder": "reakcja_kolory",
+   "safety": "Bezpieczna nawierzchnia, buty z dobrą przyczepnością.",
+   "equipment": "2 znaczniki"
+  },
+  {
+   "id": "reakcja_kolory",
+   "name": "Reakcja na kolory",
+   "cat": "zwinnosc",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 20
+   },
+   "rest_sec": 40,
+   "cues": [
+    "Rozłóż 4 kolorowe przedmioty dookoła",
+    "Ktoś woła kolor – biegniesz i dotykasz",
+    "Wracasz na środek w pozycji walki"
+   ],
+   "easier": "bieg_wahadlowy",
+   "harder": null,
+   "safety": null,
+   "equipment": "4 kolorowe przedmioty"
+  },
+  {
+   "id": "pajacyki",
+   "name": "Pajacyki",
+   "cat": "wydolnosc",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Lekko na palcach",
+    "Ręce wysoko nad głową"
+   ],
+   "easier": null,
+   "harder": "skakanka",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "skakanka",
+   "name": "Skakanka",
+   "cat": "wydolnosc",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 30
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Niskie, lekkie podskoki",
+    "Kręcą nadgarstki, nie całe ręce"
+   ],
+   "easier": "pajacyki",
+   "harder": null,
+   "safety": null,
+   "equipment": "skakanka"
+  },
+  {
+   "id": "wspinaczka",
+   "name": "Wspinaczka (mountain climbers)",
+   "cat": "wydolnosc",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 20
+   },
+   "rest_sec": 40,
+   "cues": [
+    "Pozycja pompki",
+    "Kolana na zmianę do klatki"
+   ],
+   "easier": "pajacyki",
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "burpees_dziecko",
+   "name": "Burpees dziecięce",
+   "cat": "wydolnosc",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 6
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Przysiad, dłonie na podłogę",
+    "Krok w tył do deski, krok w przód",
+    "Wstań i mały podskok"
+   ],
+   "easier": "przysiad",
+   "harder": null,
+   "safety": "Bez pompki i bez wyskoku z deski – kroki zamiast skoków.",
+   "equipment": "brak"
+  },
+  {
+   "id": "skoki_obunoz",
+   "name": "Niskie skoki obunóż",
+   "cat": "szybkosc",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Skaczesz nisko i cicho jak kot",
+    "Lądujesz na ugiętych kolanach"
+   ],
+   "easier": null,
+   "harder": "skoki_boczne",
+   "safety": "Skoki niskie, miękkie lądowanie. Ćwicz na macie/trawie/parkiecie.",
+   "equipment": "brak"
+  },
+  {
+   "id": "skoki_boczne",
+   "name": "Skoki bokiem nad linią",
+   "cat": "szybkosc",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 15
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Stopy razem, przeskok nad linią",
+    "Szybko i cicho"
+   ],
+   "easier": "skoki_obunoz",
+   "harder": "skok_w_dal",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "skok_w_dal",
+   "name": "Skok w dal z miejsca – wylądowanie",
+   "cat": "szybkosc",
+   "level": 3,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 4
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Wymach rąk i skok w przód",
+    "Ląduj jak ninja i zastygnij 2 s"
+   ],
+   "easier": "skoki_boczne",
+   "harder": null,
+   "safety": "Liczy się wylądowanie: kolana nie uciekają do środka.",
+   "equipment": "brak"
+  },
+  {
+   "id": "jedna_noga",
+   "name": "Stanie na jednej nodze",
+   "cat": "rownowaga",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 15,
+   "cues": [
+    "Kolano lekko ugięte",
+    "Patrz w jeden punkt"
+   ],
+   "easier": null,
+   "harder": "jaskolka",
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "jaskolka",
+   "name": "Jaskółka",
+   "cat": "rownowaga",
+   "level": 3,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 6
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Tułów w przód, noga w tył – jak samolot",
+    "Biodra równo, plecy proste"
+   ],
+   "easier": "jedna_noga",
+   "harder": null,
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "motyl",
+   "name": "Motyl",
+   "cat": "rozciaganie",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 10,
+   "cues": [
+    "Stopy razem, kolana w bok",
+    "Plecy proste, łokcie lekko dociskają kolana"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "przywodziciele",
+   "name": "Siad rozkroczny – przywodziciele",
+   "cat": "rozciaganie",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 10,
+   "cues": [
+    "Nogi szeroko, palce do sufitu",
+    "Pochyl się z prostymi plecami"
+   ],
+   "easier": null,
+   "harder": "szpagat_poprzeczny",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "tyl_uda",
+   "name": "Rozciąganie tyłu uda",
+   "cat": "rozciaganie",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 10,
+   "cues": [
+    "Noga prosta na podłodze lub stopniu",
+    "Pochyl się z prostymi plecami"
+   ],
+   "easier": null,
+   "harder": "szpagat_wzdluzny",
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "lydki",
+   "name": "Rozciąganie łydek przy ścianie",
+   "cat": "rozciaganie",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 10,
+   "cues": [
+    "Tylna noga prosta, pięta przy ziemi",
+    "Pchaj ścianę jak siłaczka"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "zginacze_bioder",
+   "name": "Rozciąganie bioder w klęku (wykrok)",
+   "cat": "rozciaganie",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 10,
+   "cues": [
+    "Jedno kolano na ziemi (podłóż poduszkę)",
+    "Pupa ściśnięta, biodra lekko do przodu"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": "Dawka = na każdą stronę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "biodra_9090",
+   "name": "Siad 90/90 – mobilność bioder",
+   "cat": "rozciaganie",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 6
+   },
+   "rest_sec": 15,
+   "cues": [
+    "Obie nogi zgięte pod kątem prostym",
+    "Przekładaj kolana z boku na bok bez rąk"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "szpagat_poprzeczny",
+   "name": "Szpagat poprzeczny – bezpieczna wersja",
+   "cat": "rozciaganie",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 15,
+   "cues": [
+    "Rozsuń nogi tylko do lekkiego ciągnięcia",
+    "Dłonie na podłodze, możesz oprzeć się o krzesła"
+   ],
+   "easier": "przywodziciele",
+   "harder": null,
+   "safety": "Nigdy do bólu i nie na zimno. Bez dociskania przez dorosłego.",
+   "equipment": "brak"
+  },
+  {
+   "id": "szpagat_wzdluzny",
+   "name": "Szpagat wzdłużny – bezpieczna wersja",
+   "cat": "rozciaganie",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 30
+   },
+   "rest_sec": 15,
+   "cues": [
+    "Przednia noga prosta, tylne kolano na poduszce",
+    "Biodra przodem, schodź tylko do komfortu"
+   ],
+   "easier": "tyl_uda",
+   "harder": null,
+   "safety": "Nigdy do bólu i nie na zimno. Dawka = na każdą stronę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "kiba_dachi",
+   "name": "Utrzymanie kiba-dachi",
+   "cat": "karate",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 20
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Stopy szeroko, kolana na zewnątrz",
+    "Plecy proste, jak jeździec na koniu"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": "Przerwij, gdy bolą kolana.",
+   "equipment": "brak"
+  },
+  {
+   "id": "kolano_balans",
+   "name": "Kolano w górze – balans przed kopnięciem",
+   "cat": "karate",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 2,
+    "sec": 10
+   },
+   "rest_sec": 20,
+   "cues": [
+    "Kolano wysoko, stopa podciągnięta",
+    "Ręce w gardzie, nie bujaj się"
+   ],
+   "easier": "otwieranie_bramy",
+   "harder": "kopniecie_wolne",
+   "safety": "Dawka = na każdą nogę.",
+   "equipment": "brak"
+  },
+  {
+   "id": "kopniecie_wolne",
+   "name": "Wolne kopnięcie z zatrzymaniem",
+   "cat": "karate",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 5
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Kolano w górę – kopnięcie – zatrzymaj 2 s",
+    "Kolano wraca, dopiero potem stopa na ziemię"
+   ],
+   "easier": "kolano_balans",
+   "harder": null,
+   "safety": "Dawka = na każdą nogę. Wysokość tylko taka, jaką kontrolujesz.",
+   "equipment": "brak"
+  },
+  {
+   "id": "mae_geri_seria",
+   "name": "Seria mae-geri w powietrze",
+   "cat": "karate",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 10
+   },
+   "rest_sec": 40,
+   "cues": [
+    "Kolano wysoko, kopnięcie śródstopiem",
+    "Szybki powrót nogi"
+   ],
+   "easier": null,
+   "harder": "mawashi_seria",
+   "safety": "Dawka = na każdą nogę. Nie prostuj kolana na siłę z trzaskiem.",
+   "equipment": "brak"
+  },
+  {
+   "id": "mawashi_seria",
+   "name": "Seria mawashi-geri w powietrze",
+   "cat": "karate",
+   "level": 2,
+   "mode": "reps",
+   "dose": {
+    "sets": 2,
+    "reps": 8
+   },
+   "rest_sec": 45,
+   "cues": [
+    "Obróć stopę podporową",
+    "Kolano wycelowane, biodro pracuje"
+   ],
+   "easier": "mae_geri_seria",
+   "harder": null,
+   "safety": "Dawka = na każdą nogę. Kopnięcia średnie, wysokie dopiero po rozgrzewce.",
+   "equipment": "brak"
+  },
+  {
+   "id": "seiken_seria",
+   "name": "Szybkie seiken-tsuki (seria)",
+   "cat": "karate",
+   "level": 1,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 15
+   },
+   "rest_sec": 30,
+   "cues": [
+    "Pięść ściśnięta, ramiona luźne",
+    "Druga ręka wraca do biodra"
+   ],
+   "easier": null,
+   "harder": "gyaku_seria",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "gyaku_seria",
+   "name": "Seria gyaku-tsuki z biodra",
+   "cat": "karate",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 20
+   },
+   "rest_sec": 40,
+   "cues": [
+    "Biodro kręci, ręka leci",
+    "Wydech przy każdym ciosie"
+   ],
+   "easier": "seiken_seria",
+   "harder": null,
+   "safety": "Nie prostuj łokcia do zablokowania.",
+   "equipment": "brak"
+  },
+  {
+   "id": "wejscia_wyjscia",
+   "name": "Wejścia i wyjścia (praca nóg)",
+   "cat": "karate",
+   "level": 2,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 20
+   },
+   "rest_sec": 40,
+   "cues": [
+    "Pozycja walki, lekko na palcach",
+    "Wejście z ciosem, szybkie wyjście w tył/bok"
+   ],
+   "easier": null,
+   "harder": "shadow_kumite",
+   "safety": null,
+   "equipment": "brak"
+  },
+  {
+   "id": "shadow_kumite",
+   "name": "Shadow kumite – walka z cieniem",
+   "cat": "karate",
+   "level": 3,
+   "mode": "time",
+   "dose": {
+    "sets": 3,
+    "sec": 60
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Gardą chroń głowę",
+    "Kombinacje: cios-cios-kopnięcie",
+    "Ruszaj się cały czas"
+   ],
+   "easier": "wejscia_wyjscia",
+   "harder": null,
+   "safety": "Daleko od mebli. Kontrolowane techniki, bez pełnej siły w powietrze.",
+   "equipment": "brak"
+  },
+  {
+   "id": "kata_wolno",
+   "name": "Kata w zwolnionym tempie",
+   "cat": "karate",
+   "level": 1,
+   "mode": "reps",
+   "dose": {
+    "sets": 1,
+    "reps": 2
+   },
+   "rest_sec": 60,
+   "cues": [
+    "Każda pozycja stabilna",
+    "Wolno i dokładnie, oddech spokojny"
+   ],
+   "easier": null,
+   "harder": null,
+   "safety": null,
+   "equipment": "brak"
+  }
+ ],
+ "plans": [
+  {
+   "id": "core10",
+   "name": "Brzuszkowy ekspres",
+   "goal": "Codzienne 10 min na mocny brzuch i plecy",
+   "minutes": 10,
+   "level": 1,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht",
+       "dose": {
+        "sets": 1,
+        "sec": 45
+       }
+      },
+      {
+       "ex": "gasienica"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "obwód",
+     "rounds": 2,
+     "items": [
+      {
+       "ex": "dead_bug",
+       "dose": {
+        "sets": 1,
+        "reps": 8
+       }
+      },
+      {
+       "ex": "deska_kolana",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "boczna_deska_kolana",
+       "dose": {
+        "sets": 1,
+        "sec": 15
+       }
+      },
+      {
+       "ex": "superman",
+       "dose": {
+        "sets": 1,
+        "sec": 15
+       }
+      },
+      {
+       "ex": "spiecia",
+       "dose": {
+        "sets": 1,
+        "reps": 10
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "motyl",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sila_start",
+   "name": "Pierwsze kroki siłaczki",
+   "goal": "Nauka techniki podstawowych ćwiczeń siłowych",
+   "minutes": 15,
+   "level": 1,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "obwód",
+     "rounds": 2,
+     "items": [
+      {
+       "ex": "przysiad",
+       "dose": {
+        "sets": 1,
+        "reps": 10
+       }
+      },
+      {
+       "ex": "pompki_podwyzszenie",
+       "dose": {
+        "sets": 1,
+        "reps": 8
+       }
+      },
+      {
+       "ex": "mostek_biodrowy",
+       "dose": {
+        "sets": 1,
+        "reps": 10
+       }
+      },
+      {
+       "ex": "wykrok_tyl",
+       "dose": {
+        "sets": 1,
+        "reps": 6
+       }
+      },
+      {
+       "ex": "deska_kolana",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "zginacze_bioder"
+      },
+      {
+       "ex": "lydki",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "silaczka",
+   "name": "Siłaczka",
+   "goal": "Obwód siłowy z masą ciała całego ciała",
+   "minutes": 25,
+   "level": 2,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      },
+      {
+       "ex": "gasienica"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "obwód",
+     "rounds": 3,
+     "items": [
+      {
+       "ex": "przysiad_pauza",
+       "dose": {
+        "sets": 1,
+        "reps": 8
+       }
+      },
+      {
+       "ex": "pompki_kolana",
+       "dose": {
+        "sets": 1,
+        "reps": 8
+       }
+      },
+      {
+       "ex": "wykrok_przod",
+       "dose": {
+        "sets": 1,
+        "reps": 6
+       }
+      },
+      {
+       "ex": "mostek_jednonoz",
+       "dose": {
+        "sets": 1,
+        "reps": 6
+       }
+      },
+      {
+       "ex": "superman",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "deska",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "niedzwiedz",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "tyl_uda"
+      },
+      {
+       "ex": "zginacze_bioder"
+      },
+      {
+       "ex": "motyl"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "blyskawica",
+   "name": "Błyskawica",
+   "goal": "Szybkość, zwinność i reakcja",
+   "minutes": 20,
+   "level": 2,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      },
+      {
+       "ex": "skip_a",
+       "dose": {
+        "sets": 2,
+        "sec": 10
+       }
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "drabinka_linie"
+      },
+      {
+       "ex": "drabinka_boczna"
+      },
+      {
+       "ex": "szybkie_stopy"
+      },
+      {
+       "ex": "start_reakcja"
+      },
+      {
+       "ex": "bieg_wahadlowy"
+      },
+      {
+       "ex": "reakcja_kolory"
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht",
+       "dose": {
+        "sets": 1,
+        "sec": 60
+       }
+      },
+      {
+       "ex": "lydki",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "tyl_uda",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "serce",
+   "name": "Serce wojowniczki",
+   "goal": "Wytrzymałość – interwały 30 s pracy / 30 s przerwy",
+   "minutes": 20,
+   "level": 2,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "interwał",
+     "rounds": 3,
+     "items": [
+      {
+       "ex": "pajacyki",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "skakanka",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "wspinaczka",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "burpees_dziecko",
+       "dose": {
+        "sets": 1,
+        "reps": 5
+       }
+      },
+      {
+       "ex": "skip_a",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "seiken_seria",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht",
+       "dose": {
+        "sets": 1,
+        "sec": 60
+       }
+      },
+      {
+       "ex": "motyl"
+      },
+      {
+       "ex": "lydki"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gumowe_nogi",
+   "name": "Gumowe nogi",
+   "goal": "Gibkość i mobilność bioder pod wysokie kopnięcia",
+   "minutes": 15,
+   "level": 1,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht",
+       "dose": {
+        "sets": 1,
+        "sec": 90
+       }
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "wymachy_bok"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "biodra_9090"
+      },
+      {
+       "ex": "motyl"
+      },
+      {
+       "ex": "przywodziciele"
+      },
+      {
+       "ex": "zginacze_bioder"
+      },
+      {
+       "ex": "tyl_uda"
+      },
+      {
+       "ex": "szpagat_poprzeczny",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "szpagat_wzdluzny",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "kolano_balans",
+       "dose": {
+        "sets": 1,
+        "sec": 10
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "przed_turniejem",
+   "name": "Spokojna głowa przed turniejem",
+   "goal": "Lekka sesja 1–2 dni przed zawodami: ruch, technika, bez zmęczenia",
+   "minutes": 15,
+   "level": 1,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "kata_wolno"
+      },
+      {
+       "ex": "kolano_balans",
+       "dose": {
+        "sets": 1,
+        "sec": 10
+       }
+      },
+      {
+       "ex": "seiken_seria",
+       "dose": {
+        "sets": 2,
+        "sec": 10
+       }
+      },
+      {
+       "ex": "wejscia_wyjscia",
+       "dose": {
+        "sets": 2,
+        "sec": 15
+       }
+      },
+      {
+       "ex": "start_reakcja",
+       "dose": {
+        "sets": 1,
+        "reps": 3
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "motyl",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "biodra_9090",
+       "dose": {
+        "sets": 1,
+        "reps": 4
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "runda_kumite",
+   "name": "Runda kumite",
+   "goal": "Kondycja walki: rundy, praca nóg, kombinacje",
+   "minutes": 25,
+   "level": 3,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      },
+      {
+       "ex": "skakanka",
+       "dose": {
+        "sets": 2,
+        "sec": 30
+       }
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "interwał",
+     "rounds": 3,
+     "items": [
+      {
+       "ex": "shadow_kumite",
+       "dose": {
+        "sets": 1,
+        "sec": 60
+       }
+      },
+      {
+       "ex": "gyaku_seria",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "mawashi_seria",
+       "dose": {
+        "sets": 1,
+        "reps": 6
+       }
+      },
+      {
+       "ex": "wejscia_wyjscia",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "deska",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht",
+       "dose": {
+        "sets": 1,
+        "sec": 60
+       }
+      },
+      {
+       "ex": "przywodziciele"
+      },
+      {
+       "ex": "zginacze_bioder"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "czapla",
+   "name": "Czapla i tornado",
+   "goal": "Równowaga i kontrola przy kopnięciach",
+   "minutes": 15,
+   "level": 2,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "obwód",
+     "rounds": 2,
+     "items": [
+      {
+       "ex": "jedna_noga",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "kolano_balans",
+       "dose": {
+        "sets": 1,
+        "sec": 10
+       }
+      },
+      {
+       "ex": "kopniecie_wolne",
+       "dose": {
+        "sets": 1,
+        "reps": 4
+       }
+      },
+      {
+       "ex": "kiba_dachi",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "jaskolka",
+       "dose": {
+        "sets": 1,
+        "reps": 5
+       }
+      },
+      {
+       "ex": "wspiecia_palce",
+       "dose": {
+        "sets": 1,
+        "reps": 12
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "lydki"
+      },
+      {
+       "ex": "biodra_9090"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "olimpiada",
+   "name": "Rodzinna olimpiada",
+   "goal": "Zabawa z rodziną – kto zdobędzie więcej punktów",
+   "minutes": 20,
+   "level": 1,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "pajacyki",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "obwód",
+     "rounds": 2,
+     "items": [
+      {
+       "ex": "reakcja_kolory",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "niedzwiedz",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      },
+      {
+       "ex": "skoki_obunoz",
+       "dose": {
+        "sets": 1,
+        "reps": 6
+       }
+      },
+      {
+       "ex": "jedna_noga",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      },
+      {
+       "ex": "bieg_wahadlowy",
+       "dose": {
+        "sets": 1,
+        "reps": 1
+       }
+      },
+      {
+       "ex": "deska_kolana",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "motyl"
+      },
+      {
+       "ex": "przywodziciele"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "poranna_iskra",
+   "name": "Poranna iskra",
+   "goal": "10 minut ruchu i mobilności na dobry start dnia",
+   "minutes": 10,
+   "level": 1,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht",
+       "dose": {
+        "sets": 1,
+        "sec": 45
+       }
+      },
+      {
+       "ex": "krazenia_ramion"
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "obwód",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "gasienica"
+      },
+      {
+       "ex": "przysiad",
+       "dose": {
+        "sets": 1,
+        "reps": 10
+       }
+      },
+      {
+       "ex": "biodra_9090",
+       "dose": {
+        "sets": 1,
+        "reps": 6
+       }
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "wymachy_bok"
+      },
+      {
+       "ex": "jedna_noga",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "zginacze_bioder",
+       "dose": {
+        "sets": 1,
+        "sec": 20
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "skoczek",
+   "name": "Sprężynka",
+   "goal": "Niskie skoki i lądowania – siła nóg i bezpieczne kolana",
+   "minutes": 15,
+   "level": 2,
+   "blocks": [
+    {
+     "name": "Rozgrzewka",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "trucht"
+      },
+      {
+       "ex": "krazenia_ramion"
+      },
+      {
+       "ex": "wymachy_przod"
+      },
+      {
+       "ex": "otwieranie_bramy"
+      },
+      {
+       "ex": "skakanka",
+       "dose": {
+        "sets": 1,
+        "sec": 30
+       }
+      }
+     ]
+    },
+    {
+     "name": "Część główna",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "skoki_obunoz"
+      },
+      {
+       "ex": "skoki_boczne"
+      },
+      {
+       "ex": "skok_w_dal"
+      },
+      {
+       "ex": "wspiecia_palce"
+      },
+      {
+       "ex": "mostek_biodrowy"
+      }
+     ]
+    },
+    {
+     "name": "Wyciszenie",
+     "format": "seria",
+     "rounds": 1,
+     "items": [
+      {
+       "ex": "lydki"
+      },
+      {
+       "ex": "tyl_uda"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "week_template": {
+  "title": "Tydzień wojowniczki",
+  "rules": [
+   "Nie więcej niż 1 cięższy trening w domu dzień po klubie.",
+   "Najcięższe sesje domowe w dni bez klubu.",
+   "Min. 1 dzień pełnego odpoczynku (spacer, zabawa – OK).",
+   "Przed zawodami 2 dni tylko lekko ('Spokojna głowa przed turniejem').",
+   "Codziennie można zrobić 10 min ('Brzuszkowy ekspres' lub 'Poranna iskra') – to lekka dawka.",
+   "Gdy bardzo zmęczona, coś boli albo źle śpi – dzień wolny zamiast treningu."
+  ],
+  "variant_2_club": {
+   "pon": "Siłaczka (średnio-ciężko) lub Pierwsze kroki siłaczki",
+   "wt": "KLUB + 10 min Gumowe nogi wieczorem (lekko)",
+   "sr": "Błyskawica lub Sprężynka (średnio)",
+   "czw": "KLUB",
+   "pt": "Brzuszkowy ekspres + Czapla i tornado (lekko)",
+   "sob": "Serce wojowniczki lub Rodzinna olimpiada (zabawa)",
+   "nd": "ODPOCZYNEK"
+  },
+  "variant_3_club": {
+   "pon": "KLUB",
+   "wt": "Siłaczka (średnio-ciężko)",
+   "sr": "KLUB",
+   "czw": "Gumowe nogi + Brzuszkowy ekspres (lekko)",
+   "pt": "KLUB",
+   "sob": "Błyskawica lub Rodzinna olimpiada",
+   "nd": "ODPOCZYNEK"
+  },
+  "note": "Siła 2–3×/tydz. (licząc klub), nie dzień po dniu; skoki 1–2×/tydz. z ≥48 h przerwy. Dni klubowe dopasuj do własnego grafiku."
+ },
+ "tests": [
+  {
+   "id": "skok_dal",
+   "name": "Skok w dal z miejsca",
+   "how": [
+    "Rozgrzej się 5 min.",
+    "Stań palcami przy linii, stopy na szerokość bioder.",
+    "Wymach rąk i skok obunóż jak najdalej.",
+    "Zmierz od linii do pięty bliżej linii.",
+    "2 próby, zapisz lepszą."
+   ],
+   "unit": "cm",
+   "better": "higher",
+   "ref_11_girls": {
+    "low": 123,
+    "avg": 141,
+    "good": 159
+   },
+   "ref_note": "Eurofit, dziewczęta 11 lat: P20/P50/P80 = 122,6/140,6/158,7 cm (Tomkinson i in. 2018, BJSM). Podobnie FitBack 2023: 120/140/160 cm (Ortega i in., BJSM)."
+  },
+  {
+   "id": "brzuszki30",
+   "name": "Brzuszki w 30 sekund",
+   "how": [
+    "Leżysz, kolana zgięte pod kątem 90°, ktoś trzyma stopy.",
+    "Ręce skrzyżowane na klatce lub przy skroniach.",
+    "Siad do dotknięcia łokciami ud, powrót łopatkami na podłogę.",
+    "Licz pełne powtórzenia w 30 s."
+   ],
+   "unit": "powt.",
+   "better": "higher",
+   "ref_11_girls": {
+    "low": 15,
+    "avg": 19,
+    "good": 22
+   },
+   "ref_note": "Eurofit sit-ups 30 s, dziewczęta 11 lat: P20/P50/P80 = 15/19/22 (Tomkinson i in. 2018)."
+  },
+  {
+   "id": "flamingo",
+   "name": "Flamingo – równowaga",
+   "how": [
+    "Stań na jednej nodze na niskiej listewce/linii (wersja domowa: na podłodze).",
+    "Drugą stopę trzymaj ręką za pupą.",
+    "Mierz 60 s – zatrzymuj stoper przy każdym upadku/puszczeniu stopy i licz próby.",
+    "Wynik = liczba utrat równowagi w 60 s."
+   ],
+   "unit": "upadki/60 s",
+   "better": "lower",
+   "ref_11_girls": {
+    "low": 17,
+    "avg": 11,
+    "good": 7
+   },
+   "ref_note": "Eurofit flamingo (na belce 3 cm), dziewczęta 11 lat: P20/P50/P80 = 17/11/7 (Tomkinson i in. 2018). Na płaskiej podłodze wynik będzie lepszy – porównuj głównie z własnymi wynikami."
+  },
+  {
+   "id": "sklon",
+   "name": "Skłon w siadzie (sit-and-reach)",
+   "how": [
+    "Rozgrzej się. Siad prosty, stopy oparte o pudełko/stopień.",
+    "Połóż linijkę na pudełku: poziom stóp = 15 cm.",
+    "Powoli przesuń dłonie jak najdalej, kolana proste, wytrzymaj 2 s.",
+    "Zapisz wynik (np. 5 cm za palcami = 20 cm). Lepsza z 2 prób."
+   ],
+   "unit": "cm",
+   "better": "higher",
+   "ref_11_girls": {
+    "low": 14.5,
+    "avg": 20.1,
+    "good": 25.6
+   },
+   "ref_note": "Eurofit sit-and-reach, dziewczęta 11 lat: P20/P50/P80 = 14,5/20,1/25,6 cm (Tomkinson i in. 2018). Eurofit przyjmuje 15 cm na wysokości stóp; domowy pomiar jest przybliżony."
+  },
+  {
+   "id": "wahadlowy10x5",
+   "name": "Bieg wahadłowy 10×5 m",
+   "how": [
+    "Dwie linie co 5 m, bezpieczna nawierzchnia.",
+    "Na 'start' biegnij do drugiej linii i z powrotem – to 2 odcinki.",
+    "Razem 10 odcinków (5 razy tam i z powrotem), za każdym razem przekrocz linię obiema stopami.",
+    "Ktoś mierzy czas stoperem."
+   ],
+   "unit": "s",
+   "better": "lower",
+   "ref_11_girls": {
+    "low": 24.6,
+    "avg": 22.6,
+    "good": 20.9
+   },
+   "ref_note": "Eurofit 10×5 m, dziewczęta 11 lat: P20/P50/P80 = 24,64/22,58/20,90 s (Tomkinson i in. 2018). Nie znaleziono równie wiarygodnych norm Eurofit dla wersji 4×10 m – dlatego test 10×5 m."
+  },
+  {
+   "id": "pompki_test",
+   "name": "Pompki do zmęczenia (tempo 1 na 3 s)",
+   "how": [
+    "Pozycja pompki, ciało proste.",
+    "Schodź do kąta 90° w łokciach, w tempie: 1 pompka na 3 sekundy.",
+    "Licz poprawne pompki, kończ przy 2. błędzie techniki lub utracie tempa."
+   ],
+   "unit": "powt.",
+   "better": "higher",
+   "ref_11_girls": null,
+   "target": {
+    "min": 9,
+    "good": 15
+   },
+   "ref_note": "Brak percentyli. FitnessGram (Cooper Institute, v10, 2013): strefa zdrowia dla dziewcząt 11 lat od 9 pompek 90°. Wartość 'good'=15 to ostrożny cel aplikacji, nie norma."
+  },
+  {
+   "id": "deska_test",
+   "name": "Deska na czas",
+   "how": [
+    "Deska na przedramionach, łokcie pod ramionami.",
+    "Ciało prosto od głowy do pięt.",
+    "Stop, gdy biodra opadną lub podniosą się drugi raz po upomnieniu.",
+    "Zapisz czas."
+   ],
+   "unit": "s",
+   "better": "higher",
+   "ref_11_girls": null,
+   "target": {
+    "min": 60,
+    "good": 90
+   },
+   "ref_note": "Brak percentyli dla 11-latek. CDC NHANES NYFS 2012: średnia dziewcząt 6–11 lat 61 s, 12–15 lat 77 s. Cel 60/90 s to ostrożne założenie aplikacji. Nie przekraczaj 2 min – liczy się technika."
+  },
+  {
+   "id": "beep",
+   "name": "Beep test 20 m (opcjonalnie, sala/podwórko)",
+   "how": [
+    "Potrzebne 20 m i nagranie/aplikacja z sygnałami beep testu.",
+    "Biegnij między liniami w rytmie sygnałów, tempo rośnie co etap.",
+    "Koniec, gdy 2 razy z rzędu nie zdążysz do linii.",
+    "Zapisz ukończony etap."
+   ],
+   "unit": "etap",
+   "better": "higher",
+   "ref_11_girls": {
+    "low": 2.6,
+    "avg": 4.1,
+    "good": 5.5
+   },
+   "ref_note": "Eurofit 20 m shuttle run, dziewczęta 11 lat: P20/P50/P80 = 2,64/4,07/5,53 (min/etapy; Tomkinson i in. 2018). FitBack 2023: 2,2/3,6/5,3 etapu (Ortega i in.). Test bardzo męczący – nie przed zawodami."
+  }
+ ],
+ "sources": [
+  {
+   "title": "Faigenbaum AD i in. Youth resistance training: updated position statement paper from the NSCA. J Strength Cond Res 2009;23(5 Suppl):S60–79",
+   "url": "https://dxpprod.nsca.com/globalassets/about/position-statements/position_stand_youth_resistance_training---2009.pdf",
+   "note": "Bezpieczeństwo, 1–3 serie × 6–15 powt., 2–3×/tydz. nie dzień po dniu, rozgrzewka 5–10 min, nadzór dorosłego."
+  },
+  {
+   "title": "Lloyd RS i in. Position statement on youth resistance training: the 2014 International Consensus. Br J Sports Med 2014;48:498–505 (na bazie stanowiska UKSCA)",
+   "url": "https://bjsm.bmj.com/content/48/7/498.long",
+   "note": "Międzynarodowy konsensus; trening oporowy bezpieczny i korzystny przy właściwym nadzorze i progresji."
+  },
+  {
+   "title": "Lloyd RS i in. NSCA position statement on long-term athletic development. J Strength Cond Res 2016;30(6):1491–1509",
+   "url": "https://dxpprod.nsca.com/globalassets/education/nsca_position_statement_on_ltad.pdf",
+   "note": "10 filarów LTAD; skok wzrostu, unikanie wczesnej specjalizacji, zabawa, regeneracja (≥48 h przed zawodami, >7 h snu)."
+  },
+  {
+   "title": "Lloyd RS, Oliver JL. The Youth Physical Development Model. Strength Cond J 2012;34(3):61–72",
+   "url": "https://pure.cardiffmet.ac.uk/en/publications/the-youth-physical-development-model-a-new-approach-to-long-term-/",
+   "note": "Model YPD: siła, umiejętności ruchowe i szybkość/zwinność rozwijane przez całe dzieciństwo."
+  },
+  {
+   "title": "Bergeron MF i in. IOC consensus statement on youth athletic development. Br J Sports Med 2015;49:843–851",
+   "url": "https://www.sportaus.gov.au/__data/assets/pdf_file/0004/689647/IOC_consensus_statement_on_youth_athletic_development.pdf",
+   "note": "Indywidualizacja wg dojrzewania, zarządzanie obciążeniem, nie trenować przez ból, zabawa, odżywianie (RED-S)."
+  },
+  {
+   "title": "WHO guidelines on physical activity and sedentary behaviour (2020) – dzieci i młodzież 5–17 lat",
+   "url": "https://www.who.int/europe/news-room/fact-sheets/item/physical-activity",
+   "note": "Średnio ≥60 min/dzień MVPA; aktywność intensywna oraz wzmacniająca mięśnie i kości ≥3 dni/tydz."
+  },
+  {
+   "title": "CDC – Physical Activity Guidelines for School-Aged Children and Adolescents",
+   "url": "https://www.cdc.gov/physical-activity-education/guidelines/",
+   "note": "Potwierdza: 60 min dziennie; intensywny wysiłek, siła mięśni i kości – po ≥3 dni/tydz."
+  },
+  {
+   "title": "Balyi I, Way R, Higgs C. Long-Term Athlete Development (Human Kinetics) – 7 etapów",
+   "url": "https://us.humankinetics.com/blogs/excerpt/long-term-athlete-development-follows-seven-stages",
+   "note": "Dziewczęta: Learn to Train 8–11, Train to Train 11–15 (budowa bazy tlenowej, szybkość pod koniec etapu)."
+  },
+  {
+   "title": "Tomkinson GR i in. European normative values for physical fitness in children and adolescents aged 9–17 years (Eurofit, 2 779 165 wyników). Br J Sports Med 2018;52:1445–1456",
+   "url": "https://core.ac.uk/download/235074871.pdf",
+   "note": "Normy (percentyle) dla 11-letnich dziewcząt: skok w dal, sit-ups 30 s, flamingo, sit-and-reach, 10×5 m, beep test."
+  },
+  {
+   "title": "Ortega FB i in. European fitness landscape for children and adolescents (FitBack). Br J Sports Med 2023;57:299–310",
+   "url": "https://repository.essex.ac.uk/35891/1/European%20fitness%20landscape%20for%20children%20and%20adolescents%20updated%20reference%20values%2C%20fitness%20maps%20and%20country%20rankings%20based%20on.pdf",
+   "note": "Aktualne normy europejskie: skok w dal, siła chwytu, beep test (dziewczęta 11 lat)."
+  },
+  {
+   "title": "FitnessGram Healthy Fitness Zone Standards (Cooper Institute, v10, 2013)",
+   "url": "https://www.isbe.net/Documents/HFZ_Standards.pdf",
+   "note": "Progi zdrowia: pompki 90° (dziewczęta 11 l.: 9), curl-up (>15)."
+  },
+  {
+   "title": "Fulton JE i in. Measures of Muscular Strength in U.S. Children and Adolescents, 2012. NCHS Data Brief 139 (NHANES NYFS)",
+   "url": "https://www.cdc.gov/nchs/products/databriefs/db139.htm",
+   "note": "Deska: średnio 61 s (dziewczęta 6–11 lat), 77 s (12–15 lat)."
+  },
+  {
+   "title": "Ramirez-Campillo R i in. Plyometric-jump training effects ... according to maturity: systematic review with meta-analysis. Sports Med Open 2023;9:23",
+   "url": "https://link.springer.com/10.1186/s40798-023-00568-6",
+   "note": "Skoki bezpieczne i skuteczne u młodzieży; start ok. 90 skoków/tydz., 1–2×/tydz., ≥48 h przerwy, miękka nawierzchnia."
+  },
+  {
+   "title": "de Borja C i in. Primary Care Considerations for Youth Martial Arts Athletes. Curr Rev Musculoskelet Med 2025;18:73–78",
+   "url": "https://link.springer.com/article/10.1007/s12178-024-09942-7",
+   "note": "Karate: najczęściej urazy stopy/kostki; zalecany nadzorowany trening siły, core i równowagi."
+  }
+ ]
+}
