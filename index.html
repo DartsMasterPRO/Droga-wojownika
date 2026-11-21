@@ -1039,7 +1039,7 @@ function render(){
  $('#app').innerHTML=v();
  if(tab==='start')placeHero('start',mood(),`Osu, ${esc(S.name)}`);
  else{const hs={trening:[{dzis:'Twój trening na dziś',plany:'Gotowe plany treningowe',cw:'Biblioteka ćwiczeń',testy:'Test sprawności',rodzina:'Wspólne wyzwanie tygodnia',analiza:'Nagraj się, a ja ocenię technikę'}[TS.sub],'Trening'],kata:[`${S.kata.filter(k=>k.f).length} startowych · ${reps()} powtórzeń`,'Kata'],kumite:['Timer, refleks i zasady walki','Kumite'],zawody:[`${S.comps.length} startów · ${medals().reduce((a,b)=>a+b,0)} medali`,'Zawody'],wiecej:sub==='karty'?[`${S.got.length} z ${CARDS.length} kart zdobytych`,'Karty']:sub==='sklep'?[`${S.coins||0} monet w skarbonce`,'Sklepik']:['Pasy, dziennik, słowniczek','Więcej']}[tab];
-  placeHero(tab,{vid:tab==='wiecej'&&sub==='karty'?'tab-karty':HV[tab],s:hs[0]},hs[1])}
+  placeHero(tab,{vid:tab==='trening'?({dzis:'tr-dzis',plany:'tr-plany',cw:'tr-cwiczenia',rodzina:'tr-rodzina',analiza:'tr-trener'}[TS.sub]||HV.trening):tab==='wiecej'?({karty:'tab-karty',sklep:'w-sklep',pasy:'w-pasy',log:'w-dziennik',quiz:'w-slowniczek',ust:'w-ustawienia'}[sub]||HV.wiecej):HV[tab],s:hs[0]},hs[1])}
  $('#nav').innerHTML=TABS.map(([k,t])=>`<a href="#${k}" class="${k===tab?'on':''}" ${k===tab?'aria-current="page"':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>${t}</a>`).join('');
  tShow();fillImgs();if(profOpen)renderProf();msg='';applyAcc();
  if(tab!==lastTab){lastTab=tab;tabFx()}
