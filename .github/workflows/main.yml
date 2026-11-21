@@ -1,0 +1,42 @@
+# Publikuje aplikację "Droga wojownika" na GitHub Pages przy każdym wrzuceniu zmian.
+# Jednorazowo: Settings → Pages → Source: "GitHub Actions".
+name: Publikuj aplikację
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Pobierz pliki
+        uses: actions/checkout@v6
+
+      - name: Nowa wersja do pamięci telefonu
+        run: sed -i "s/const V='dw-[^']*'/const V='dw-${GITHUB_SHA::8}'/" sw.js
+
+      - name: Przygotuj Pages
+        uses: actions/configure-pages@v5
+
+      - name: Spakuj aplikację
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .
+
+      - name: Opublikuj
+        id: deployment
+        uses: actions/deploy-pages@v5
