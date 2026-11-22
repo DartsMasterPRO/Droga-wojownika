@@ -263,6 +263,9 @@ nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;heig
 .btn-p .rip{background:radial-gradient(circle,rgba(255,255,255,.38),rgba(255,255,255,.12) 60%,transparent 70%)}
 @keyframes rip{to{transform:scale(2.8);opacity:0}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.intro h2{opacity:1}.rip{display:none}}
+
+.item b,.item .mute,.kname,.mw b,.card h3,.card p{overflow-wrap:anywhere}
+.medst{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
 </style>
 </head>
 <body>
@@ -331,10 +334,21 @@ const fresh=()=>({v:2,style:'kyo',name:'Blanka',born:'2015-11-08',cur:3,passed:0
  kata:KATA.map(([n,l])=>({n,l,r:0,f:false,note:''})),
  log:[],comps:[],an:[],tests:[],ch:{},club:[],xp:0,plansDone:0,voice:1,music:1,mvol:1,remind:0,fam:null,coins:0,inv:[],look:null,bg:null,pet:0,gold:0,title:0,quizBest:0,next:{d:'',n:''},kt:{w:90,p:60,r:3,a:1},rs:'średnio',rd:60});
 let S=null;
-try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+{let raw=null;try{raw=localStorage.getItem(KEY);S=JSON.parse(raw)}catch(e){try{if(raw)localStorage.setItem(KEY+'-uszkodzone-'+Date.now(),raw)}catch(_){}}}
 if(!S||!S.v)S=fresh();
 if(S.style!=='kyo'){const f=fresh();Object.assign(S,{v:2,style:'kyo',born:'2015-11-08',cur:3,belts:f.belts,kata:f.kata,kt:f.kt,me:S.me||defMe(),an:S.an||[]})}
-S.an=S.an||[];S.me=S.me||defMe();S.tests=S.tests||[];S.ch=S.ch||{};S.club=S.club||[];S.xp=S.xp||0;if(S.voice==null)S.voice=1;if(S.music==null)S.music=1;S.mute=0;if(S.coins==null)S.coins=0;S.inv=S.inv||[];if(S.mvol==null)S.mvol=1;
+// uzupełnia brakujące pola i czyści dane (stary zapis, kopia z pliku)
+function normalize(s){const D=fresh();for(const k in D)if(s[k]==null)s[k]=D[k];
+ for(const k of['log','comps','kata','an','tests','inv','club'])if(!Array.isArray(s[k]))s[k]=D[k];
+ if(!Array.isArray(s.belts)||!s.belts.length)s.belts=D.belts;
+ if(typeof s.next!=='object'||!s.next)s.next=D.next;if(typeof s.ch!=='object')s.ch={};s.me=s.me&&typeof s.me==='object'?s.me:defMe();s.kt={...D.kt,...(s.kt||{})};
+ s.cur=Math.max(0,Math.min(s.belts.length-1,s.cur|0));
+ const col=c=>/^#[0-9a-f]{3,8}$/i.test(c)?c:'#888';s.belts.forEach(b=>{b.c=col(b.c);b.s=b.s?col(b.s):null;if(!Array.isArray(b.req))b.req=[]});
+ s.an=s.an.filter(a=>a&&DRILLS[a.dr]).map(a=>({...a,id:String(a.id).replace(/[^\w-]/g,''),sc:+a.sc||0}));
+ s.comps=s.comps.filter(c=>c&&typeof c==='object');s.comps.forEach(c=>c.p=+c.p||0);
+ for(const k of['coins','xp','quizBest','plansDone','rd'])s[k]=+s[k]||0;if(!s.rd)s.rd=D.rd;
+ if(s.voice==null)s.voice=1;if(s.music==null)s.music=1;s.mute=0;if(s.mvol==null)s.mvol=1;return s}
+normalize(S);
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}try{kvSync()}catch(e){}};
 
 const $=s=>document.querySelector(s);
@@ -348,6 +362,7 @@ const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const daysTo=d=>Math.round((new Date(d+'T00:00')-new Date(today()+'T00:00'))/864e5);
 const dni=n=>n===1?'dzień':'dni';
+const pluralPL=(n,a,b,c)=>n===1?a:(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?b:c;
 const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 const age=()=>{const b=new Date(S.born+'T00:00'),t=new Date();let a=t.getFullYear()-b.getFullYear();if(t.getMonth()<b.getMonth()||(t.getMonth()===b.getMonth()&&t.getDate()<b.getDate()))a--;return a};
 const bday=()=>today().slice(5)===S.born.slice(5);
@@ -355,7 +370,7 @@ const lat=n=>n===1?'rok':(n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?'lata':'lat';
 const starsTxt=n=>'★'.repeat(n)+`<i>${'★'.repeat(5-n)}</i>`;
 
 function streak(){const set=new Set(S.log.map(l=>l.d));const d=new Date();if(!set.has(iso(d)))d.setDate(d.getDate()-1);let n=0;while(set.has(iso(d))){n++;d.setDate(d.getDate()-1)}return n}
-function bestStreak(){const ds=[...new Set(S.log.map(l=>l.d))].sort();let best=0,run=0,prev=null;for(const d of ds){run=prev&&daysTo(d)-daysTo(prev)===1?run+1:1;best=Math.max(best,run);prev=d}return best}
+function bestStreak(log=S.log){const ds=[...new Set(log.map(l=>l.d))].sort();let best=0,run=0,prev=null;for(const d of ds){run=prev&&daysTo(d)-daysTo(prev)===1?run+1:1;best=Math.max(best,run);prev=d}return best}
 const reps=()=>S.kata.reduce((a,k)=>a+(k.r||0),0);
 const medals=()=>[1,2,3].map(p=>S.comps.filter(x=>x.p==p).length);
 
@@ -434,7 +449,9 @@ function heroHTML(m,title,small){return `<div class="hmedia">${m.vid?`<video src
  <div class="htext"><p class="kick">Droga wojownika</p><h1>${title}</h1>${m.t?`<p class="ht">${esc(m.t)}</p>`:''}${m.s?`<p class="hs">${esc(m.s)}</p>`:''}</div>`}
 function placeHero(t,m,title){let e=heroEls[t];if(!e){e=document.createElement('div');e.className='hero'+(t==='start'?'':' small');e.dataset.a='prof';e.setAttribute('role','button');e.setAttribute('aria-label','Otwórz kartę postaci');heroEls[t]=e;e._k=''}
  const k=JSON.stringify([m,title]);if(e._k!==k){e._k=k;e.innerHTML=heroHTML(m,title)}
- const slot=$('#heroSlot');if(slot){slot.replaceWith(e);const v=e.querySelector('video');if(v)v.play().catch(()=>{})}}
+ // zwolnij pamięć filmików z innych zakładek
+ for(const[k2,h]of Object.entries(heroEls))if(h!==e){const v=h.querySelector('video');if(v&&v.getAttribute('src')){v.pause();v.dataset.s=v.getAttribute('src');v.removeAttribute('src');v.load()}}
+ const slot=$('#heroSlot');if(slot){slot.replaceWith(e);const v=e.querySelector('video');if(v){if(!v.getAttribute('src')&&v.dataset.s)v.src=v.dataset.s;v.play().catch(()=>{})}}}
 
 function beltSvg(c,s){return `<svg viewBox="0 0 360 120" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Pas"><defs><linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient></defs>
 <ellipse cx="190" cy="114" rx="80" ry="4" fill="#000" opacity=".6"/>
@@ -584,7 +601,7 @@ function vZawody(){
  const c=S.comps.slice().sort((a,b)=>b.d.localeCompare(a.d)),m=medals();
  return `<div id="heroSlot"></div><main class="wrap">
  ${compPrep()}
- <div class="grid3" style="margin-bottom:14px">${[['Złoto','m1'],['Srebro','m2'],['Brąz','m3']].map(([t,cl],i)=>`<div class="stat row"><div class="medal ${cl}">${i+1}</div><div><div class="num">${m[i]}</div><span>${t}</span></div></div>`).join('')}</div>
+ <div class="grid3" style="margin-bottom:14px">${[['Złoto','m1'],['Srebro','m2'],['Brąz','m3']].map(([t,cl],i)=>`<div class="stat medst"><div class="medal ${cl}">${i+1}</div><div><div class="num">${m[i]}</div><span>${t}</span></div></div>`).join('')}</div>
  <div class="card"><h3>Najbliższe zawody</h3><div class="grid2"><div class="field"><label for="nd">Data</label><input id="nd" type="date" value="${esc(S.next.d)}" data-c="nextd"></div>
   <div class="field"><label for="nn">Nazwa</label><input id="nn" value="${esc(S.next.n)}" data-c="nextn" placeholder="np. Puchar Burmistrza"></div></div>
   ${S.next.d&&daysTo(S.next.d)>=0?`<p style="margin:0"><b>Za ${daysTo(S.next.d)} ${dni(daysTo(S.next.d))}</b></p>`:''}</div>
@@ -701,7 +718,7 @@ function buildSteps(plan){const st=[];
 function startPlan(plan){if(!plan)return;try{actx()}catch(e){}P={plan,st:buildSteps(plan),i:0,t0:Date.now(),paused:false};if(!P.st.length)return;
  try{navigator.wakeLock?.request('screen').then(w=>P&&(P.wake=w)).catch(()=>{})}catch(e){}
  $('#play').hidden=false;stepStart()}
-function stepStart(){countStop();const s=P.st[P.i];clearInterval(P.id);P.lb=null;P.said={};if(!s)return finishPlan();
+function stepStart(){countStop();P.paused=false;P.pAt=0;const s=P.st[P.i];clearInterval(P.id);P.lb=null;P.said={};if(!s)return finishPlan();
  if(s.k==='rest'){const nx=P.st.slice(P.i+1).find(x=>x.k==='work');say(nx?`Przerwa. Następne: ${nx.e.name}.`:'Przerwa.')}else say(s.e.mode==='time'?`${s.e.name}. ${s.d.sec||30} sekund.`:`${s.e.name}. ${s.d.reps||10} powtórzeń.`);
  const now=Date.now();if(s.k==='rest'){P.ready=now;P.end=now+s.sec*1000}else if(s.e.mode==='time'){P.ready=now+3000;P.end=P.ready+(s.d.sec||30)*1000}else{P.ready=P.end=0}
  renderPlay();if(P.end)P.id=setInterval(tickPlay,200)}
@@ -716,8 +733,10 @@ function tickPlay(){if(!P||P.paused)return;const s=P.st[P.i],now=Date.now();
 function nextStep(){P.i++;stepStart()}
 function pausePlay(){if(!P)return;if(P.paused){const d=Date.now()-P.pAt;P.ready+=d;P.end+=d;P.paused=false}else{P.paused=true;P.pAt=Date.now()}renderPlay()}
 function closePlay(log){countStop();clearInterval(P?.id);try{P?.wake?.release()}catch(e){}$('#play').hidden=true;$('#play').innerHTML='';
- if(log&&P){const m=Math.max(1,Math.round((Date.now()-P.t0)/60000));S.log.push({d:today(),t:/kumite|karate|kopn/i.test(P.plan.name+P.plan.goal)?'Kihon':'Kondycja',m,n:P.plan.name,pid:P.plan.id});S.plansDone=(S.plansDone||0)+1;addCoins(10,'Plan ukończony');streakCoins();addXP(20+m);save();
-  say(`Brawo, ${S.name}! Trening ukończony.`);celebrate({vid:pick(['brzuszki','worek','boks']),k:'Trening ukończony!',t:P.plan.name,s:`${m} min · +${20+m} XP · ${pick(CHEER)}`,fan:true});checkCards()}
+ const isPlan=P&&!String(P.plan.id||'').startsWith('ex-'),secs=P?(Date.now()-P.t0)/1000:0,need=P?Math.min(isPlan?300:60,planMin(P.plan)*60*.3):0;
+ if(log&&P&&secs<need){toast('Za szybko 😉 Trening liczy się, gdy naprawdę go zrobisz.');log=false}
+ if(log&&P){const m=Math.max(1,Math.round(secs/60));S.log.push({d:today(),t:/kumite|karate|kopn/i.test(P.plan.name+P.plan.goal)?'Kihon':'Kondycja',m,n:P.plan.name,pid:isPlan?P.plan.id:undefined});if(isPlan){S.plansDone=(S.plansDone||0)+1;addCoins(10,'Plan ukończony')}else addCoins(3,'Ćwiczenie zrobione');streakCoins();addXP(isPlan?20+m:5+m);save();
+  say(`Brawo, ${S.name}! Trening ukończony.`);celebrate({vid:pick(['brzuszki','worek','boks']),k:'Trening ukończony!',t:P.plan.name,s:`${m} min · +${isPlan?20+m:5+m} XP · ${pick(CHEER)}`,fan:true});checkCards()}
  P=null;render()}
 function finishPlan(){closePlay(true)}
 function renderPlay(){const s=P.st[P.i],n=P.st.length,doneW=P.st.slice(0,P.i).filter(x=>x.k==='work').length,allW=P.st.filter(x=>x.k==='work').length;
@@ -840,7 +859,7 @@ const MON=['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sie
 const loadImgEl=s=>new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(null);i.src=s});
 async function makeReport(){const ym=today().slice(0,7),[Y,Mo]=ym.split('-'),L=S.log.filter(l=>l.d.startsWith(ym)),mins=L.reduce((a,l)=>a+(+l.m||0),0),days=new Set(L.map(l=>l.d)).size;
  const an=S.an.filter(a=>a.d.startsWith(ym)),best=an.length?Math.max(...an.map(a=>a.sc)):null,med=S.comps.filter(c=>c.d.startsWith(ym)&&c.p>=1&&c.p<=3),plans=L.filter(l=>l.pid).length;
- const tests=(TD?.tests||[]).map(t=>{const r=(S.tests||[]).filter(x=>x.id===t.id&&x.d.startsWith(ym));if(!r.length)return null;const v=t.better==='lower'?Math.min(...r.map(x=>x.v)):Math.max(...r.map(x=>x.v));return `${t.name.split('(')[0].trim()}: ${String(v).replace('.',',')} ${t.unit}`}).filter(Boolean).slice(0,3);
+ const tests=(TD?.tests||[]).map(t=>{const r=(S.tests||[]).filter(x=>x.id===t.id&&x.d.startsWith(ym));if(!r.length)return null;const v=t.better==='lower'?Math.min(...r.map(x=>x.v)):Math.max(...r.map(x=>x.v));return `${t.name.split('(')[0].trim()}: ${String(v).replace('.',',')} ${t.unit}`}).filter(Boolean).slice(0,2);
  const c=document.createElement('canvas');c.width=1080;c.height=1350;const g=c.getContext('2d');
  try{await document.fonts.load('italic 800 80px "Barlow Condensed"');await document.fonts.load('700 40px "Barlow Condensed"');await document.fonts.load('500 30px Barlow')}catch(e){}
  const CF='"Barlow Condensed",Arial Narrow,sans-serif',BF='Barlow,Arial,sans-serif';
@@ -850,18 +869,18 @@ async function makeReport(){const ym=today().slice(0,7),[Y,Mo]=ym.split('-'),L=S
  g.fillStyle='#f2c14e';g.font=`700 38px ${CF}`;g.fillText('DROGA WOJOWNIKA',70,110);
  g.fillStyle='#ffe08a';g.font=`italic 800 96px ${CF}`;g.fillText('RAPORT',66,215);g.fillText(MON[+Mo-1].toUpperCase(),66,310);
  g.fillStyle='#c9ced6';g.font=`500 34px ${BF}`;g.fillText(Y,70,365);
- g.fillStyle='#fff';g.font=`italic 800 72px ${CF}`;g.fillText(S.name.toUpperCase(),66,500);
+ g.fillStyle='#fff';{let fs=72;g.font=`italic 800 ${fs}px ${CF}`;while(g.measureText(S.name.toUpperCase()).width>940&&fs>32){fs-=4;g.font=`italic 800 ${fs}px ${CF}`}}g.fillText(S.name.toUpperCase(),66,500);
  const b=S.belts[S.cur];g.fillStyle=b.c;g.fillRect(70,530,120,26);if(b.s){g.fillStyle=b.s;g.fillRect(150,530,16,26)}g.fillStyle='#c9ced6';g.font=`500 30px ${BF}`;g.fillText(`${b.k} · ${b.n}`,205,553);
  g.fillText(`Poziom ${lvl().l} · ${lvl().t}`,70,605);
- const tiles=[[days,'dni treningu'],[Math.round(mins/6)/10+' h','na macie'],[bestStreak(),'najdłuższa seria'],[plans,'planów ukończonych'],[best??'–','najlepsza ocena trenera'],[med.length,'medali w tym miesiącu']];
+ const tiles=[[days,'dni treningu'],[Math.round(mins/6)/10+' h','na macie'],[bestStreak(L),'najdłuższa seria'],[plans,'planów ukończonych'],[best??'–','najlepsza ocena trenera'],[med.length,'medali w tym miesiącu']];
  tiles.forEach(([v,l],i)=>{const x=70+(i%3)*320,y=690+Math.floor(i/3)*230;g.fillStyle='#151924';g.beginPath();g.roundRect(x,y,300,200,24);g.fill();g.strokeStyle='#2b3140';g.lineWidth=2;g.stroke();
   g.fillStyle='#ffe08a';g.font=`italic 800 92px ${CF}`;g.fillText(String(v).replace('.',','),x+26,y+110);g.fillStyle='#9aa2af';g.font=`500 26px ${BF}`;g.fillText(l,x+26,y+160)});
  let y=1180;g.fillStyle='#f2c14e';g.font=`700 34px ${CF}`;if(tests.length){g.fillText('REKORDY TESTÓW',70,y);g.fillStyle='#fff';g.font=`500 28px ${BF}`;tests.forEach((t,i)=>g.fillText(t,70,y+44+i*38))}
  else{g.fillText(med.length?`MEDALE: ${med.map(m=>['','złoto','srebro','brąz'][m.p]).join(', ')}`:'OSU! KAŻDY TRENING SIĘ LICZY',70,y)}
- g.fillStyle='#9aa2af';g.font=`500 22px ${BF}`;g.fillText(S.me?.klub||'Karate kyokushin',70,1300);
+ g.fillStyle='#9aa2af';g.font=`500 22px ${BF}`;g.fillText(S.me?.klub||'Karate kyokushin',70,1322);
  return c}
 async function openReport(){const r=$('#rep');r.hidden=false;r.innerHTML=`<div class="pbar"><b style="font:700 20px 'Barlow Condensed'">Raport miesiąca</b><button data-a="repx">Zamknij</button></div><div class="wrap" style="padding:16px"><p class="mute">Przygotowuję…</p></div>`;
- const c=await makeReport();c.toBlob(bl=>{REPBLOB=bl;const url=URL.createObjectURL(bl);r.querySelector('.wrap').innerHTML=`<img src="${url}" alt="Raport miesiąca" style="width:100%;border-radius:14px;display:block;margin-bottom:14px">
+ const c=await makeReport();c.toBlob(bl=>{REPBLOB=bl;if(window._repURL)URL.revokeObjectURL(window._repURL);const url=window._repURL=URL.createObjectURL(bl);r.querySelector('.wrap').innerHTML=`<img src="${url}" alt="Raport miesiąca" style="width:100%;border-radius:14px;display:block;margin-bottom:14px">
   <button class="btn-p full bigbtn" data-a="repshare" style="margin-bottom:10px">Wyślij rodzinie lub sensei</button><button class="full" data-a="repdl">Zapisz w telefonie</button>`},'image/png')}
 let REPBLOB=null;
 function dlBlob(bl,name){const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
@@ -870,7 +889,7 @@ async function shareBlob(bl,name,title){const f=new File([bl],name,{type:bl.type
 /* ---------- KOPIA DO PLIKU ---------- */
 async function backupBlob(){const imgs={};for(const a of S.an){const v=await getImg(a.id);if(v)imgs[a.id]=v}return new Blob([JSON.stringify({app:'droga-wojownika',ver:3,date:today(),S,imgs})],{type:'application/json'})}
 async function importFile(file){try{const d=JSON.parse(await file.text());const nS=d.app==='droga-wojownika'?d.S:d;if(!nS||!nS.v||!Array.isArray(nS.belts))throw 0;
- S=nS;S.an=S.an||[];S.me=S.me||defMe();S.tests=S.tests||[];S.ch=S.ch||{};S.club=S.club||[];S.xp=S.xp||0;if(!Array.isArray(S.got))S.got=CARDS.filter(earned).map(c=>c.id);
+ S=normalize(nS);if(!Array.isArray(S.got))S.got=CARDS.filter(earned).map(c=>c.id);
  if(d.imgs)for(const[k,v]of Object.entries(d.imgs)){IMG.set(k,v);await idb.set(k,v)}for(const k in heroEls)heroEls[k]._k='';save();msg='Kopia wczytana – wszystko wróciło na miejsce!'}catch(e){msg='To nie jest plik kopii z tej aplikacji.'}render()}
 
 /* ---------- PRZYPOMNIENIA ---------- */
@@ -907,12 +926,12 @@ const jpParts=n=>n<=10?[n]:[Math.floor(n/10)>1?Math.floor(n/10):0,10,n%10].filte
 const jpWord=(n,A,sep=' ')=>jpParts(n).map(x=>A[x]).join(sep);
 let jaVoice=null;try{const f=()=>{try{jaVoice=speechSynthesis.getVoices().find(v=>/^ja/i.test(v.lang))||null}catch(e){}};f();speechSynthesis.addEventListener&&speechSynthesis.addEventListener('voiceschanged',f)}catch(e){}
 function sayJp(n){if(S.mute||!S.voice||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(jaVoice?jpWord(n,JPK,''):jpWord(n,JPP));u.lang=jaVoice?'ja-JP':'pl-PL';u.voice=jaVoice||plVoice;u.rate=1.15;u.onstart=()=>duck(1);u.onend=u.onerror=()=>duck(0);speechSynthesis.speak(u)}catch(e){}}
-function countStop(){if(P&&P.cnt){clearInterval(P.cnt.id);P.cnt=null}}
+function countStop(){if(P&&P.cnt){clearInterval(P.cnt.id);clearTimeout(P.cnt.t0);P.cnt=null}}
 function countGo(){if(!P)return;const s=P.st[P.i];if(!s||s.k!=='work')return;if(P.cnt){countStop();renderPlay();return}
- const max=s.d.reps||10,tempo=s.e.cat==='karate'?1700:s.e.cat==='wydolnosc'?1500:2400;P.cnt={n:0,max};renderPlay();
- const tick=()=>{if(!P||!P.cnt)return;P.cnt.n++;const n=P.cnt.n;setT(n,jpWord(n,JPR).toUpperCase());sayJp(n);
+ const max=s.d.reps||10,tempo=s.e.cat==='karate'?1700:s.e.cat==='wydolnosc'?1500:2400;const cnt=P.cnt={n:0,max};renderPlay();
+ const tick=()=>{if(!P||P.cnt!==cnt)return;P.cnt.n++;const n=P.cnt.n;setT(n,jpWord(n,JPR).toUpperCase());sayJp(n);
   if(n>=P.cnt.max){countStop();setTimeout(()=>{say('Yame! Brawo!');taiko(2);setTimeout(()=>P&&P.st[P.i]===s&&nextStep(),900)},700)}};
- setTimeout(()=>{if(P&&P.cnt){tick();if(P&&P.cnt)P.cnt.id=setInterval(tick,tempo)}},800);say('Liczymy! Hajime!')}
+ cnt.t0=setTimeout(()=>{if(P&&P.cnt===cnt){tick();if(P&&P.cnt===cnt)cnt.id=setInterval(tick,tempo)}},800);say('Liczymy! Hajime!')}
 
 /* ---------- TRYB ZAWODÓW ---------- */
 const BAG=['Karategi – czyste i złożone','Pas','Ochraniacze wymagane w regulaminie','Ochraniacz na zęby (jeśli wymagany)','Butelka wody','Przekąska: banan lub kanapka','Legitymacja lub zgoda rodzica','Klapki','Ręcznik','Gumki do włosów'];
@@ -988,6 +1007,8 @@ const COIN='<svg viewBox="0 0 24 24" class="coin"><circle cx="12" cy="12" r="10"
 const own=id=>(S.inv||[]).includes(id);
 let toastT=0;
 function toast(html){let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}t.innerHTML=html;t.classList.remove('show');void t.offsetWidth;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2200)}
+// nagroda tylko raz za to samo (zapobiega nabijaniu monet)
+function payOnce(k,n,why){S.paid=S.paid||{};if(S.paid[k])return false;S.paid[k]=1;addCoins(n,why);return true}
 function addCoins(n,why){if(!n)return;S.coins=(S.coins||0)+n;S.coinsTotal=(S.coinsTotal||0)+n;coin();toast(`${COIN}<b>+${n}</b>${why?`<span>${esc(why)}</span>`:''}`)}
 function streakCoins(){const st=streak();S.stPaid=S.stPaid||{};if(st>=7&&st%7===0&&!S.stPaid[today()]){S.stPaid[today()]=1;addCoins(25,`${st} dni z rzędu!`)}}
 /* scena postaci: tło + strój + tygrysek */
@@ -1039,7 +1060,7 @@ function render(){
  const v={start:vStart,trening:vTrening,kata:vKata,kumite:vKumite,zawody:vZawody,wiecej:vWiecej}[tab]||vStart;
  $('#app').innerHTML=v();
  if(tab==='start')placeHero('start',mood(),`Osu, ${esc(S.name)}`);
- else{const hs={trening:[{dzis:'Twój trening na dziś',plany:'Gotowe plany treningowe',cw:'Biblioteka ćwiczeń',testy:'Test sprawności',rodzina:'Wspólne wyzwanie tygodnia',analiza:'Nagraj się, a ja ocenię technikę'}[TS.sub],'Trening'],kata:[`${S.kata.filter(k=>k.f).length} startowych · ${reps()} powtórzeń`,'Kata'],kumite:['Timer, refleks i zasady walki','Kumite'],zawody:[`${S.comps.length} startów · ${medals().reduce((a,b)=>a+b,0)} medali`,'Zawody'],wiecej:sub==='karty'?[`${S.got.length} z ${CARDS.length} kart zdobytych`,'Karty']:sub==='sklep'?[`${S.coins||0} monet w skarbonce`,'Sklepik']:['Pasy, dziennik, słowniczek','Więcej']}[tab];
+ else{const hs={trening:[{dzis:'Twój trening na dziś',plany:'Gotowe plany treningowe',cw:'Biblioteka ćwiczeń',testy:'Test sprawności',rodzina:'Wspólne wyzwanie tygodnia',analiza:'Nagraj się, a ja ocenię technikę'}[TS.sub],'Trening'],kata:[`${S.kata.filter(k=>k.f).length} startowych · ${reps()} powtórzeń`,'Kata'],kumite:['Timer, refleks i zasady walki','Kumite'],zawody:[`${S.comps.length} ${pluralPL(S.comps.length,'start','starty','startów')} · ${medals().reduce((a,b)=>a+b,0)} ${pluralPL(medals().reduce((a,b)=>a+b,0),'medal','medale','medali')}`,'Zawody'],wiecej:sub==='karty'?[`${S.got.length} z ${CARDS.length} kart zdobytych`,'Karty']:sub==='sklep'?[`${S.coins||0} monet w skarbonce`,'Sklepik']:['Pasy, dziennik, słowniczek','Więcej']}[tab];
   placeHero(tab,{vid:tab==='trening'?({dzis:'tr-dzis',plany:'tr-plany',cw:'tr-cwiczenia',rodzina:'tr-rodzina',analiza:'tr-trener'}[TS.sub]||HV.trening):tab==='wiecej'?({karty:'tab-karty',sklep:'w-sklep',pasy:'w-pasy',log:'w-dziennik',quiz:'w-slowniczek',ust:'w-ustawienia'}[sub]||HV.wiecej):HV[tab],s:hs[0]},hs[1])}
  $('#nav').innerHTML=TABS.map(([k,t])=>`<a href="#${k}" class="${k===tab?'on':''}" ${k===tab?'aria-current="page"':''}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>${t}</a>`).join('');
  tShow();fillImgs();if(profOpen)renderProf();msg='';applyAcc();
@@ -1065,9 +1086,9 @@ function rShow(flash){const el=$('#rx');if(el){el.textContent=R.cur;if(flash){el
 function rNext(){if(!R.run)return;if(Date.now()>R.end){R.run=false;R.cur='Gotowa?';S.rx=(S.rx||0)+1;addXP(10);save();rShow();celebrate({img:'kopniak',k:'Trening reakcji ukończony',t:'Błyskawicznie!',s:pick(CHEER)});checkCards();return}
  let n;do{n=pick(TECH)}while(n===R.cur);R.cur=n;if(S.voice)say(n);else beep(990,.08);rShow(true);
  const[a,b]=SPEED[S.rs]||SPEED['średnio'];R.id=setTimeout(rNext,a+Math.random()*(b-a))}
-function rGo(){clearTimeout(R.id);if(R.run){R.run=false;R.cur='Gotowa?';rShow();return}
+function rGo(){clearTimeout(R.id);(R.cd||[]).forEach(clearTimeout);if(R.run){R.run=false;R.cur='Gotowa?';rShow();return}
  R.run=true;R.end=Date.now()+S.rd*1000+3000;R.cur='3';rShow();beep(700,.1);
- setTimeout(()=>{if(!R.run)return;R.cur='2';rShow();beep(700,.1)},1000);setTimeout(()=>{if(!R.run)return;R.cur='1';rShow();beep(700,.1)},2000);R.id=setTimeout(rNext,3000)}
+ R.cd=[setTimeout(()=>{if(!R.run)return;R.cur='2';rShow();beep(700,.1)},1000),setTimeout(()=>{if(!R.run)return;R.cur='1';rShow();beep(700,.1)},2000)];R.id=setTimeout(rNext,3000)}
 
 /* ---------- mokuso ---------- */
 function mkStop(txt){MK.run=false;clearTimeout(MK.id);const b=$('#br'),g=$('#mkgo');if(b){b.classList.remove('in');b.textContent=txt||'Gotowa?'}if(g)g.textContent='Zacznij oddychać'}
@@ -1104,13 +1125,13 @@ $('#vidGal').addEventListener('change',e=>runAnalysis(e.target.files[0]));
 function introRun(){const it=$('#intro'),v=$('#iv'),au=$('#ia');it.classList.remove('wait');$('#itap').hidden=true;
  const h=$('#it'),d=$('#dedi');[h,d].forEach(x=>{x.style.animation='none';void x.offsetWidth;x.style.animation=''});
  try{v.currentTime=0}catch(e){}v.play().catch(()=>{});if(S.music){try{au.currentTime=0;au.volume=.95;au.play().catch(()=>{})}catch(e){}}}
-function showIntro(){const it=$('#intro'),v=$('#iv'),au=$('#ia');$('#it').textContent='Osu, '+S.name;it.hidden=false;it.classList.remove('out');
+function showIntro(){const it=$('#intro'),v=$('#iv'),au=$('#ia');if(!v.querySelector('source')&&!v.getAttribute('src')){v.src='media/wideo/v-intro.mp4'}if(!au.getAttribute('src'))au.src='media/muzyka/intro.mp3';$('#it').textContent='Osu, '+S.name;it.hidden=false;it.classList.remove('out');
  try{v.pause();v.currentTime=0}catch(e){}
  if(!S.music){introRun();return}
  try{au.currentTime=0;au.volume=.95}catch(e){}
  au.play().then(()=>{mGest=true;introRun()}).catch(()=>{it.classList.add('wait');$('#itap').hidden=false})}
 function endIntro(){const it=$('#intro');if(it.hidden)return;it.classList.add('out');$('#iv').pause();const au=$('#ia');fadeTo(au,0,450);setTimeout(()=>{au.pause()},480);
- setTimeout(()=>{it.hidden=true;it.classList.remove('out','wait');$('#itap').hidden=true},500);document.querySelectorAll('.hero video').forEach(v=>v.play().catch(()=>{}))}
+ setTimeout(()=>{it.hidden=true;it.classList.remove('out','wait');$('#itap').hidden=true;try{const v=$('#iv');v.querySelector('source')?.remove();v.removeAttribute('src');v.load();au.removeAttribute('src');au.load()}catch(e){}},500);document.querySelectorAll('.hero video').forEach(v=>v.play().catch(()=>{}))}
 $('#iv').addEventListener('ended',endIntro);
 $('#intro').addEventListener('click',e=>{if(e.target.id==='skip')return;mGest=true;if(!$('#itap').hidden){introRun();return}endIntro()});
 $('#skip').addEventListener('click',endIntro);
@@ -1129,7 +1150,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b
  case'mcol':mcol=+v;renderProf();return;
  case'addmedal':{const n=val('mn');S.comps.push({d:val('md')||today(),c:val('mc'),n,p:mcol,o:''});addXP(30);save();
   celebrate(mcol===1?{img:'medal',k:n||'Zawody',t:'Złoto!',s:'Nowy medal w kolekcji. Mistrzyni!'}:{img:'podium',k:n||'Zawody',t:mcol===2?'Srebro!':'Brąz!',s:'Nowy medal w kolekcji. Brawo!'});checkCards();render();return}
- case'addlog':{const d=val('ld')||today(),t=val('lt'),m=Math.max(0,+val('lm')||0);S.log.push({d,t,m,n:val('ln')});addXP(10+m/3);addCoins(10,'Trening zapisany');streakCoins();const st=streak();
+ case'addlog':{const d=val('ld')||today(),t=val('lt'),m=Math.min(300,Math.max(0,+val('lm')||0));if(!m){toast('Wpisz, ile minut trwał trening 🙂');return}S.log.push({d,t,m,n:val('ln')});if(payOnce('log'+d,10,'Trening zapisany'))addXP(10+m/3);else addXP(5);streakCoins();const st=streak();
   celebrate({img:TYPEIMG[t]||'poza',k:'Trening zapisany',t:'Osu!',s:`${t} · ${m} min · ${st>1?`seria ${st} ${dni(st)}!`:pick(CHEER)}`});keep=false;break}
  case'dellog':if(!arm(b))return;S.log.splice(i,1);break;
  case'kf':kf=v;break;
@@ -1151,10 +1172,10 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b
  case'chdone':S.ch=S.ch||{};S.ch[today()]=1;addXP(20);addCoins(5,'Wyzwanie dnia');celebrate({img:'kciuk',k:'Wyzwanie dnia',t:'Zaliczone!',s:'+20 XP. Jutro nowe wyzwanie!'});break;
  case'roll':rollWheel();return;
  case'rolldo':if(!ROLL)return;addXP(10);celebrate({img:exImg(ROLL),k:'Koło wyzwań',t:'Brawo!',s:`${ROLL.name} zaliczone. +10 XP`});ROLL=null;break;
- case'tsave':{const t=TD.tests.find(x=>x.id===v),raw=val('tv-'+v).replace(',','.'),num=parseFloat(raw);if(!t||!isFinite(num))return;S.tests=S.tests||[];const prev=S.tests.filter(x=>x.id===v).sort((a,b)=>a.d.localeCompare(b.d)).pop();S.tests.push({id:v,d:today(),v:num});addXP(15);addCoins(5,'Test sprawności');
+ case'tsave':{const t=TD.tests.find(x=>x.id===v),raw=val('tv-'+v).replace(',','.'),num=parseFloat(raw);if(!t||!isFinite(num)||num<0)return;S.tests=S.tests||[];const prev=S.tests.filter(x=>x.id===v).sort((a,b)=>a.d.localeCompare(b.d)).pop();S.tests.push({id:v,d:today(),v:num});if(payOnce('t'+v+today(),5,'Test sprawności'))addXP(15);
   const better=prev&&(t.better==='lower'?num<prev.v:num>prev.v);celebrate(better?{vid:'rekord',k:t.name,t:'Nowy rekord!',s:`${String(num).replace('.',',')} ${t.unit} (poprzednio ${String(prev.v).replace('.',',')})`,fan:true}:{img:'tablica',k:t.name,t:String(num).replace('.',',')+' '+t.unit,s:prev?'Zapisane. Następnym razem pobijesz!':'Pierwszy wynik zapisany. +15 XP'});break}
  case'rcol':rcol=+v;document.querySelectorAll('[data-a=rcol]').forEach(x=>x.classList.toggle('on',+x.dataset.v===rcol));document.querySelectorAll('.rcl').forEach(x=>x.textContent=RCOL.find(r=>r[0]===rcol)[3]);return;
- case'addres':{const pre=v,p=rcol,n=val(pre+'n');S.comps.push({d:val(pre+'d')||today(),c:val(pre+'c'),n,p,o:val(pre+'o'),good:val(pre+'g'),fix:val(pre+'f')});addCoins(p>=1&&p<=3?70:20,p>=1&&p<=3?'Medal!':'Start w zawodach');if(S.next.d&&S.next.d<=today())S.next={d:'',n:''};addXP(p>=1&&p<=3?30:15);
+ case'addres':{const pre=v,p=rcol,n=val(pre+'n');S.comps.push({d:val(pre+'d')||today(),c:val(pre+'c'),n,p,o:val(pre+'o'),good:val(pre+'g'),fix:val(pre+'f')});const fresh1=payOnce('comp'+(val(pre+'d')||today())+n.toLowerCase(),p>=1&&p<=3?70:20,p>=1&&p<=3?'Medal!':'Start w zawodach');if(S.next.d&&S.next.d<=today())S.next={d:'',n:''};if(fresh1)addXP(p>=1&&p<=3?30:15);
   celebrate(p===1?{img:'medal',k:n||'Zawody',t:'Złoto!',s:'Mistrzyni. Osu!'}:p>1?{img:'podium',k:n||'Zawody',t:p+'. miejsce!',s:'Medal jest Twój. Brawo!'}:{img:'sou',k:n||'Zawody',t:'Każdy start uczy',s:'Wyciągnij wnioski i wracaj silniejsza. Osu!',conf:false});say(p===1?'Złoto! Mistrzyni!':p>1?'Medal! Brawo!':'Każdy start uczy. Osu!');break}
  case'katahelp':S.kataHelp=1;break;
  case'setbelt':S.cur=i;for(const k in heroEls)heroEls[k]._k='';celebrate({img:'macha',k:'Mój pas',t:S.belts[i].n,s:S.belts[i].k+' – zapisane. Osu!',conf:false});break;
@@ -1195,13 +1216,13 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b
  case'card':{const c=CARDS[i];celebrate({vid:c.vid,img:c.img,k:'Twoja karta',t:c.n,s:c.need,conf:false});return}
  case'addreq':{const t=val('nr');if(!t)return;S.belts[S.cur+1].req.push({t,d:false});break}
  case'delreq':if(!arm(b))return;S.belts[S.cur+1].req.splice(i,1);break;
- case'pass':{if(!arm(b))return;S.cur++;S.passed=(S.passed||0)+1;addCoins(100,'Nowy pas!');const nb=S.belts[S.cur];celebrate({vid:'pas',img:'puchar',belt:S.cur,gong:1,k:'Egzamin zdany!',t:nb.n,s:`${nb.k} – nowy pas. Droga trwa. Osu!`});say(`Gratulacje! Nowy pas: ${nb.n}. Osu!`);addXP(100);keep=false;location.hash='start';break}
+ case'pass':{if(!arm(b))return;S.cur++;const nowy=!(S.paid&&S.paid['belt'+S.cur]);S.passed=(S.passed||0)+(nowy?1:0);payOnce('belt'+S.cur,100,'Nowy pas!');const nb=S.belts[S.cur];celebrate({vid:'pas',img:'puchar',belt:S.cur,gong:1,k:'Egzamin zdany!',t:nb.n,s:`${nb.k} – nowy pas. Droga trwa. Osu!`});say(`Gratulacje! Nowy pas: ${nb.n}. Osu!`);if(nowy)addXP(100);keep=false;location.hash='start';break}
  case'qstart':qStart();keep=false;break;
  case'qans':Q.ans=i;if(i===Q.list[Q.i].ok){Q.score++;beep(990,.1)}else beep(300,.2);break;
  case'qnext':Q.i++;Q.ans=null;if(Q.i>=10){if(Q.score>S.quizBest)S.quizBest=Q.score;addXP(Q.score*2);if(Q.score===10)addCoins(10,'Quiz 10/10');celebrate(Q.score===10?{img:'taniec',k:'Quiz',t:'10/10!',s:'Sensei byłby dumny.',fan:true}:Q.score>=7?{img:'macha',k:'Quiz',t:Q.score+'/10',s:'Bardzo dobrze! Jeszcze krok do perfekcji.'}:{img:'smutek',k:'Quiz',t:Q.score+'/10',s:'Spróbuj jeszcze raz, dasz radę!',conf:false})}break;
  case'intro':showIntro();return;
  case'copy':{const t=$('#bk');t.select();try{navigator.clipboard.writeText(t.value).then(()=>{b.textContent='Skopiowano'},()=>{document.execCommand('copy');b.textContent='Skopiowano'})}catch(x){try{document.execCommand('copy');b.textContent='Skopiowano'}catch(y){}}return}
- case'imp':{try{const d=JSON.parse(val('im'));if(!d||!d.v||!Array.isArray(d.belts))throw 0;S=d;S.an=S.an||[];S.me=S.me||defMe();if(!Array.isArray(S.got))S.got=CARDS.filter(earned).map(c=>c.id);msg='Kopia wczytana.'}catch(x){msg='To nie wygląda na poprawną kopię.'}break}
+ case'imp':{try{let d=JSON.parse(val('im'));if(d&&d.app==='droga-wojownika')d=d.S;if(!d||!d.v||!Array.isArray(d.belts))throw 0;S=normalize(d);if(!Array.isArray(S.got))S.got=CARDS.filter(earned).map(c=>c.id);msg='Kopia wczytana.'}catch(x){msg='To nie wygląda na poprawną kopię.'}break}
  case'reset':if(!arm(b))return;S=fresh();S.got=[];idb.clear();IMG.clear();for(const k in heroEls)heroEls[k]._k='';msg='Dane wyczyszczone.';break;
  default:return;
  }
@@ -1219,7 +1240,7 @@ document.addEventListener('change',e=>{const t=e.target,c=t.dataset.c;if(!c)retu
  else if(c==='name'){S.name=t.value.trim()||'Blanka'}
  else if(c==='born'){if(t.value)S.born=t.value}
  else if(c==='dedi'){S.dedi=t.value.trim();$('#dedi').textContent=S.dedi}
- else if(c==='me'){S.me[t.dataset.k]=t.value.trim();save();renderProf();return}
+ else if(c==='me'){S.me[t.dataset.k]=t.value.trim();save();return}
  else if(c==='trkata')TR.kata=t.value;
  else if(c==='music'){S.music=t.checked?1:0;mGest=true;save();sceneMusic();render();return}
  else if(c==='mvol'){S.mvol=+t.value;save();if(mEl&&mKey)fadeTo(mEl,mVol(mKey),200);return}

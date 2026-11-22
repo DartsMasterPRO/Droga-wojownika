@@ -244,7 +244,7 @@ export async function analyze(file,drill,onP=()=>{}){
  try{await fixDuration(v);
   const F=await track(v,cfg.fps,cfg.max,p=>onP(.03+p*.9,'Oglądam Twój film…'));
   const valid=F.filter(f=>f.w).length/F.length;
-  if(valid<.45)return{error:'Nie widzę Cię dobrze na filmie. Stań tak, żeby cała sylwetka była w kadrze, i nagraj przy dobrym świetle.'};
+  if(!F.length||!(valid>=.45))return{error:'Nie widzę Cię dobrze na filmie. Stań tak, żeby cała sylwetka była w kadrze, i nagraj przy dobrym świetle.'};
   const warn=[];const V=F.filter(f=>f.lm);
   const ankVis=avg(V.map(f=>Math.min(f.lm[27].visibility??1,f.lm[28].visibility??1)));if(ankVis<.45)warn.push('Słabo widzę Twoje stopy – następnym razem odsuń telefon dalej.');
   if(cfg.side){const r=med(V.map(f=>Math.abs(f.lm[11].x-f.lm[12].x)/Math.max(.02,Math.abs((f.lm[23].y+f.lm[24].y)/2-(f.lm[11].y+f.lm[12].y)/2))));if(r>.62)warn.push('To ćwiczenie najlepiej nagrywać z boku – wtedy dokładniej ocenię technikę.')}
