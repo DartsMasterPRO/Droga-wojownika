@@ -266,6 +266,7 @@ nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;heig
 
 .item b,.item .mute,.kname,.mw b,.card h3,.card p{overflow-wrap:anywhere}
 .medst{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.gry{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gtile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px;border-radius:14px;background:var(--card2);border:1px solid var(--line);text-align:left;color:var(--ink);min-height:0}.gtile img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}.gtile b{font:700 18px 'Barlow Condensed',sans-serif;line-height:1.1}.gtile span{font-size:12px;color:var(--mute);line-height:1.25}.gtx{display:flex;flex-direction:column;gap:2px;min-width:0}.gry .gtile:last-child:nth-child(odd){grid-column:1/-1;flex-direction:row;align-items:center}.gry .gtile:last-child:nth-child(odd) img{width:84px;flex:none}
 </style>
 </head>
 <body>
@@ -572,8 +573,12 @@ function vKata(){
  <div class="card"><h3>Dodaj kata</h3><div class="row"><input id="nk" placeholder="np. Seienchin" style="flex:1"><button class="btn-p" data-a="addkata">Dodaj</button></div></div>
  </main>`}
 
-function graCard(){const g=S.game||{};return `<div class="card gcard"><div class="row" style="align-items:center;flex-wrap:nowrap;gap:12px"><img src="media/poza.webp" alt="" style="width:76px;height:76px;border-radius:14px;object-fit:cover;flex:none"><div style="flex:1"><p class="kick" style="margin:0">Mini-gra</p><h3 style="margin:0">Dojo Refleks</h3><p class="mute" style="margin:2px 0 0;line-height:1.3">Ciosy, kopnięcia i Wyzwanie Sensei${g.best?` · rekord ${g.best}`:''}</p></div></div><button class="btn-p full bigbtn" style="margin-top:12px" data-a="gra">Graj!</button></div>`}
-function graTile(){const g=S.game||{};return `<div class="card" role="button" tabindex="0" data-a="gra" style="display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer"><img src="media/sklep/shop-tygrys.webp" alt="" style="width:44px;height:44px;flex:none"><span style="flex:1;color:var(--ink)"><b>Gra: Dojo Refleks</b><br><span class="mute">${g.best?`Twój rekord: ${g.best}`:'Sprawdź swój refleks!'}</span></span><span style="color:var(--acc);font-weight:700;white-space:nowrap">Graj ›</span></div>`}
+const GRY=[['refleks','Dojo Refleks','Ciosy, kopnięcia i Wyzwanie Sensei','poza'],['kumite','Turniej Kumite','Walcz o złoty medal','kopniecie'],['kata','Mistrzyni Kata','Zapamiętaj prawdziwe kata','sou'],['deski','Tameshiwari','Rozbij deski, dachówki i cegły','kopniak'],['rodzina','Pojedynek rodzinny','Gra we dwoje na jednym telefonie','taniec']];
+function graRec(id){const g=id==='refleks'?S.game:(S.games||{})[id];return g&&g.best?`rekord ${g.best}`:''}
+function graCard(){const ok=id=>id==='refleks'?!!window.Gra:!!(window.Games&&window.Games[id]);
+ return `<div class="card" id="gryhub"><p class="kick" style="margin:0">Mini-gry</p><h3 style="margin:0 0 10px">Gry wojownika</h3><div class="gry">${GRY.filter(g=>ok(g[0])).map(([id,n,d,img])=>`<button class="gtile" data-a="gra" data-v="${id}"><img src="media/${img}.webp" alt=""><div class="gtx"><b>${n}</b><span>${graRec(id)||d}</span></div></button>`).join('')}</div></div>`}
+function graTile(){const n=GRY.filter(g=>g[0]==='refleks'?window.Gra:window.Games&&window.Games[g[0]]).length;
+ return `<div class="card" role="button" tabindex="0" data-a="gry" style="display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer"><img src="media/sklep/shop-tygrys.webp" alt="" style="width:44px;height:44px;flex:none"><span style="flex:1;color:var(--ink)"><b>Gry wojownika</b><br><span class="mute">${n} ${pluralPL(n,'gra','gry','gier')} – zagraj i zbieraj monety</span></span><span style="color:var(--acc);font-weight:700;white-space:nowrap">Graj ›</span></div>`}
 function vKumite(){
  const k=S.kt,opt=(a,v)=>a.map(x=>`<option value="${x}" ${x==v?'selected':''}>${x>=60?Math.floor(x/60)+':'+String(x%60).padStart(2,'0'):x+' s'}</option>`).join('');
  return `<div id="heroSlot"></div><main class="wrap">
@@ -1150,7 +1155,8 @@ document.addEventListener('pointerdown',e=>{const b=e.target.closest('button,a.c
 /* ---------- akcje ---------- */
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,i=+b.dataset.i,v=b.dataset.v;let keep=true;
  switch(a){
- case'gra':if(window.Gra)Gra.open();return;
+ case'gra':if(!v||v==='refleks'){if(window.Gra)Gra.open()}else if(window.Games&&Games[v])Games[v].open();return;
+ case'gry':location.hash='kumite';setTimeout(()=>{const h=$('#gryhub');if(h)h.scrollIntoView({behavior:'smooth',block:'start'})},120);return;
  case'prof':openProf();return;
  case'profx':closeProf();return;
  case'mcol':mcol=+v;renderProf();return;
@@ -1259,11 +1265,16 @@ document.addEventListener('change',e=>{const t=e.target,c=t.dataset.c;if(!c)retu
  else if(c==='club'){S.club=(S.club||[]).filter(x=>x!==i);if(t.checked)S.club.push(i);S.club.sort()}
  save()});
 
+window.addEventListener('load',()=>{if(location.hash.replace('#','')==='kumite'||!location.hash||location.hash==='#start')try{render()}catch(e){}});
 window.DW={addCoins,addXP,payOnce,beep,taiko,gong,fanfare,say,toast,celebrate,save,today,actx,getS:()=>S,music:o=>{gOn=!!o;sceneMusic()}};
 const route=()=>{let h=location.hash.slice(1);if(h==='karty'){sub='karty';h='wiecej'}if(h==='trener'){TS.sub='analiza';h='trening'}tab=TABS.some(([k])=>k===h)?h:'start';if(profOpen)closeProf();render();scrollTo(0,0)};
 addEventListener('hashchange',route);route();
 }
 </script>
 <script src="js/gra.js"></script>
+<script src="js/gra-kumite.js" onerror="this.remove()"></script>
+<script src="js/gra-rodzina.js" onerror="this.remove()"></script>
+<script src="js/gra-deski.js" onerror="this.remove()"></script>
+<script src="js/gra-kata.js" onerror="this.remove()"></script>
 </body>
 </html>
