@@ -133,6 +133,7 @@ const CSS=`
 #gra{position:fixed;inset:0;z-index:58;background:#07090d;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;color:#f1f2f4}
 #gra[hidden]{display:none}
 #gra .g-bg{position:absolute;inset:0;background-size:cover;background-position:center 60%;transform:scale(1.04)}
+.g-bgn{opacity:0;transition:opacity .8s ease}.g-bgn.on{opacity:1}
 #gra .g-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 45%,rgba(7,9,13,.25),rgba(7,9,13,.85) 75%),linear-gradient(180deg,rgba(7,9,13,.75),rgba(7,9,13,.2) 30%,rgba(7,9,13,.35) 70%,rgba(7,9,13,.9))}
 #gra.boss .g-tech{visibility:hidden}
 #gra.boss .g-bg::after{background:radial-gradient(120% 80% at 50% 45%,rgba(80,10,10,.35),rgba(10,3,3,.9) 75%)}
@@ -206,6 +207,16 @@ let playerImg=null,tigerImg=null,shakeOK=true;
 function on(t,ev,fn,opt){t.addEventListener(ev,fn,opt);listeners.push([t,ev,fn,opt])}
 function later(fn,ms){const id=setTimeout(()=>{timers=timers.filter(x=>x!==id);fn()},ms);timers.push(id);return id}
 
+
+// tła poziomów: media/gra/tlo-<nazwa>.webp – jeśli pliku nie ma, zostaje obecne tło
+const LVBG=[null,'las','mata','ogrod','bambus','gory','hala'],BOSSBG='swiatynia';
+let bgCur='';
+function setBg(url){if(!root||!url||url===bgCur)return;const im=new Image();im.onload=()=>{if(!root)return;bgCur=url;
+ const d=document.createElement('div');d.className='g-bg g-bgn';d.style.backgroundImage=`url('${url}')`;
+ const old=[...root.querySelectorAll('.g-bg')];old[old.length-1].after(d);requestAnimationFrame(()=>d.classList.add('on'));
+ setTimeout(()=>{old.forEach(o=>o.remove())},900)};im.src=url}
+function baseBg(){const S=S_();return S.bg?`media/sklep/shop-${S.bg}.webp`:'media/sklep/shop-tlo-dojo.webp'}
+function lvlBg(L){if(!L)return setBg(baseBg());const k=LVBG[Math.min(L,LVBG.length-1)];if(k)setBg(`media/gra/tlo-${k}.webp`)}
 function newGame(){
  return {state:'count',t:0,left:ROUND,score:0,combo:0,maxCombo:0,lvl:0,targets:[],parts:[],texts:[],rings:[],
   spawnT:.6,tigerT:rnd(14,22),hits:0,perf:0,misses:0,tech:{tsuki:0,mae:0,mawashi:0,kakato:0,wari:0,kiai:0},
@@ -291,7 +302,7 @@ function breakCombo(x,y,txt){
 }
 function checkBelt(){
  let L=G.lvl;while(L<BELTS.length-1&&G.score>=BELTS[L+1].at)L++;
- if(L>G.lvl){G.lvl=L;G.banner={t:0,b:BELTS[L]};flash(.25,'255,224,138');try{DW().taiko(2)}catch(e){}buzz([30,40,30])}
+ if(L>G.lvl){G.lvl=L;lvlBg(L);G.banner={t:0,b:BELTS[L]};flash(.25,'255,224,138');try{DW().taiko(2)}catch(e){}buzz([30,40,30])}
 }
 function perfectOf(t){const p=t.age/t.life;return p>.5&&p<.8}
 
@@ -371,7 +382,7 @@ function trail(x0,y0,x1,y1){G.rings.push({trail:1,x0,y0,x1,y1,age:0,life:.22})}
 
 /* ---------- Wyzwanie Sensei ---------- */
 function startBoss(){
- G.state='bossIntro';G.bossIntroT=0;G.targets.forEach(t=>{if(!t.dead){t.dead=1;t.hitT=0;t.poof=1}});
+ G.state='bossIntro';setBg(`media/gra/tlo-${BOSSBG}.webp`);G.bossIntroT=0;G.targets.forEach(t=>{if(!t.dead){t.dead=1;t.hitT=0;t.poof=1}});
  root.classList.add('boss');
  try{DW().gong()}catch(e){}buzz([40,60,40]);
  G.boss={len:3,seq:null,i:0,hp:0,shakeT:0,hitT:0,left:BOSS_T,done:0,errT:0};newSeq();
@@ -680,7 +691,7 @@ function finish(){
 function startLoop(){if(raf)return;lastT=performance.now();raf=requestAnimationFrame(loop)}
 function stopLoop(){if(raf)cancelAnimationFrame(raf);raf=0}
 function play(){
- G=newGame();hudCache={};root.classList.remove('menu');els.scr.hidden=true;els.scr.innerHTML='';root.classList.remove('boss');
+ G=newGame();lvlBg(0);hudCache={};root.classList.remove('menu');els.scr.hidden=true;els.scr.innerHTML='';root.classList.remove('boss');
  els.tech.classList.remove('on');shakeOK=!reducedMotion();
  hud();startLoop();
 }
@@ -697,7 +708,7 @@ function open(){
  if(!document.getElementById('gra-css')){const st=document.createElement('style');st.id='gra-css';st.textContent=CSS;document.head.appendChild(st)}
  const S=S_();
  playerImg=loadImg(S.look?`media/sklep/shop-${S.look}.webp`:'media/gra-postac.webp');tigerImg=loadImg('media/sklep/shop-tygrys.webp');
- const bg=S.bg?`media/sklep/shop-${S.bg}.webp`:'media/sklep/shop-tlo-dojo.webp';
+ const bg=baseBg();bgCur=bg;
  root.innerHTML=`<div class="g-bg" style="background-image:url('${bg}')"></div><canvas></canvas>
   <div class="g-hud"><button class="g-ib" data-g="pause" aria-label="Pauza">${PSVG}</button>
    <div class="g-sc"><b>0</b><span class="g-mul">COMBO ×1</span></div>
