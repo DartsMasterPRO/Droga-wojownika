@@ -276,6 +276,7 @@ nav.tabs a.on::before{content:'';position:absolute;top:0;left:22%;right:22%;heig
 
 <div id="prof" class="prof" hidden></div>
 <div id="play" class="play" hidden></div>
+<div id="gra" hidden></div>
 <div id="rep" class="prof" hidden></div>
 <input type="file" id="impFile" accept="application/json,.json" hidden>
 
@@ -489,6 +490,7 @@ function vStart(){
   <a class="chrow" href="#trening" data-a="tsub" data-v="dzis"><span style="color:var(--ink);font-weight:500;white-space:normal">Wyzwanie dnia: ${cd?'zaliczone ✓':ch.map(e=>esc(e.name)).join(' + ')}</span><span>${cd?'':'+20 XP ›'}</span></a>${trained?feelRow():''}</div>`:''}
  <div class="card"><div class="row between"><h3 style="margin:0">${FLAME} ${st} ${dni(st)} z rzędu</h3><span class="mute">rekord: ${bestStreak()}</span></div><div style="margin-top:12px">${calHTML()}</div></div>
  ${lvlCard()}
+ ${graTile()}
  <div class="card"><div class="row between"><b>${esc(b.k)} · ${esc(b.n)}</b><span class="mute">${nb?`do ${esc(nb.k)}: ${done}/${req.length}`:'Najwyższy pas'}</span></div><div class="beltfig">${beltSvg(b.c,b.s)}</div><div class="bar"><i style="width:${bp}%"></i></div></div>
  <div class="grid3" style="margin-bottom:14px">
   <div class="stat"><div class="num">${monN}</div><span>dni treningu w tym miesiącu</span></div>
@@ -570,9 +572,12 @@ function vKata(){
  <div class="card"><h3>Dodaj kata</h3><div class="row"><input id="nk" placeholder="np. Seienchin" style="flex:1"><button class="btn-p" data-a="addkata">Dodaj</button></div></div>
  </main>`}
 
+function graCard(){const g=S.game||{};return `<div class="card gcard"><div class="row" style="align-items:center;flex-wrap:nowrap;gap:12px"><img src="media/poza.webp" alt="" style="width:76px;height:76px;border-radius:14px;object-fit:cover;flex:none"><div style="flex:1"><p class="kick" style="margin:0">Mini-gra</p><h3 style="margin:0">Dojo Refleks</h3><p class="mute" style="margin:2px 0 0;line-height:1.3">Ciosy, kopnięcia i Wyzwanie Sensei${g.best?` · rekord ${g.best}`:''}</p></div></div><button class="btn-p full bigbtn" style="margin-top:12px" data-a="gra">Graj!</button></div>`}
+function graTile(){const g=S.game||{};return `<div class="card" role="button" tabindex="0" data-a="gra" style="display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer"><img src="media/sklep/shop-tygrys.webp" alt="" style="width:44px;height:44px;flex:none"><span style="flex:1;color:var(--ink)"><b>Gra: Dojo Refleks</b><br><span class="mute">${g.best?`Twój rekord: ${g.best}`:'Sprawdź swój refleks!'}</span></span><span style="color:var(--acc);font-weight:700;white-space:nowrap">Graj ›</span></div>`}
 function vKumite(){
  const k=S.kt,opt=(a,v)=>a.map(x=>`<option value="${x}" ${x==v?'selected':''}>${x>=60?Math.floor(x/60)+':'+String(x%60).padStart(2,'0'):x+' s'}</option>`).join('');
  return `<div id="heroSlot"></div><main class="wrap">
+ ${graCard()}
  <div class="card timer ph-${T.ph}" id="tcard"><p class="mute" id="tph"></p><div class="num" id="tm">0:00</div>
   <div class="grid2"><button class="btn-p" id="tgo" data-a="tgo">Start</button><button data-a="treset">Reset</button></div>
   <details style="margin-top:10px;text-align:left"><summary>Ustawienia timera</summary>
@@ -969,10 +974,10 @@ function weekSum(){const wd=(new Date().getDay()+6)%7;if(wd!==6&&wd!==0)return '
 
 /* ---------- MUZYKA W TLE ---------- */
 const MUS={menu:'media/muzyka/menu.mp3',trening:'media/muzyka/trening.mp3',spokoj:'media/muzyka/spokoj.mp3'},MV={menu:.2,trening:.32,spokoj:.3};
-let mEl=null,mKey=null,mDuck=1,mGest=false;
+let mEl=null,mKey=null,mDuck=1,mGest=false,gOn=false;
 const mVol=k=>(MV[k]||.25)*(S.mvol??1)*mDuck;
 function fadeTo(a,v,ms){if(!a)return;clearInterval(a._f);const s0=a.volume,t0=Date.now();a._f=setInterval(()=>{const k=Math.min(1,(Date.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,s0+(v-s0)*k))}catch(e){}if(k>=1)clearInterval(a._f)},40)}
-function wantMusic(){if(S.mute||!S.music||document.hidden||!$('#intro').hidden)return null;if(P){const p=P.plan;return /gumowe|przed_turniejem|rozci/i.test(p.id+' '+p.name)?'spokoj':'trening'}if(MK.run)return 'spokoj';if(T.run||R.run)return 'trening';
+function wantMusic(){if(S.mute||!S.music||document.hidden||!$('#intro').hidden)return null;if(gOn)return 'trening';if(P){const p=P.plan;return /gumowe|przed_turniejem|rozci/i.test(p.id+' '+p.name)?'spokoj':'trening'}if(MK.run)return 'spokoj';if(T.run||R.run)return 'trening';
  if(tab==='trening'&&TS.sub==='analiza'&&TR.view==='proc')return 'spokoj';return 'menu'}
 function sceneMusic(){const k=wantMusic();if(k===mKey){if(mEl&&mEl.paused&&k&&mGest)mEl.play().catch(()=>{});return}
  const old=mEl;mKey=k;mEl=null;if(old){fadeTo(old,0,700);setTimeout(()=>{old.pause();old.removeAttribute('src');old.load()},750)}
@@ -1145,6 +1150,7 @@ document.addEventListener('pointerdown',e=>{const b=e.target.closest('button,a.c
 /* ---------- akcje ---------- */
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,i=+b.dataset.i,v=b.dataset.v;let keep=true;
  switch(a){
+ case'gra':if(window.Gra)Gra.open();return;
  case'prof':openProf();return;
  case'profx':closeProf();return;
  case'mcol':mcol=+v;renderProf();return;
@@ -1253,9 +1259,11 @@ document.addEventListener('change',e=>{const t=e.target,c=t.dataset.c;if(!c)retu
  else if(c==='club'){S.club=(S.club||[]).filter(x=>x!==i);if(t.checked)S.club.push(i);S.club.sort()}
  save()});
 
+window.DW={addCoins,addXP,payOnce,beep,taiko,gong,fanfare,say,toast,celebrate,save,today,actx,getS:()=>S,music:o=>{gOn=!!o;sceneMusic()}};
 const route=()=>{let h=location.hash.slice(1);if(h==='karty'){sub='karty';h='wiecej'}if(h==='trener'){TS.sub='analiza';h='trening'}tab=TABS.some(([k])=>k===h)?h:'start';if(profOpen)closeProf();render();scrollTo(0,0)};
 addEventListener('hashchange',route);route();
 }
 </script>
+<script src="js/gra.js"></script>
 </body>
 </html>
