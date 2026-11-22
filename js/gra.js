@@ -622,7 +622,7 @@ function screenStart(){
  sc.innerHTML=`<div class="g-in">
   <button class="g-ib g-x" data-g="exit" aria-label="Wyjdź">${XSVG}</button>
   <p class="g-kick">Mini-gra · Kumite</p><h2 class="g-t">Dojo Refleks</h2>
-  <div class="g-hero"><img src="media/sklep/shop-${esc(S.look||'baza')}.webp" alt=""><img class="g-tg" src="media/sklep/shop-tygrys.webp" alt=""></div>
+  <div class="g-hero"><img src="${S.look?`media/sklep/shop-${esc(S.look)}.webp`:'media/gra-postac.webp'}" alt=""><img class="g-tg" src="media/sklep/shop-tygrys.webp" alt=""></div>
   <div class="g-best"><div><b>${fmt(gd.best||0)}</b><span>Twój rekord</span></div><div><b>${gd.best?esc(BELTS[gd.lvl||0].n.replace(' pas','')):'–'}</b><span>najwyższy pas w grze</span></div><div><b>${ct.max-ct.got}</b><span>monet do zdobycia dziś</span></div></div>
   <div class="g-how"><h3>Jak grać?</h3>
    <div class="g-row" data-ic="pad"><p><b>Czerwona tarcza – stuknij!</b><small>To cios pięścią: seiken tsuki.</small></p></div>
@@ -696,7 +696,7 @@ function open(){
  root=document.getElementById('gra');if(!root){root=document.createElement('div');root.id='gra';document.body.appendChild(root)}
  if(!document.getElementById('gra-css')){const st=document.createElement('style');st.id='gra-css';st.textContent=CSS;document.head.appendChild(st)}
  const S=S_();
- playerImg=loadImg(`media/sklep/shop-${S.look||'baza'}.webp`);tigerImg=loadImg('media/sklep/shop-tygrys.webp');
+ playerImg=loadImg(S.look?`media/sklep/shop-${S.look}.webp`:'media/gra-postac.webp');tigerImg=loadImg('media/sklep/shop-tygrys.webp');
  const bg=S.bg?`media/sklep/shop-${S.bg}.webp`:'media/sklep/shop-tlo-dojo.webp';
  root.innerHTML=`<div class="g-bg" style="background-image:url('${bg}')"></div><canvas></canvas>
   <div class="g-hud"><button class="g-ib" data-g="pause" aria-label="Pauza">${PSVG}</button>
